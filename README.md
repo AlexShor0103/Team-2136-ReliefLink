@@ -8,3 +8,10 @@ We are going to do well on this project.
 
 * Eduardo Trunci
 * Daniel Young
+* Alexandr Shor
+* Gia-Minh Nguyen
+* Yuting Shen
+* Suvan Adhikari
+* Rithvik Rajavelu
+
+
