@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/relief_technique_utils.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ReliefScreen extends StatelessWidget {
 
-  final VideoData data;
+  final ReliefTechniqueData data;
 
   const ReliefScreen({Key? key, required this.data}) : super(key: key);
 
@@ -22,14 +23,14 @@ class ReliefScreen extends StatelessWidget {
 
 class VideoArea extends StatelessWidget {
 
-  final VideoData data;
+  final ReliefTechniqueData data;
   final YoutubePlayerController _controller;
 
-  VideoArea({Key? key, required this.data}) :
+  VideoArea({Key? key, required this.data}):
         _controller = YoutubePlayerController(
           initialVideoId: data.videoId,
           flags: const YoutubePlayerFlags(
-            autoPlay: true,
+            autoPlay: false,
             mute: false
           )
         ),
@@ -38,6 +39,7 @@ class VideoArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      Text(data.activityName, style: const TextStyle(color: Colors.orange, fontSize:30)),
       YoutubePlayer(controller:_controller),
       const NextButton()
     ]);
@@ -57,12 +59,4 @@ class NextButton extends StatelessWidget {
         },
     );
   }
-}
-
-
-class VideoData {
-  // Not sure if there is any more data we want to add about videos,
-  // so I made this a class
-  String videoId;
-  VideoData({required this.videoId});
 }
