@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/relief_technique_utils.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ReliefRateScreen extends StatelessWidget {
 
@@ -11,7 +10,10 @@ class ReliefRateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(title: const Text("HEADER HERE")), // Insert header here
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ), // Insert header here
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: RatingSection(data: data),
@@ -31,28 +33,41 @@ class RatingSection extends StatefulWidget {
 
 class _RatingSectionState extends State<RatingSection> {
   static const double defaultRating = 3;
-  double _ratingValue = defaultRating;
+  double _value = defaultRating;
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text("How effective was ${widget.data.activityName}?"),
-      RatingBar(
-        initialRating: defaultRating,
-        allowHalfRating: false,
-        onRatingUpdate: (value) {
-          setState(() {
-            _ratingValue = value;
-          });
-        },
-        ratingWidget: RatingWidget(
-            full: const Icon(Icons.star, color: Colors.yellow),
-            half: const Icon(Icons.star_half, color: Colors.yellow),
-            empty: const Icon(Icons.star_outline, color: Colors.yellow)
-        ),
+      Text(
+          "How effective was ${widget.data.activityName}?",
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          )
       ),
-      Text("THIS IS FOR DEBUGGING: Current rating is $_ratingValue."),
-      const RateButton()
+      Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(children: [
+          Slider(
+            min: 0,
+            max: 5,
+            value: _value,
+            onChanged: ((value) {
+              setState(() {
+                _value = value;
+              });
+            }),
+            divisions: 5,
+          ),
+          Text("$_value"),
+        ])
+      ),
+      FavoriteButton(data: widget.data),
+      const Padding(
+        child: RateButton(),
+        padding: EdgeInsets.all(20),
+      ),
+
 
     ]);
   }
@@ -69,6 +84,63 @@ class RateButton extends StatelessWidget {
       onPressed: () {
         print("Rated");
       },
+    );
+  }
+}
+
+class FavoriteButton extends StatefulWidget {
+  final bool initialFavorite;
+  FavoriteButton({Key? key, required ReliefTechniqueData data}) :
+        initialFavorite = data.favorite,
+        super(key: key);
+
+  @override
+  State<FavoriteButton> createState() => _FavoriteButtonState();
+}
+
+class _FavoriteButtonState extends State<FavoriteButton> {
+  bool _favorite = false;
+  IconData _iconData = Icons.star_outline;
+  String _text = "Mark as favorite";
+
+  @override
+  void initState() {
+    _favorite = widget.initialFavorite;
+    if (_favorite) {
+      _iconData = Icons.star;
+      _text = "Unmark as favorite";
+    } else {
+      _iconData = Icons.star_outline;
+      _text = "Mark as favorite";
+    }
+  }
+
+  void flipFavorite() {
+    setState(() {
+      _favorite = !_favorite;
+      if (_favorite) {
+        _iconData = Icons.star;
+        _text = "Unmark as favorite";
+      } else {
+        _iconData = Icons.star_outline;
+        _text = "Mark as favorite";
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        children:[
+          IconButton(
+              onPressed: flipFavorite,
+              icon: Icon(
+                _iconData,
+                color: Colors.yellow,
+              )
+          ),
+          Text(_text)
+        ]
     );
   }
 }

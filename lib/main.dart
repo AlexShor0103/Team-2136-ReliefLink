@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      //home: ReliefScreen(data: ReliefTechniqueData(videoId: "syx3a1_LeFo", activityName: "Guided Meditation")),
-      home: ReliefRateScreen(data: ReliefTechniqueData(videoId: "syx3a1_LeFo", activityName: "Guided Meditation"))
+      // home: ReliefScreen(data: ReliefTechniqueData(videoId: "syx3a1_LeFo", activityName: "Guided Meditation", favorite: false)),
+      home: ReliefRateScreen(data: ReliefTechniqueData(videoId: "syx3a1_LeFo", activityName: "Guided Meditation", favorite: false))
     );
   }
 }

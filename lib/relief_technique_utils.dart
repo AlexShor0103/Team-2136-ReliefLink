@@ -1,5 +1,6 @@
 class ReliefTechniqueData {
   String videoId;
   String activityName;
-  ReliefTechniqueData({required this.videoId, required this.activityName});
+  bool favorite;
+  ReliefTechniqueData({required this.videoId, required this.activityName, required this.favorite});
 }
