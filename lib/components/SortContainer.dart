@@ -24,11 +24,15 @@ class SortContainerState extends State<SortContainer>{
     // TODO: implement build
     return Column(
       //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+
       children: [
         ReliefTechniqueSortingButton(text:  "Sort by Favorite", option: SortOptions.FAVORITE), 
-        ReliefTechniqueSortingButton(text:  "Sort by Mood", option: SortOptions.MOOD),
-        ReliefTechniqueSortingButton(text:  "Sort by Time Taken", option: SortOptions.TIME)
-      ],
+        
+          Column( children:[
+            ReliefTechniqueSortingButton(text:  "Sort by Mood", option: SortOptions.MOOD),
+            ReliefTechniqueSortingButton(text:  "Sort by Time Taken", option: SortOptions.TIME)//Row
+                ])
+        ],
     );
   }
 

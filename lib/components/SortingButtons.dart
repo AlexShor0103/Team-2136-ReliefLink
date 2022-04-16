@@ -27,8 +27,8 @@ class ReliefTechniqueSortingButtonState extends State<ReliefTechniqueSortingButt
     return RadioListTile<SortOptions>(
                     title: Text(text),
                     value:  this.option,
-                    
-                    groupValue: SortContainerState.optionState,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    groupValue: SortContainerState.optionState, 
                     onChanged: (SortOptions? value) {
                       setState(() {
                         SortContainerState.optionState = value!;

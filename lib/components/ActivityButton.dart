@@ -10,6 +10,8 @@ class ActivityButton extends StatelessWidget{
     // TODO: implement build
     Color color; 
     const double radius = 10;
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double buttonMinHeight = deviceHeight * 0.125;
     if (mood == "Anxious") {
       color = Color(0xff8CC9BA);
     } else if (mood == "Sleepless") {
@@ -22,11 +24,15 @@ class ActivityButton extends StatelessWidget{
     OutlinedButton button = OutlinedButton(
       onPressed: () {}, 
       child: Text(this.name), 
-  
+    
       style: ButtonStyle(
+
         backgroundColor: MaterialStateProperty.all<Color>(color),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(radius)))
-      )));
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(radius))),
+        
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(Size(0, buttonMinHeight))
+      ));
     return button;
   }
 
