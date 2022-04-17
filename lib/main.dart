@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/relief_rate_screen.dart';
+import 'package:relieflink/relief_screen.dart';
+import 'package:relieflink/relief_technique_utils.dart';
+
 
 import 'components/ActivitiesContainer.dart';
 import 'components/SortContainer.dart';
@@ -78,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView(children: <Widget>[SortContainer(),SingleChildScrollView(child: ReliefActivityBoxContainer())])
+      // home: ReliefRateScreen(data: ReliefTechniqueData(videoId: "syx3a1_LeFo", activityName: "Guided Meditation", favorite: false))
       
     );
     }
