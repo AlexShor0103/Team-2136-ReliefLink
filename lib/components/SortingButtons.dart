@@ -5,37 +5,43 @@ import './SortContainer.dart';
 class ReliefTechniqueSortingButton extends StatefulWidget {
   final String text; 
   final SortOptions option;
-
-  const ReliefTechniqueSortingButton({Key? key, required this.text, required this.option}) : super(key: key);
+  SortOptions? optionState;
+  ReliefTechniqueSortingButton({Key? key, required this.text, required this.option, required this.optionState}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return ReliefTechniqueSortingButtonState(this.text, this.option);
+    return ReliefTechniqueSortingButtonState(this.text, option, optionState);
   }
 
 }
 class ReliefTechniqueSortingButtonState extends State<ReliefTechniqueSortingButton> {
 
-  SortOptions option;
+  final SortOptions option;
   final String text;
-
-  ReliefTechniqueSortingButtonState(this.text, this.option);
+  SortOptions ?groupoption;
+  SortOptions? sortState;
+  ReliefTechniqueSortingButtonState(this.text, this.option, this.sortState);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return RadioListTile<SortOptions>(
                     title: Text(text),
-                    value:  this.option,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    groupValue: SortContainerState.optionState, 
+                    value:  option,
+                    toggleable: true,
+                    groupValue: sortState,
                     onChanged: (SortOptions? value) {
                       setState(() {
-                        SortContainerState.optionState = value!;
+                        if (sortState == value) {
+                          sortState = null;
+                        } else {
+                            sortState = value;
+                        }
+
+                        
+                        
                       });
                     }
     );
   }
-
-  
 }

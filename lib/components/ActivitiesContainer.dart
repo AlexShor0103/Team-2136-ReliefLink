@@ -33,7 +33,7 @@ class ReliefActivityBoxContainerState extends State<ReliefActivityBoxContainer> 
             child: 
               Padding(
                 padding: EdgeInsets.all(10.0),
-                child: ActivityButton(name: activitiesList[i].name, duration: activitiesList[i].duration, mood: activitiesList[i].mood))));
+                child: ActivityButton(name: activitiesList[i].name, duration: activitiesList[i].duration, mood: activitiesList[i].mood, handler: activitiesList[i].listenerFunction))));
           durationRemainingCounter = 90 - activitiesList[i].duration;
           
 
@@ -43,7 +43,7 @@ rowComponents.add(Flexible(fit: FlexFit.tight, flex: ((90 - activitiesList[i].du
             child: 
               Padding(
                 padding: EdgeInsets.all(10.0),
-                child: ActivityButton(name: activitiesList[i].name, duration: activitiesList[i].duration, mood: activitiesList[i].mood))));
+                child: ActivityButton(name: activitiesList[i].name, duration: activitiesList[i].duration, mood: activitiesList[i].mood, handler: activitiesList[i].listenerFunction))));
           durationRemainingCounter -= activitiesList[i].duration;
         }
         

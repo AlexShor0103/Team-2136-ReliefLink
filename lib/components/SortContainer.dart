@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum SortOptions {
-  NONE,
+
   FAVORITE,
   MOOD,
   TIME
@@ -18,7 +18,7 @@ class SortContainer extends StatefulWidget {
   }
 }
 class SortContainerState extends State<SortContainer>{
-  static SortOptions? optionState;
+  SortOptions? optionState;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -26,11 +26,11 @@ class SortContainerState extends State<SortContainer>{
       //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
 
       children: [
-        ReliefTechniqueSortingButton(text:  "Sort by Favorite", option: SortOptions.FAVORITE), 
+        ReliefTechniqueSortingButton(text:  "Sort by Favorite", option: SortOptions.FAVORITE, optionState: optionState), 
         
           Column( children:[
-            ReliefTechniqueSortingButton(text:  "Sort by Mood", option: SortOptions.MOOD),
-            ReliefTechniqueSortingButton(text:  "Sort by Time Taken", option: SortOptions.TIME)//Row
+            ReliefTechniqueSortingButton(text:  "Sort by Mood", option: SortOptions.MOOD , optionState: optionState),
+            ReliefTechniqueSortingButton(text:  "Sort by Time Taken", option: SortOptions.TIME, optionState: optionState)//Row
                 ])
         ],
     );
@@ -40,13 +40,13 @@ class SortContainerState extends State<SortContainer>{
 class ReliefTechniqueSortingButton extends StatefulWidget {
   final String text; 
   final SortOptions option;
-
-  const ReliefTechniqueSortingButton({Key? key, required this.text, required this.option}) : super(key: key);
+  SortOptions? optionState;
+  ReliefTechniqueSortingButton({Key? key, required this.text, required this.option, required this.optionState}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return ReliefTechniqueSortingButtonState(this.text, this.option);
+    return ReliefTechniqueSortingButtonState(this.text, option, optionState);
   }
 
 }
@@ -55,19 +55,26 @@ class ReliefTechniqueSortingButtonState extends State<ReliefTechniqueSortingButt
   final SortOptions option;
   final String text;
   SortOptions ?groupoption;
-  ReliefTechniqueSortingButtonState(this.text, this.option);
+  SortOptions? sortState;
+  ReliefTechniqueSortingButtonState(this.text, this.option, this.sortState);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return RadioListTile<SortOptions>(
                     title: Text(text),
-                    value:  this.option,
-                    
-                    groupValue: groupoption,
+                    value:  option,
+                    toggleable: true,
+                    groupValue: sortState,
                     onChanged: (SortOptions? value) {
                       setState(() {
-                        groupoption = value!;
-                        print(SortContainerState.optionState);
+                        if (sortState == value) {
+                          sortState = null;
+                        } else {
+                            sortState = value;
+                        }
+
+                        
+                        
                       });
                     }
     );

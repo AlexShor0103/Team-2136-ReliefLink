@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class ActivityButton extends StatelessWidget{
   final String name, mood;
   final int duration;
-  const ActivityButton({Key? key, required this.name, required this.duration, required this.mood}) : super(key: key);
+  final Function handler;
+  const ActivityButton({Key? key, required this.name, required this.duration, required this.mood, required this.handler}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,8 @@ class ActivityButton extends StatelessWidget{
     Color color; 
     const double radius = 10;
     double deviceHeight = MediaQuery.of(context).size.height;
-    double buttonMinHeight = deviceHeight * 0.125;
+    double buttonMinHeight = deviceHeight * 0.13;
+    bool liked = false;
     if (mood == "Anxious") {
       color = Color(0xff8CC9BA);
     } else if (mood == "Sleepless") {
@@ -22,11 +24,13 @@ class ActivityButton extends StatelessWidget{
         color = Color(0xffC5D7BF);
     }
     OutlinedButton button = OutlinedButton(
-      onPressed: () {}, 
-      child: Text(this.name), 
-    
+      onPressed: () => (this.handler()), 
+      child: Column(children: [ Container(alignment: Alignment.topRight,child: IconButton(onPressed: () {}, icon: Icon(Icons.star_outline_outlined), color: Colors.white)),
+        Text(this.name, style: TextStyle(color: Colors.white), textAlign: TextAlign.center)]), 
+      
       style: ButtonStyle(
-
+        shadowColor: MaterialStateProperty.all<Color>(Colors.grey),
+        elevation: MaterialStateProperty.all<double>(4.0),
         backgroundColor: MaterialStateProperty.all<Color>(color),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(radius))),
         
