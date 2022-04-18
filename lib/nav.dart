@@ -36,9 +36,6 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-
-        ),
         //state within screens are maintained
         body: IndexedStack(
           index: currentIndex,
