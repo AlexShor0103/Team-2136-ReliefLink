@@ -1,4 +1,4 @@
-import '../relief_technique_utils.dart';
+import '../utils/relief_technique_utils.dart';
 
 List<ReliefTechniqueData> activities = [
   ReliefTechniqueData(activityName: "Progressive Muscle Relaxation", duration: 30, mood: "Anxious", videoId: "1nZEdqcGVzo", favorite: false),

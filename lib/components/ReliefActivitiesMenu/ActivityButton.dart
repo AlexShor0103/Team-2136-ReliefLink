@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../ReliefHomeScreen.dart';
-import '../relief_rate_screen.dart';
-import '../relief_screen.dart';
-import '../relief_technique_utils.dart';
+import '../../screens/ReliefHomeScreen.dart';
+import '../ReliefActivity/ReliefRateScreen.dart';
+import '../ReliefActivity/ReliefScreen.dart';
+import '../../utils/relief_technique_utils.dart';
 
 class ActivityButton extends StatelessWidget{
   final ReliefTechniqueData activity;

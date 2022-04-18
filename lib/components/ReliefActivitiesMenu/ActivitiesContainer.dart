@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../activities/activities.dart';
-import '../relief_technique_utils.dart';
-import './ActivityButton.dart';
+import '../../activities/activities.dart';
+import '../../utils/relief_technique_utils.dart';
+import 'ActivityButton.dart';
 class ReliefActivityBoxContainer extends StatefulWidget {
   const ReliefActivityBoxContainer({Key? key}) : super(key: key);
 

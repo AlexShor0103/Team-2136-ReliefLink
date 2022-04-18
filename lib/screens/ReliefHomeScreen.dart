@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'components/ActivitiesContainer.dart';
-import 'components/SortContainer.dart';
+import '../components/ReliefActivitiesMenu/ActivitiesContainer.dart';
+import '../components/ReliefActivitiesMenu/SortContainer.dart';
 
 class ReliefHomeScreen extends StatelessWidget {
   const ReliefHomeScreen({ Key? key }) : super(key: key);

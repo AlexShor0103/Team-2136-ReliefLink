@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:relieflink/relief_rate_screen.dart';
-import 'package:relieflink/relief_screen.dart';
-import 'package:relieflink/relief_technique_utils.dart';
-import 'package:relieflink/nav.dart';
-import 'package:relieflink/top.dart';
+import 'package:relieflink/components/ReliefActivity/ReliefRateScreen.dart';
+import 'package:relieflink/components/ReliefActivity/ReliefScreen.dart';
+import 'package:relieflink/utils/relief_technique_utils.dart';
+import 'package:relieflink/screens/NavigationWrapper.dart';
+import 'package:relieflink/components/Navigation/TopBars.dart';
+import 'components/ReliefActivitiesMenu/ActivitiesContainer.dart';
+import 'components/ReliefActivitiesMenu/SortContainer.dart';
 
-
-import 'components/ActivitiesContainer.dart';
-import 'components/SortContainer.dart';
 void main() {
   runApp(const MyApp());
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:relieflink/relief_technique_utils.dart';
-import 'package:relieflink/top.dart';
+import 'package:relieflink/utils/relief_technique_utils.dart';
+import 'package:relieflink/components/Navigation/TopBars.dart';
 
 class ReliefRateScreen extends StatelessWidget {
 
