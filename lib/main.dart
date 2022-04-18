@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:relieflink/relief_rate_screen.dart';
 import 'package:relieflink/relief_screen.dart';
 import 'package:relieflink/relief_technique_utils.dart';
-=======
 import 'package:relieflink/nav.dart';
 import 'package:relieflink/top.dart';
->>>>>>> JessNavigationBars
 
 
 import 'components/ActivitiesContainer.dart';
