@@ -60,33 +60,38 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget{
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      insetPadding: const EdgeInsets.only(left: 100, top: 250, right: 100, bottom: 250),
+                      insetPadding: const EdgeInsets.only(left: 50, top: 250, right: 50, bottom: 250),
                       shape: const RoundedRectangleBorder(
                           borderRadius: const BorderRadius.all(const Radius.circular(10.0))
                       ),
                       content: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             const Text("Call for emergency?"),
                             const SizedBox(height: 20,),
-                            Row(
-                              children: <Widget>[
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Colors.red,
+                            Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red,
+                                    ),
+                                    child: const Icon(Icons.close),
+                                    onPressed: () => Navigator.of(context, rootNavigator: true).pop('dialog'),
                                   ),
-                                  child: const Icon(Icons.close),
-                                  onPressed: () => Navigator.of(context, rootNavigator: true).pop('dialog'),
-                                ),
-                                const SizedBox(width: 30),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.green,
+                                  const SizedBox(width: 30),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Colors.green,
+                                    ),
+                                    child: const Icon(Icons.check),
+                                    //TODO: call actual contacts
+                                    onPressed: () => Navigator.of(context, rootNavigator: true).pop('dialog'),
                                   ),
-                                  child: const Icon(Icons.check),
-                                  //TODO: call actual contacts
-                                  onPressed: () => Navigator.of(context, rootNavigator: true).pop('dialog'),
-                                ),
-                              ]
+                                ]
+                              ),
                             ),
                           ],
                       ),
