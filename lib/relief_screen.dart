@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/relief_rate_screen.dart';
 import 'package:relieflink/relief_technique_utils.dart';
+import 'package:relieflink/top.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ReliefScreen extends StatelessWidget {
@@ -11,12 +13,11 @@ class ReliefScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(title: const Text("HEADER HERE")), // Insert header here
+      appBar:Top_Relief(), // Insert header here
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: VideoArea(data: data),
       ),
-      bottomNavigationBar: const Text("NAVIGATION BAR HERE"), // Insert navigation bar here
     );
   }
 }
@@ -39,24 +40,34 @@ class VideoArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text(data.activityName, style: const TextStyle(color: Colors.orange, fontSize:30)),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(data.activityName, style: const TextStyle(color: Colors.orange, fontSize:30)),
+      ),
       YoutubePlayer(controller:_controller),
-      const NextButton()
+      NextButton(data: data)
     ]);
   }
 }
 
 class NextButton extends StatelessWidget {
-  const NextButton({Key? key}) : super(key: key);
+  final ReliefTechniqueData data;
+  const NextButton({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-        style: OutlinedButton.styleFrom(primary: Colors.white, backgroundColor: Colors.orange),
-        child: const Text("Mark as Completed"),
-        onPressed: () {
-          print("Marked as Complete");
-        },
+    return Container(
+      margin: const EdgeInsets.only(top: 10.0),
+      child: OutlinedButton(
+          style: OutlinedButton.styleFrom(primary: Colors.white, backgroundColor: Colors.orange),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: const Text("Mark as Completed"),
+          ),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> ReliefRateScreen(data: data)));
+          },
+      ),
     );
   }
 }

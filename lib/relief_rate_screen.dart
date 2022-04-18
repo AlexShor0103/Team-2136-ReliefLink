@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/relief_technique_utils.dart';
+import 'package:relieflink/top.dart';
 
 class ReliefRateScreen extends StatelessWidget {
 
@@ -10,15 +11,11 @@ class ReliefRateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ), // Insert header here
+      appBar: Top_Relief(), // Insert header here
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: RatingSection(data: data),
       ),
-      bottomNavigationBar: const Text("NAVIGATION BAR HERE"), // Insert navigation bar here
     );
   }
 }
@@ -62,7 +59,7 @@ class _RatingSectionState extends State<RatingSection> {
           Text("$_value"),
         ])
       ),
-      FavoriteButton(data: widget.data),
+      Center(child: FavoriteButton(data: widget.data)),
       const Padding(
         child: RateButton(),
         padding: EdgeInsets.all(20),
@@ -82,7 +79,8 @@ class RateButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(primary: Colors.white, backgroundColor: Colors.orange),
       child: const Text("Rate"),
       onPressed: () {
-        print("Rated");
+        Navigator.pop(context);
+        Navigator.pop(context);
       },
     );
   }
@@ -130,17 +128,17 @@ class _FavoriteButtonState extends State<FavoriteButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        children:[
-          IconButton(
-              onPressed: flipFavorite,
-              icon: Icon(
-                _iconData,
-                color: Colors.yellow,
-              )
-          ),
-          Text(_text)
-        ]
-    );
+    return  Row(
+          children:[
+            IconButton(
+                onPressed: flipFavorite,
+                icon: Icon(
+                  _iconData,
+                  color: Colors.yellow,
+                )
+            ),
+            Text(_text)
+          ]
+      );
   }
 }

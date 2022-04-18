@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import '../activities/activities.dart';
+import '../relief_technique_utils.dart';
 import './ActivityButton.dart';
 class ReliefActivityBoxContainer extends StatefulWidget {
   const ReliefActivityBoxContainer({Key? key}) : super(key: key);
 
-
-
-    // TODO: implement createState
     @override
     State<ReliefActivityBoxContainer> createState() {
   
@@ -17,7 +15,7 @@ class ReliefActivityBoxContainer extends StatefulWidget {
   
 }
 class ReliefActivityBoxContainerState extends State<ReliefActivityBoxContainer> {
-  List<Activity> activitiesList =  activities;
+  List<ReliefTechniqueData> activitiesList =  activities;
   List<Widget> widgetList = [];
   List<Widget> buildBoxes() {
       List<Widget> rowComponents = [];
@@ -27,13 +25,12 @@ class ReliefActivityBoxContainerState extends State<ReliefActivityBoxContainer> 
         if (durationRemainingCounter - activitiesList[i].duration < 0) {
           
           widgetList.add(Row(children: rowComponents, mainAxisAlignment: MainAxisAlignment.spaceBetween));
-
           rowComponents = [];
           rowComponents.add(Flexible(fit: FlexFit.tight, flex: ((90 - activitiesList[i].duration)/10).round(), 
             child: 
               Padding(
                 padding: EdgeInsets.all(10.0),
-                child: ActivityButton(name: activitiesList[i].name, duration: activitiesList[i].duration, mood: activitiesList[i].mood))));
+                child: ActivityButton(activity: activitiesList[i]))));
           durationRemainingCounter = 90 - activitiesList[i].duration;
           
 
@@ -43,7 +40,7 @@ rowComponents.add(Flexible(fit: FlexFit.tight, flex: ((90 - activitiesList[i].du
             child: 
               Padding(
                 padding: EdgeInsets.all(10.0),
-                child: ActivityButton(name: activitiesList[i].name, duration: activitiesList[i].duration, mood: activitiesList[i].mood))));
+                child: ActivityButton(activity: activitiesList[i]))));
           durationRemainingCounter -= activitiesList[i].duration;
         }
         
@@ -57,7 +54,6 @@ widgetList.add(Row(children: rowComponents));
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Column(children: buildBoxes());
     
   }

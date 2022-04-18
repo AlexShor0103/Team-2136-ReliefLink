@@ -10,6 +10,8 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        elevation: 10,
         title: Center(
           child: RichText(
             textAlign: TextAlign.left,
