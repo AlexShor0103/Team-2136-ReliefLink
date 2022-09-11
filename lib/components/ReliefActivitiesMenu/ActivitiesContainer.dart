@@ -24,7 +24,7 @@ class ReliefActivityBoxContainerState
       case SortOptions.NONE:
         break;
       case SortOptions.FAVORITE:
-        activities.sort((a, b) => b.favorite ? -1 : 1);
+        activities.sort((a, b) => b.favorite ? 1 : -1);
         break;
       case SortOptions.MOOD:
         activities.sort(
