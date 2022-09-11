@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/utils/constants.dart';
 
-enum SortOptions {
-  NONE,
-  FAVORITE,
-  MOOD,
-  TIME
-}
 class SortContainer extends StatefulWidget {
   static SortOptions? option;
-  
-
 
   @override
   State<StatefulWidget> createState() {
@@ -17,61 +10,67 @@ class SortContainer extends StatefulWidget {
     return SortContainerState();
   }
 }
-class SortContainerState extends State<SortContainer>{
+
+class SortContainerState extends State<SortContainer> {
   static SortOptions? optionState;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    void setNewSort(SortOptions option) {
+      setState(() {
+        optionState = option;
+      });
+    }
+
     return Column(
       //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
 
       children: [
-        ReliefTechniqueSortingButton(text:  "Sort by Favorite", option: SortOptions.FAVORITE), 
-        
-          Column( children:[
-            ReliefTechniqueSortingButton(text:  "Sort by Mood", option: SortOptions.MOOD),
-            ReliefTechniqueSortingButton(text:  "Sort by Time Taken", option: SortOptions.TIME)//Row
-                ])
-        ],
+        SortingButton(
+          text: "Sort by Favorite",
+          option: SortOptions.FAVORITE,
+          groupOption: optionState ?? SortOptions.NONE,
+          callback: setNewSort,
+        ),
+        SortingButton(
+          text: "Sort by Mood",
+          option: SortOptions.MOOD,
+          groupOption: optionState ?? SortOptions.NONE,
+          callback: setNewSort,
+        ),
+        SortingButton(
+          text: "Sort by Time Taken",
+          option: SortOptions.TIME,
+          groupOption: optionState ?? SortOptions.NONE,
+          callback: setNewSort,
+        )
+      ],
     );
   }
-
 }
-class ReliefTechniqueSortingButton extends StatefulWidget {
-  final String text; 
-  final SortOptions option;
 
-  const ReliefTechniqueSortingButton({Key? key, required this.text, required this.option}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return ReliefTechniqueSortingButtonState(this.text, this.option);
-  }
-
-}
-class ReliefTechniqueSortingButtonState extends State<ReliefTechniqueSortingButton> {
-
-  final SortOptions option;
+class SortingButton extends StatelessWidget {
   final String text;
-  SortOptions ?groupoption;
-  ReliefTechniqueSortingButtonState(this.text, this.option);
+  final SortOptions option;
+  final SortOptions groupOption;
+  final void Function(SortOptions) callback;
+  const SortingButton(
+      {Key? key,
+      required this.option,
+      required this.text,
+      required this.groupOption,
+      required this.callback})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return RadioListTile<SortOptions>(
-                    title: Text(text),
-                    value:  this.option,
-                    
-                    groupValue: groupoption,
-                    onChanged: (SortOptions? value) {
-                      setState(() {
-                        groupoption = value!;
-                        print(SortContainerState.optionState);
-                      });
-                    }
-    );
+        title: Text(text),
+        value: option,
+        groupValue: groupOption,
+        onChanged: (SortOptions? value) {
+          callback(value ?? SortOptions.NONE);
+          AppConstants.setSortActivitiesBy(value ?? SortOptions.NONE);
+        });
   }
-  
-  
 }

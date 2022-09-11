@@ -1,6 +1,13 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+
 class AppConstants {
+  static final sortingOptions = ActivitiesSorting();
+  static setSortActivitiesBy(SortOptions sortOption) {
+    sortingOptions.optionNotifier.value = sortOption;
+  }
+
   static final colorsByMood = {
     'anxious': AppColors.cyan,
     'sleepless': AppColors.red,
@@ -39,3 +46,10 @@ class AppColors {
   static const red2 = Color.fromRGBO(230, 81, 86, 1);
   static const grey = Color.fromRGBO(90, 90, 90, 1);
 }
+
+class ActivitiesSorting with ChangeNotifier {
+  ValueNotifier<SortOptions> optionNotifier =
+      ValueNotifier<SortOptions>(SortOptions.NONE);
+}
+
+enum SortOptions { NONE, FAVORITE, MOOD, TIME }
