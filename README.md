@@ -15,6 +15,14 @@ An app to assist suicide prevention, from coping techniques to relaxation exerci
 - Suvan Adhikari
 - Rithvik Rajavelu
 
+## The Design
+We had some awesome people thinking on how to make this app look good. The process is still ongoing! Here a snippet of it:
+
+[Link to Figma](https://www.figma.com/file/mNFVtgz74QbCJ8LsecEXef/2136-Prototype---ReliefLink?node-id=0%3A1)
+
+### Screenshots
+Soon!
+
 # Release Notes
 
 ## v0.1.0
