@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'ReliefHomeScreen.dart';
-
+import '../components/Profile/ProfileScreen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -21,18 +21,25 @@ class _NavState extends State<Nav> {
     //reliefScreen()
     //meScreen()
     Center(
-      child: Text('Diary',
-        style: TextStyle(fontSize: 60),),
+      child: Text(
+        'Diary',
+        style: TextStyle(fontSize: 60),
+      ),
     ),
     Center(
-      child: Text('Contact',
-        style: TextStyle(fontSize: 60),),
+      child: Text(
+        'Contact',
+        style: TextStyle(fontSize: 60),
+      ),
     ),
     ReliefHomeScreen(),
-    Center(
-      child: Text('Me',
-        style: TextStyle(fontSize: 60),),
-    )
+    ProfileScreen(),
+    // Center(
+    //   child: Text(
+    //     'Me',
+    //     style: TextStyle(fontSize: 60),
+    //   ),
+    // )
   ];
 
   @override
@@ -45,25 +52,22 @@ class _NavState extends State<Nav> {
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.8),
-              spreadRadius: 5,
-              blurRadius: 20,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.8),
+                spreadRadius: 5,
+                blurRadius: 20,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
           child: SizedBox(
-            
-              
               height: 70,
               child: BottomNavigationBar(
                 //currentIndex: selected screen(icon) index
                 currentIndex: currentIndex,
-                onTap: (index) => setState(() =>
-                currentIndex = index,
+                onTap: (index) => setState(
+                  () => currentIndex = index,
                 ),
                 type: BottomNavigationBarType.fixed,
                 iconSize: 35,
@@ -97,9 +101,7 @@ class _NavState extends State<Nav> {
                     label: 'Me',
                   ),
                 ],
-              )
-          ),
-        )
-    );
+              )),
+        ));
   }
 }
