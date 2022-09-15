@@ -30,6 +30,9 @@ dependencies:
   flutter:
     sdk: flutter
   youtube_player_flutter: ^8.0.0
+  dio: ^4.0.0
+  flutter_polyline_points: ^0.2.6
+  google_maps_flutter: ^2.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
