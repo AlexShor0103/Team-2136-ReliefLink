@@ -6,8 +6,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool showInsuranceNameConfidential = false;
-  bool showInsurancePNConfidential = false;
+  bool showInsuranceCompanyNameConfidential = false;
+  bool showPolicyNumberConfidential = false;
+  bool showMemberIDConfidential = false;
+
+  String firstName = "";
+  String lastName = "";
+  String age = "";
+  String insuranceCompanyName = "";
+  String policyNumber = "";
+  String memberID = "";
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,6 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         FocusScope.of(context).unfocus();
       },
       child: ListView(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         children: [
           const SizedBox(
             height: 15,
@@ -24,15 +34,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 avatars(),
                 avatarEdit(context),
-                //TODO
               ],
             ),
           ),
           const SizedBox(
             height: 25,
           ),
-          const Text(
-            'firstName LastName',
+          Text(
+            "${firstName} ${lastName}",
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
@@ -49,9 +58,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(
             height: 35,
           ),
-          textInputs("First Name", "firstName", false),
-          textInputs("Last Name", "lastName", false),
-          textInputs("Email", "burdell@gatech.edu", false),
+          textInputs("First Name", firstName, false),
+          textInputs("Last Name", lastName, false),
+          textInputs("Age", age, false),
           const Text(
             'Insurance Information',
             textAlign: TextAlign.left,
@@ -61,35 +70,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(
             height: 35,
           ),
-          textInputs("Insurance Name", "*****", true),
-          textInputs("Insurance Policy Number", "*****", true),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              OutlineButton(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                onPressed: () {},
-                child: const Text("CANCEL",
-                    style: TextStyle(
-                        fontSize: 14, letterSpacing: 2.2, color: Colors.black)),
-              ),
-              RaisedButton(
-                onPressed: () {},
-                color: Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: const Text(
-                  "SAVE",
-                  style: TextStyle(
-                      fontSize: 14, letterSpacing: 2.2, color: Colors.white),
-                ),
-              )
-            ],
-          ),
+          textInputs("Insurance Company Name", insuranceCompanyName, true),
+          textInputs("Policy Number", policyNumber, true),
+          textInputs("Member ID", memberID, true)
         ],
       ),
     );
@@ -110,8 +93,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           color: const Color(0xffF9CB9A),
         ),
-        child: const Icon(
-          Icons.edit,
+        child: IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () => {
+            //TODO: change pics.
+          },
           color: Colors.white,
         ),
       ),
@@ -143,30 +129,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget textInputs(String label, String placeholder, bool isConfidential) {
-    // bool showConfidential = true;
-    bool showConfidential = label == "Insurance Name"
-        ? showInsuranceNameConfidential
-        : showInsurancePNConfidential;
+    String inputVal = "";
+    bool enableEdit = false;
+    bool editIcon = true;
+    bool showConfidential = label == "Insurance Company Name"
+        ? showInsuranceCompanyNameConfidential
+        : (label == "Policy Number"
+            ? showPolicyNumberConfidential
+            : showMemberIDConfidential);
     return Padding(
       padding: const EdgeInsets.only(bottom: 35),
       child: (TextField(
+        enabled: enableEdit,
+        onChanged: (value) => {inputVal = value},
         obscureText: isConfidential
-            ? (label == "Insurance Name"
-                ? showInsuranceNameConfidential
-                : showInsurancePNConfidential)
+            ? (label == "Insurance Company Name"
+                ? showInsuranceCompanyNameConfidential
+                : (label == "Policy Number"
+                    ? showPolicyNumberConfidential
+                    : showMemberIDConfidential))
             : false,
         decoration: InputDecoration(
           suffixIcon: isConfidential
               ? IconButton(
                   onPressed: () {
                     setState(() {
-                      if (label == "Insurance Name") {
-                        showInsuranceNameConfidential =
-                            !showInsuranceNameConfidential;
+                      if (label == "Insurance Company Name") {
+                        showInsuranceCompanyNameConfidential =
+                            !showInsuranceCompanyNameConfidential;
+                      } else if (label == "Policy Number") {
+                        showPolicyNumberConfidential =
+                            !showPolicyNumberConfidential;
                       } else {
-                        showInsurancePNConfidential =
-                            !showInsurancePNConfidential;
+                        showMemberIDConfidential = !showMemberIDConfidential;
                       }
+                      enableEdit = !enableEdit;
                     });
                   },
                   icon: Icon(
@@ -174,7 +171,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.grey,
                   ),
                 )
-              : null,
+              : IconButton(
+                  onPressed: () {
+                    enableEdit = !enableEdit;
+                    editIcon = !editIcon;
+                    if (label == "First Name") {
+                      firstName = inputVal;
+                    } else if (label == "Last Name") {
+                      lastName = inputVal;
+                    } else if (label == "Age") {
+                      age = inputVal;
+                    } else if (label == "Insureance Company Name") {
+                      insuranceCompanyName = inputVal;
+                    } else if (label == "Policy Number") {
+                      policyNumber = inputVal;
+                    } else if (label == "Member ID") {
+                      memberID = inputVal;
+                    }
+                  },
+                  icon: editIcon
+                      ? Icon(
+                          Icons.edit,
+                          color: Colors.grey,
+                        )
+                      : Icon(
+                          Icons.check_outlined,
+                          color: Colors.grey,
+                        ),
+                ),
           contentPadding: EdgeInsets.only(bottom: 3),
           labelText: label,
           labelStyle: TextStyle(
