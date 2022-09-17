@@ -28,9 +28,10 @@ class ActivityButton extends StatelessWidget{
     ElevatedButton button = ElevatedButton(
       onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context)=> ReliefScreen(data: activity)));
-      }, 
-      child: Align(child: Text(activity.activityName, style: TextStyle(color: Colors.white)), alignment: Alignment.center,), 
-    
+      },
+        //Sensible text fields may be impossible with ElevatedButton. Ideally, certain text would be styled differently. Brief search suggests using 'Rich Text' widgets
+      child: Align(child: Text('${activity.activityName}\nEstimated Time: ${activity.duration.toString()} minutes\nIf you feel: ${activity.mood}',
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w900)), alignment: Alignment.topLeft,),
       style: ButtonStyle(
 
         backgroundColor: MaterialStateProperty.all<Color>(color),

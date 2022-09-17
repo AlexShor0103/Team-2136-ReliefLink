@@ -10,8 +10,24 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 10,
+      leading: ElevatedButton(
+        onPressed: () {},
+        child: const Icon(Icons.grade, size: 45, color: Color.fromRGBO(245, 205, 87, 1)),
+        style: ElevatedButton.styleFrom(
+          primary: const Color.fromRGBO(75, 121, 243, 1.0),
+          padding: const EdgeInsets.only(left: 6, right: 10),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(80.0),
+            topRight: Radius.circular(80.0),
+            bottomLeft:Radius.circular(80.0),
+            bottomRight: Radius.circular(80.0),
+            ),
+          ),
+        ), // style
+      ),
         title: Center(
           child: RichText(
             textAlign: TextAlign.left,
