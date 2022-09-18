@@ -3,7 +3,6 @@ import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 
 class ReliefRateScreen extends StatelessWidget {
-
   final ReliefTechniqueData data;
 
   const ReliefRateScreen({Key? key, required this.data}) : super(key: key);
@@ -35,37 +34,32 @@ class _RatingSectionState extends State<RatingSection> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text(
-          "How effective was ${widget.data.activityName}?",
+      Text("How effective was ${widget.data.activityName}?",
           style: const TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
-          )
-      ),
+          )),
       Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(children: [
-          Slider(
-            min: 0,
-            max: 5,
-            value: _value,
-            onChanged: ((value) {
-              setState(() {
-                _value = value;
-              });
-            }),
-            divisions: 5,
-          ),
-          Text("$_value"),
-        ])
-      ),
+          padding: const EdgeInsets.all(20),
+          child: Column(children: [
+            Slider(
+              min: 0,
+              max: 5,
+              value: _value,
+              onChanged: ((value) {
+                setState(() {
+                  _value = value;
+                });
+              }),
+              divisions: 5,
+            ),
+            Text("$_value"),
+          ])),
       Center(child: FavoriteButton(data: widget.data)),
       const Padding(
         child: RateButton(),
         padding: EdgeInsets.all(20),
       ),
-
-
     ]);
   }
 }
@@ -76,7 +70,8 @@ class RateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: OutlinedButton.styleFrom(primary: Colors.white, backgroundColor: Colors.orange),
+      style: OutlinedButton.styleFrom(
+          primary: Colors.white, backgroundColor: Colors.orange),
       child: const Text("Rate"),
       onPressed: () {
         Navigator.pop(context);
@@ -87,9 +82,9 @@ class RateButton extends StatelessWidget {
 }
 
 class FavoriteButton extends StatefulWidget {
-  final bool initialFavorite;
-  FavoriteButton({Key? key, required ReliefTechniqueData data}) :
-        initialFavorite = data.favorite,
+  final ReliefTechniqueData activity;
+  FavoriteButton({Key? key, required ReliefTechniqueData data})
+      : activity = data,
         super(key: key);
 
   @override
@@ -103,7 +98,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
 
   @override
   void initState() {
-    _favorite = widget.initialFavorite;
+    _favorite = widget.activity.favorite;
     if (_favorite) {
       _iconData = Icons.star;
       _text = "Unmark as favorite";
@@ -114,6 +109,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   }
 
   void flipFavorite() {
+    widget.activity.toggleActivityFavorite();
     setState(() {
       _favorite = !_favorite;
       if (_favorite) {
@@ -128,17 +124,14 @@ class _FavoriteButtonState extends State<FavoriteButton> {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
-          children:[
-            IconButton(
-                onPressed: flipFavorite,
-                icon: Icon(
-                  _iconData,
-                  color: Colors.yellow,
-                )
-            ),
-            Text(_text)
-          ]
-      );
+    return Row(children: [
+      IconButton(
+          onPressed: flipFavorite,
+          icon: Icon(
+            _iconData,
+            color: Colors.yellow,
+          )),
+      Text(_text)
+    ]);
   }
 }
