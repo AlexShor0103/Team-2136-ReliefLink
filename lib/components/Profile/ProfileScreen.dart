@@ -49,6 +49,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           const SizedBox(
             height: 35,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: (() {
+                  setState(() {
+                    //state reinforcement to update firstName, lastName UI.
+                    print(firstName);
+                  });
+                  //UPDATE INFO TO BACKEND
+                }),
+                icon: Icon(
+                  Icons.sync,
+                  size: 35,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
           const Text(
             'Personal Information',
             textAlign: TextAlign.left,
@@ -129,9 +148,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget textInputs(String label, String placeholder, bool isConfidential) {
-    String inputVal = "";
-    bool enableEdit = false;
-    bool editIcon = true;
     bool showConfidential = label == "Insurance Company Name"
         ? showInsuranceCompanyNameConfidential
         : (label == "Policy Number"
@@ -140,8 +156,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 35),
       child: (TextField(
-        enabled: enableEdit,
-        onChanged: (value) => {inputVal = value},
+        onChanged: (value) => {
+          if (label == "Insurance Company Name")
+            {insuranceCompanyName = value}
+          else if (label == "Policy Number")
+            {policyNumber = value}
+          else if (label == "Member ID")
+            {memberID = value}
+          else if (label == "First Name")
+            {firstName = value}
+          else if (label == "Last Name")
+            {lastName = value}
+          else
+            {age = value}
+        },
         obscureText: isConfidential
             ? (label == "Insurance Company Name"
                 ? showInsuranceCompanyNameConfidential
@@ -163,7 +191,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       } else {
                         showMemberIDConfidential = !showMemberIDConfidential;
                       }
-                      enableEdit = !enableEdit;
                     });
                   },
                   icon: Icon(
@@ -171,34 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     color: Colors.grey,
                   ),
                 )
-              : IconButton(
-                  onPressed: () {
-                    enableEdit = !enableEdit;
-                    editIcon = !editIcon;
-                    if (label == "First Name") {
-                      firstName = inputVal;
-                    } else if (label == "Last Name") {
-                      lastName = inputVal;
-                    } else if (label == "Age") {
-                      age = inputVal;
-                    } else if (label == "Insureance Company Name") {
-                      insuranceCompanyName = inputVal;
-                    } else if (label == "Policy Number") {
-                      policyNumber = inputVal;
-                    } else if (label == "Member ID") {
-                      memberID = inputVal;
-                    }
-                  },
-                  icon: editIcon
-                      ? Icon(
-                          Icons.edit,
-                          color: Colors.grey,
-                        )
-                      : Icon(
-                          Icons.check_outlined,
-                          color: Colors.grey,
-                        ),
-                ),
+              : null,
           contentPadding: EdgeInsets.only(bottom: 3),
           labelText: label,
           labelStyle: TextStyle(
