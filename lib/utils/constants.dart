@@ -53,7 +53,33 @@ class AppColors {
 }
 
 // This will be a class containing the gradients we use in our application
-class AppGrads {}
+class AppGrads {
+  static const blue = LinearGradient(
+    colors: [Color.fromRGBO(127, 197, 237, 1), Color.fromRGBO(185, 255, 173, 1)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  static const purple = LinearGradient(
+    colors: [Color.fromRGBO(130, 165, 255, 1), Color.fromRGBO(255, 130, 227, 1)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  static const green = LinearGradient(
+    colors: [Color.fromRGBO(149, 240, 141, 1), Color.fromRGBO(192, 249, 119, 1), Color.fromRGBO(255, 232, 174, 1)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  static const orange = LinearGradient(
+    colors: [Color.fromRGBO(255, 184, 119, 1), Color.fromRGBO(255, 235, 163, 1)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  static const sunset = LinearGradient(
+    colors: [Color.fromRGBO(219, 142, 211, 1), Color.fromRGBO(255, 125, 153, 1), Color.fromRGBO(255, 169, 132, 1), Color.fromRGBO(255, 225, 147, 1)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+}
 
 class ActivitiesSorting with ChangeNotifier {
   ValueNotifier<SortOptions> optionNotifier =

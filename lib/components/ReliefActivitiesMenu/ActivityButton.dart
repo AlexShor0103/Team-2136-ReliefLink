@@ -101,7 +101,8 @@ class _ActivityButtonState extends State<ActivityButton> {
       },
       
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(color),
+          // backgroundColor: MaterialStateProperty.all<Color>(color),
+          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(255, 255, 255, 1)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(radius))),
@@ -112,17 +113,30 @@ class _ActivityButtonState extends State<ActivityButton> {
           fixedSize:
               MaterialStateProperty.all<Size>(Size(0, buttonMinHeight)),
           alignment: Alignment.topCenter),
-      child: Ink(
-        decoration: const BoxDecoration(
-          
-          gradient: LinearGradient(colors: [Color(0xff374ABE), Color(0xff64B6FF)],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
+      child: Column(
+        children: [
+          Container(
+            
+            decoration: const BoxDecoration(
+              gradient: AppGrads.sunset,
+              // borderRadius: BorderRadius.all(radius),
+            ),
+            height: buttonMinHeight * 0.3,
           ),
-          // borderRadius: 2,
-        ),
-        height: buttonMinHeight * 0.3,
-      ),
+
+        ],)
+    //   child: Ink(
+    //     decoration: const BoxDecoration(
+          
+    //       gradient: LinearGradient(colors: [Color(0xff374ABE), Color(0xff64B6FF)],
+    //         begin: Alignment.centerLeft,
+    //         end: Alignment.centerRight,
+    //       ),
+    //       borderRadius: BorderRadius.circular(radius),
+    //     ),
+    //     height: buttonMinHeight * 0.3,
+    //   ),
+
     );
     
     return button2;
