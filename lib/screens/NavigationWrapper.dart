@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/utils/constants.dart';
 
 import 'ReliefHomeScreen.dart';
 import '../components/Profile/ProfileScreen.dart';
@@ -73,8 +74,8 @@ class _NavState extends State<Nav> {
                 iconSize: 35,
                 selectedFontSize: 15,
                 unselectedFontSize: 15,
-                unselectedItemColor: Color.fromRGBO(90, 90, 90, 1),
-                selectedItemColor: Color.fromRGBO(0, 0, 0, 1),
+                unselectedItemColor: AppColors.grey,
+                selectedItemColor: AppColors.black,
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(

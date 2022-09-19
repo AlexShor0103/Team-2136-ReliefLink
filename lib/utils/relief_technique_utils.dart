@@ -4,6 +4,14 @@ class ReliefTechniqueData {
   String mood;
   bool favorite;
   int duration;
-  ReliefTechniqueData({required this.videoId, required this.activityName, required this.favorite, required this.mood, required this.duration});
-  
+  ReliefTechniqueData(
+      {required this.videoId,
+      required this.activityName,
+      required this.favorite,
+      required this.mood,
+      required this.duration});
+
+  void toggleActivityFavorite() {
+    favorite = !favorite;
+  }
 }
