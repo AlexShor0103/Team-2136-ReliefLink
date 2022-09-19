@@ -8,6 +8,10 @@ class AppConstants {
     sortingOptions.optionNotifier.value = sortOption;
   }
 
+  // static final colorLib ={
+  //   'cyan'
+  // }
+
   static final colorsByMood = {
     'anxious': AppColors.cyan,
     'sleepless': AppColors.red,
@@ -45,6 +49,7 @@ class AppColors {
   static const white = Color.fromRGBO(255, 255, 255, 1);
   static const red2 = Color.fromRGBO(230, 81, 86, 1);
   static const grey = Color.fromRGBO(90, 90, 90, 1);
+  static const font = Color.fromRGBO(81, 69, 106, 1);
 }
 
 // This will be a class containing the gradients we use in our application
