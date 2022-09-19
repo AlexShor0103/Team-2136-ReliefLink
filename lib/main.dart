@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:relieflink/components/ReliefActivity/ReliefRateScreen.dart';
 import 'package:relieflink/components/ReliefActivity/ReliefScreen.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
@@ -36,7 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -45,13 +45,35 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    return Scaffold(appBar: const Top_Relief(), body: SafeArea(child: Nav()));
+  }
+}
+
+class MapScreen extends StatefulWidget {
+  @override
+  _MapScreenState createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  static const _initialCameraPosition =
+      CameraPosition(target: LatLng(37.773972, -122.431297), zoom: 11.5);
+
+  GoogleMapController _googleMapController;
+
+  @override
+  void dispose() {
+    _googleMapController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      
-      appBar: const Top_Relief(),
-      body: SafeArea(
-        child: Nav()
-      )
-      
-    );
-    }
+        body: GoogleMap(
+            myLocationButtonEnabled: false,
+            zoomControlsEnabled: false,
+            initialCameraPosition: _initialCameraPosition,
+            onMapCreated: (controller) => _googleMapController = controller,)
+            );
+  }
 }
