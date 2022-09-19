@@ -41,8 +41,14 @@ class _ActivityButtonState extends State<ActivityButton> {
         child: Align(
           child: Column(children: [
             const Spacer(),
+            // this is the text for the activity
             Text(widget.activity.activityName,
-                style: const TextStyle(color: AppColors.white)),
+                style: const TextStyle(
+                  color: AppColors.white,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17)),
+            Text('${widget.activity.duration} min'),
             IconButton(
                 onPressed: () {
                   // Set favorite
