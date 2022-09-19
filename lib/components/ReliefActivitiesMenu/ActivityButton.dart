@@ -6,6 +6,8 @@ import '../ReliefActivity/ReliefRateScreen.dart';
 import '../ReliefActivity/ReliefScreen.dart';
 import '../../utils/relief_technique_utils.dart';
 
+
+// this class
 class ActivityButton extends StatefulWidget {
   final ReliefTechniqueData activity;
   const ActivityButton({Key? key, required this.activity}) : super(key: key);

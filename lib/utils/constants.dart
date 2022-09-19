@@ -47,6 +47,9 @@ class AppColors {
   static const grey = Color.fromRGBO(90, 90, 90, 1);
 }
 
+// This will be a class containing the gradients we use in our application
+class AppGrads {}
+
 class ActivitiesSorting with ChangeNotifier {
   ValueNotifier<SortOptions> optionNotifier =
       ValueNotifier<SortOptions>(SortOptions.NONE);

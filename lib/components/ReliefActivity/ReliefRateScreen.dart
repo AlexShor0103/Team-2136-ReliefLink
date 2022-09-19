@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 
+// this is for when the user finishes their video, and is permitted to rate their selection
 class ReliefRateScreen extends StatelessWidget {
   final ReliefTechniqueData data;
 

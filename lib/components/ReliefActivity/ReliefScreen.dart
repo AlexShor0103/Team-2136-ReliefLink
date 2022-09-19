@@ -4,8 +4,8 @@ import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// this class is responsible for holding the video for the current relief technique
 class ReliefScreen extends StatelessWidget {
-
   final ReliefTechniqueData data;
 
   const ReliefScreen({Key? key, required this.data}) : super(key: key);
@@ -13,7 +13,7 @@ class ReliefScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:Top_Relief(), // Insert header here
+      appBar: Top_Relief(), // Insert header here
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: VideoArea(data: data),
@@ -22,19 +22,15 @@ class ReliefScreen extends StatelessWidget {
   }
 }
 
+// This is where the video is played
 class VideoArea extends StatelessWidget {
-
   final ReliefTechniqueData data;
   final YoutubePlayerController _controller;
 
-  VideoArea({Key? key, required this.data}):
-        _controller = YoutubePlayerController(
-          initialVideoId: data.videoId,
-          flags: const YoutubePlayerFlags(
-            autoPlay: false,
-            mute: false
-          )
-        ),
+  VideoArea({Key? key, required this.data})
+      : _controller = YoutubePlayerController(
+            initialVideoId: data.videoId,
+            flags: const YoutubePlayerFlags(autoPlay: false, mute: false)),
         super(key: key);
 
   @override
@@ -42,9 +38,10 @@ class VideoArea extends StatelessWidget {
     return Column(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(data.activityName, style: const TextStyle(color: Colors.orange, fontSize:30)),
+        child: Text(data.activityName,
+            style: const TextStyle(color: Colors.orange, fontSize: 30)),
       ),
-      YoutubePlayer(controller:_controller),
+      YoutubePlayer(controller: _controller),
       NextButton(data: data)
     ]);
   }
@@ -59,14 +56,18 @@ class NextButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10.0),
       child: OutlinedButton(
-          style: OutlinedButton.styleFrom(primary: Colors.white, backgroundColor: Colors.orange),
-          child: Container(
-            padding: EdgeInsets.all(20),
-            child: const Text("Mark as Completed"),
-          ),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> ReliefRateScreen(data: data)));
-          },
+        style: OutlinedButton.styleFrom(
+            primary: Colors.white, backgroundColor: Colors.orange),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: const Text("Mark as Completed"),
+        ),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ReliefRateScreen(data: data)));
+        },
       ),
     );
   }
