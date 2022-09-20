@@ -1,20 +1,23 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 
 class AppConstants {
+  // ACTIVITY SORTING
+
+  // To navigate to the home screen with any specific sorting, add the sorting preference
+  // using the method below and then navigate.
+  // That will lead you to the desired page with the sorting.
   static final sortingOptions = ActivitiesSorting();
   static setSortActivitiesBy(SortOptions sortOption) {
     sortingOptions.optionNotifier.value = sortOption;
   }
 
+  // COLOR SCHEMA
   static final colorsByMood = {
     'anxious': AppColors.cyan,
     'sleepless': AppColors.red,
     'energetic': AppColors.orange,
     'other': AppColors.green
   };
-
   static Color getColorByMood(String mood) {
     var color = colorsByMood[mood.toLowerCase()];
     return color ?? const Color(0x0);
@@ -36,6 +39,7 @@ class AppConstants {
   }
 }
 
+// COLOR CONSTANTS
 class AppColors {
   static const cyan = Color(0xff8CC9BA);
   static const red = Color(0xffFC8D7A);
@@ -47,6 +51,7 @@ class AppColors {
   static const grey = Color.fromRGBO(90, 90, 90, 1);
 }
 
+// SORTING UTILS
 class ActivitiesSorting with ChangeNotifier {
   ValueNotifier<SortOptions> optionNotifier =
       ValueNotifier<SortOptions>(SortOptions.NONE);
