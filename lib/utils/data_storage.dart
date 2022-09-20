@@ -8,6 +8,9 @@ class DataStorage {
   SharedPreferences? prefs;
   Map<String, dynamic>? data;
 
+  /// Initializes the local storage instance and updates the local copy of data.
+  /// This function should be run before using a DataStorage object.
+  /// Beware of race conditions.
   Future<void> init() async {
     try {
       prefs ??= await SharedPreferences.getInstance();
@@ -24,6 +27,11 @@ class DataStorage {
     }
   }
 
+  /// Sets a key-value pair in the local copy of the data store, with key [key] and value [value].
+  /// Better not to use this directly, but use the abstracted methods for each type
+  /// of stored data.
+  /// Returns true if the pair is successfully set, false otherwise.
+  /// Check to make sure init() has been called if false is returned.
   bool setPair(String key, dynamic value) {
     try {
       data![key] = value;
@@ -41,6 +49,9 @@ class DataStorage {
   // Key for list of emergency contact ids, personal info ids,
   // relief technique ids, etc. start with applist_{NAME}
 
+  /// Adds an emergency contact object [contactData] to the local copy of the data store.
+  /// Returns true if the pair is successfully set, false otherwise.
+  /// Check to make sure init() has been called if false is returned.
   bool addEmergencyContact(EmergencyContactData contactData) {
     try {
       List<String> contactsList = data!['applist_contacts'];
@@ -53,6 +64,10 @@ class DataStorage {
     }
   }
 
+  /// Gets a value corresponding to a key [key] in the local copy of the
+  /// key-value store.
+  /// If there is an error getting the data, returns null. Check to make sure init()
+  /// has been called.
   dynamic getValue(String key) {
     try {
       return data!['key'];
@@ -61,10 +76,16 @@ class DataStorage {
     }
   }
 
+  /// Gets the local copy of the entire key-value store. Does NOT return a copy
+  /// of the data, but a reference to the local copy of the data.
+  /// If the data is null, make sure init() has been called.
   Map<String, dynamic>? getData() {
     return data;
   }
 
+  /// Saves the local copy of the data to disk.
+  /// Returns true if the data is successfully saved, false otherwise.
+  /// If false is returned, make sure init() has been called.
   bool saveToDisk() {
     try {
       for (String key in data!.keys) {
