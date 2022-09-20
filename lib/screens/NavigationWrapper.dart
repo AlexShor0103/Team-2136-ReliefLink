@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
 import 'ReliefHomeScreen.dart';
+import '../components/Profile/ProfileScreen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -33,12 +34,7 @@ class _NavState extends State<Nav> {
       ),
     ),
     ReliefHomeScreen(),
-    Center(
-      child: Text(
-        'Me',
-        style: TextStyle(fontSize: 60),
-      ),
-    )
+    ProfileScreen(),
   ];
 
   @override
