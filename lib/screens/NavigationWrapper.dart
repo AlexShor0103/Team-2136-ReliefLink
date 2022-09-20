@@ -35,12 +35,6 @@ class _NavState extends State<Nav> {
     ),
     ReliefHomeScreen(),
     ProfileScreen(),
-    // Center(
-    //   child: Text(
-    //     'Me',
-    //     style: TextStyle(fontSize: 60),
-    //   ),
-    // )
   ];
 
   @override
