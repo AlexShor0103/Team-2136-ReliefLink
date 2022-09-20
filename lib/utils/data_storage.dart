@@ -27,7 +27,7 @@ class DataStorage {
     }
   }
 
-  /// Sets a key-value pair in the local copy of the data store, with key [key] and value [value].
+  /// Sets a key-value pair in the local copy of the data store, with [key] and [value].
   /// Better not to use this directly, but use the abstracted methods for each type
   /// of stored data.
   /// Returns true if the pair is successfully set, false otherwise.
@@ -63,8 +63,7 @@ class DataStorage {
       return false;
     }
   }
-
-  /// Gets a value corresponding to a key [key] in the local copy of the
+  /// Gets a value corresponding to a [key] in the local copy of the
   /// key-value store.
   /// If there is an error getting the data, returns null. Check to make sure init()
   /// has been called.
@@ -72,6 +71,18 @@ class DataStorage {
     try {
       return data!['key'];
     } catch(e) {
+      return null;
+    }
+  }
+
+  /// Gets the class for the data of an emergency contact from the local copy, given an [id].
+  /// If the emergency contact is not in the local copy or an error occurs, null is returned.
+  /// Check to make sure init() has been called.
+  EmergencyContactData? getEmergencyContact(String id) {
+    try {
+      return EmergencyContactData.fromJson(
+          jsonDecode(getValue("contact_" + id)));
+    } catch (e) {
       return null;
     }
   }
