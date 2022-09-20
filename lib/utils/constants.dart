@@ -67,6 +67,7 @@ class AppConstants {
         return 'orange';
     }
   }
+
   //can get any needed gradient
   static getGradByName(String colorName) {
     switch (colorName.toLowerCase()) {
@@ -91,10 +92,11 @@ class AppColors {
   static const red = Color(0xffFC8D7A);
   static const orange = Color(0xffF9CB9A);
   static const green = Color(0xffC5D7BF);
-  static const black = Color.fromRGBO(0, 0, 0, 1);
+  static const black = Color.fromARGB(255, 43, 40, 40);
   static const white = Color.fromRGBO(255, 255, 255, 1);
   static const red2 = Color.fromRGBO(230, 81, 86, 1);
   static const grey = Color.fromRGBO(90, 90, 90, 1);
+  static const bg = Color.fromRGBO(252, 245, 235, 1);
   static const font = Color.fromRGBO(81, 69, 106, 1);
 }
 
