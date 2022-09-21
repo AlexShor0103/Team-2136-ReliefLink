@@ -5,6 +5,7 @@ import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 import 'package:video_player/video_player.dart';
 
+// this class is responsible for holding the video for the current relief technique
 class ReliefScreen extends StatelessWidget {
   final ReliefTechniqueData data;
 
@@ -22,6 +23,7 @@ class ReliefScreen extends StatelessWidget {
   }
 }
 
+// This is where the video is played
 class VideoArea extends StatelessWidget {
   final ReliefTechniqueData data;
   final VideoPlayerController _controller;

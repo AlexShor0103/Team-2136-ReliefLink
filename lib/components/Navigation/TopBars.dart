@@ -33,13 +33,13 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget {
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: black,
+                    color: AppColors.black,
                   ),
                 ),
               ]),
         ),
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.bg,
       toolbarHeight: 80,
       actions: <Widget>[
         Padding(
