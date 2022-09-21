@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/components/ReliefActivity/ReliefRateScreen.dart';
+import 'package:relieflink/components/ReliefActivity/ReliefVideoPlayer.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:video_player/video_player.dart';
 
 // this class is responsible for holding the video for the current relief technique
 class ReliefScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class ReliefScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Top_Relief(), // Insert header here
+      appBar: Top_Relief(),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: VideoArea(data: data),
@@ -25,12 +26,10 @@ class ReliefScreen extends StatelessWidget {
 // This is where the video is played
 class VideoArea extends StatelessWidget {
   final ReliefTechniqueData data;
-  final YoutubePlayerController _controller;
+  final VideoPlayerController _controller;
 
   VideoArea({Key? key, required this.data})
-      : _controller = YoutubePlayerController(
-            initialVideoId: data.videoId,
-            flags: const YoutubePlayerFlags(autoPlay: false, mute: false)),
+      : _controller = VideoPlayerController.network(data.videoLink),
         super(key: key);
 
   @override
@@ -41,7 +40,14 @@ class VideoArea extends StatelessWidget {
         child: Text(data.activityName,
             style: const TextStyle(color: Colors.orange, fontSize: 30)),
       ),
-      YoutubePlayer(controller: _controller),
+      Expanded(
+        child: Container(),
+      ),
+      ReliefVideoPlayer(
+          controller: _controller, autoplay: true, looping: false),
+      Expanded(
+        child: Container(),
+      ),
       NextButton(data: data)
     ]);
   }
