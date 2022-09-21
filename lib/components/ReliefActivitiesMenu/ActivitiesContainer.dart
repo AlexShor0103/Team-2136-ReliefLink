@@ -67,8 +67,8 @@ class ReliefActivityBoxContainerState
         widgetList.add(
           Padding(
               padding: const EdgeInsets.all(10.0),
-              child: ActivityButton(activity: activitiesList[i], updateParent: updateActivities)
-          ),
+              child: ActivityButton(
+                  activity: activitiesList[i], updateParent: updateActivities)),
         );
       }
     }
@@ -88,12 +88,10 @@ class ReliefActivityBoxContainerState
         valueListenable: AppConstants.sortingOptions.optionNotifier,
         builder: (context, value, _) {
           return SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child:  buildBoxes(value)
-              ), 
-             );
+            physics: BouncingScrollPhysics(),
+            child: Padding(
+                padding: const EdgeInsets.all(10.0), child: buildBoxes(value)),
+          );
         });
   }
 }
