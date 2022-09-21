@@ -41,3 +41,4 @@ Soon!
 
 - Some titles of activities get broken down and overflow in the cards due to the cards being too small
 - Favoriting an activity resets when the app is closed
+- Favorite Icon overflows on some Relief Technique cards
