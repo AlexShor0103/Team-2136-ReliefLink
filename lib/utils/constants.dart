@@ -98,7 +98,6 @@ class AppColors {
   static const font = Color.fromRGBO(81, 69, 106, 1);
 }
 
-// This will be a class containing the gradients we use in our application
 class AppGrads {
   static const LinearGradient blue = LinearGradient(
     colors: [

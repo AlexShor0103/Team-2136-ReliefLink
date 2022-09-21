@@ -8,7 +8,6 @@ import '../ReliefActivity/ReliefRateScreen.dart';
 import '../ReliefActivity/ReliefScreen.dart';
 import '../../utils/relief_technique_utils.dart';
 
-// this class
 class ActivityButton extends StatefulWidget {
   final ReliefTechniqueData activity;
   const ActivityButton({Key? key, required this.activity}) : super(key: key);
@@ -27,7 +26,6 @@ class _ActivityButtonState extends State<ActivityButton> {
     const double radius = 10;
     double deviceHeight = MediaQuery.of(context).size.height;
 
-    // KNOWN BUG: Favorites button overflows. Currently fixed by making the cards a lil taller
     double buttonMinHeight = deviceHeight * 0.13;
     setState(() {
       iconData = widget.activity.favorite ? Icons.star : Icons.star_outline;
@@ -45,7 +43,7 @@ class _ActivityButtonState extends State<ActivityButton> {
         style: ButtonStyle(
             //sets background color of buttons to white
             backgroundColor: MaterialStateProperty.all<Color>(
-                Color.fromRGBO(255, 255, 255, 1)),
+                AppColors.white,
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(radius))),
@@ -68,8 +66,6 @@ class _ActivityButtonState extends State<ActivityButton> {
               height: buttonMinHeight * 0.25,
             ),
             Text(widget.activity.activityName,
-              // the reason text aligns center is due to column. Since talking to someone
-              // takes up two rows, it's the only one that aligns left
               style: const TextStyle(
                   color: AppColors.font,
                   fontFamily: 'MainFont',
@@ -82,7 +78,6 @@ class _ActivityButtonState extends State<ActivityButton> {
                   fontWeight: FontWeight.w200,
                   fontSize: 17)),
             
-            // known issue, not towards the right, and overflows on the "talk to someone"
             IconButton(
               color: AppColors.font,
               style: IconButton.styleFrom(
