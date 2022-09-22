@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:relieflink/components/ReliefActivity/ReliefRateScreen.dart';
 import 'package:relieflink/components/ReliefActivity/ReliefScreen.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
@@ -39,6 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -47,6 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(appBar: const Top_Relief(), body: SafeArea(child: Nav()));
-  }
+    return Scaffold(
+      appBar: const Top_Relief(),
+      body: SafeArea(
+        child: Nav()
+      )
+      
+    );
+    }
 }
