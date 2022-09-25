@@ -20,7 +20,8 @@ class ReliefActivityBoxContainerState
   List<ReliefTechniqueData> activitiesList = activities;
   List<Widget> widgetList = [];
 
-  Widget buildBoxes(SortOptions sort) {
+  Widget buildBoxes(SearchAndSortOptions options) {
+    var sort = options.sortOption;
     switch (sort) {
       case SortOptions.NONE:
         break;
@@ -38,11 +39,17 @@ class ReliefActivityBoxContainerState
     }
     widgetList = [];
     for (int i = 0; i < activitiesList.length; i++) {
-      widgetList.add(
-        Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ActivityButton(activity: activitiesList[i])),
-      );
+      if (options.searchString == '' ||
+          activitiesList[i]
+              .activityName
+              .toLowerCase()
+              .contains(options.searchString.toLowerCase())) {
+        widgetList.add(
+          Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ActivityButton(activity: activitiesList[i])),
+        );
+      }
     }
 
     return GridView.count(
@@ -56,7 +63,7 @@ class ReliefActivityBoxContainerState
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<SortOptions>(
+    return ValueListenableBuilder<SearchAndSortOptions>(
         valueListenable: AppConstants.sortingOptions.optionNotifier,
         builder: (context, value, _) {
           return SingleChildScrollView(
