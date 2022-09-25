@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/utils/constants.dart';
 
 import '../components/ReliefActivitiesMenu/ActivitiesContainer.dart';
 import '../components/ReliefActivitiesMenu/SortContainer.dart';
@@ -9,6 +10,7 @@ class ReliefHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: AppColors.bg,
       child: ListView(children: <Widget>[
           SortContainer(), 
           SingleChildScrollView(child: ReliefActivityBoxContainer())]),

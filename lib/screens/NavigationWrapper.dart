@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
 import 'ReliefHomeScreen.dart';
+import '../components/Profile/ProfileScreen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -33,12 +34,7 @@ class _NavState extends State<Nav> {
       ),
     ),
     ReliefHomeScreen(),
-    Center(
-      child: Text(
-        'Me',
-        style: TextStyle(fontSize: 60),
-      ),
-    )
+    ProfileScreen(),
   ];
 
   @override
@@ -53,7 +49,7 @@ class _NavState extends State<Nav> {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.8),
+                color: AppColors.font.withOpacity(0.8),
                 spreadRadius: 5,
                 blurRadius: 20,
                 offset: Offset(0, 3), // changes position of shadow
@@ -72,8 +68,8 @@ class _NavState extends State<Nav> {
                 iconSize: 35,
                 selectedFontSize: 15,
                 unselectedFontSize: 15,
-                unselectedItemColor: AppColors.grey,
-                selectedItemColor: AppColors.black,
+                unselectedItemColor: AppColors.grey.withOpacity(0.6),
+                selectedItemColor: AppColors.font,
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(

@@ -2,7 +2,7 @@
 
 ## About the Project
 
-A companion for individuals struggling with thoughts of harming themself.
+A companion for individuals struggling with thoughts of harming themselves.
 
 An app to assist suicide prevention, from coping techniques to relaxation exercises. Part of the Junior Design class at Georgia Tech, group 2136, with our client Dr. Nadine Kaslow.
 
@@ -41,3 +41,4 @@ Soon!
 
 - Some titles of activities get broken down and overflow in the cards due to the cards being too small
 - Favoriting an activity resets when the app is closed
+- Favorite Icon overflows on some Relief Technique cards
