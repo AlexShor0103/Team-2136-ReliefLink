@@ -12,8 +12,8 @@ class ReliefHomeScreen extends StatelessWidget {
     return Container(
       color: AppColors.bg,
       child: ListView(children: <Widget>[
-          SortContainer(), 
-          SingleChildScrollView(child: ReliefActivityBoxContainer())]),
+        SortContainer(),
+        const SingleChildScrollView(child: ReliefActivityBoxContainer())]),
     );
   }
 }

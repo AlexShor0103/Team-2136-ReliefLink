@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
 class SortContainer extends StatefulWidget {
-  static SortOptions? option;
+  SortOptions? option;
 
   @override
   State<StatefulWidget> createState() {
@@ -12,7 +12,8 @@ class SortContainer extends StatefulWidget {
 }
 
 class SortContainerState extends State<SortContainer> {
-  static SortOptions? optionState;
+  SortOptions? optionState;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
