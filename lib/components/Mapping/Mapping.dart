@@ -11,12 +11,14 @@ class Mapping extends StatefulWidget {
 }
 
 class MapSampleState extends State<Mapping> {
-  Completer<GoogleMapController> _controller = Completer();
+  static const double _defaultLat = 33.772163578;
+  static const double _defaultLong = -84.390165106;
+  static const CameraPosition _defaultLocation = CameraPosition(
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      zoom: 15);
+  MapType _currentMapType = MapType.normal;
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
@@ -24,15 +26,39 @@ class MapSampleState extends State<Mapping> {
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
+  void _changeMapType() {
+    setState(() {
+      _currentMapType = _currentMapType == MapType.normal
+          ? MapType.satellite
+          : MapType.normal;
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+        GoogleMap(
+          initialCameraPosition: _defaultLocation,
+          mapType: _currentMapType,
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+        ),
+        Container(
+        padding: const EdgeInsets.only(top:24, right:12),
+        alignment: Alignment.topRight,
+        child: Column(
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: _changeMapType,
+              backgroundColor: Colors.green,
+              child: const Icon(Icons.map_outlined, size: 30.0),
+              ),
+            ],
+          ),
+        ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _goToTheLake,
