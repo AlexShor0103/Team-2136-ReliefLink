@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './emergency_contact_utils.dart';
+import './user_account_utils.dart';
 
 class DataStorage {
   SharedPreferences? prefs;
@@ -20,7 +21,7 @@ class DataStorage {
         newData[key] = prefs!.get(key);
       }
       data = newData;
-    } catch(e) {
+    } catch (e) {
       if (kDebugMode) {
         print(e);
       }
@@ -36,7 +37,7 @@ class DataStorage {
     try {
       data![key] = value;
       return true;
-    } catch(e) {
+    } catch (e) {
       // If init hasn't run yet - could be a race condition
       return false;
     }
@@ -59,10 +60,23 @@ class DataStorage {
       setPair("applist_contacts", contactsList);
       setPair("contact_" + contactData.id, jsonEncode(contactData));
       return true;
-    } catch(e) {
+    } catch (e) {
       return false;
     }
   }
+
+  /// Adds or update a user account object [accountData] to the local copy of the data store.
+  /// Returns true if the pair is successfully set, false otherwise.
+  /// Check to make sure init() has been called if false is returned.
+  bool addUserAccount(UserAccountData accountData) {
+    try {
+      setPair("account_data", jsonEncode(accountData));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /// Gets a value corresponding to a [key] in the local copy of the
   /// key-value store.
   /// If there is an error getting the data, returns null. Check to make sure init()
@@ -70,7 +84,7 @@ class DataStorage {
   dynamic getValue(String key) {
     try {
       return data!['key'];
-    } catch(e) {
+    } catch (e) {
       return null;
     }
   }
@@ -82,6 +96,17 @@ class DataStorage {
     try {
       return EmergencyContactData.fromJson(
           jsonDecode(getValue("contact_" + id)));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Gets the class for the data of user account from the local copy.
+  /// If the user account is not in the local copy or an error occurs, null is returned.
+  /// Check to make sure init() has been called.
+  UserAccountData? getUserAccountData() {
+    try {
+      return UserAccountData.fromJson(jsonDecode(getValue("account_data")));
     } catch (e) {
       return null;
     }
@@ -114,7 +139,7 @@ class DataStorage {
         }
       }
       return true;
-    } catch(e) {
+    } catch (e) {
       return false;
     }
   }

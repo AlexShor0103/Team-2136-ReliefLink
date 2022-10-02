@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../utils/user_account_utils.dart';
+import '../../utils/data_storage.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -9,7 +11,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool showInsuranceCompanyNameConfidential = false;
   bool showPolicyNumberConfidential = false;
   bool showMemberIDConfidential = false;
-
+  
   String firstName = "";
   String lastName = "";
   String age = "";
@@ -19,6 +21,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserAccountData? userData = (new DataStorage()).getUserAccountData() == null
+        ? null
+        : (new DataStorage()).getUserAccountData();
+    if (userData != null) {
+      firstName = userData.firstName;
+      lastName = userData.lastName;
+      age = userData.age;
+      insuranceCompanyName = userData.insuranceCompanyName;
+      policyNumber = userData.policyNumber;
+      memberID = userData.memberID;
+    }
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -58,7 +72,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     //state reinforcement to update firstName, lastName UI.
                     print(firstName);
                   });
-                  //UPDATE INFO TO BACKEND
+                  UserAccountData newData = new UserAccountData(
+                    firstName: firstName,
+                    lastName: lastName,
+                    age: age,
+                    memberID: memberID,
+                    policyNumber: policyNumber,
+                    insuranceCompanyName: insuranceCompanyName,
+                  );
+                  bool result = (new DataStorage()).addUserAccount(newData);
                 }),
                 icon: Icon(
                   Icons.sync,
