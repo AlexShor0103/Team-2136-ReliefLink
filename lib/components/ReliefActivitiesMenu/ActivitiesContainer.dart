@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:relieflink/utils/constants.dart';
 import '../../activities/activities.dart';
@@ -19,7 +20,8 @@ class ReliefActivityBoxContainerState
   List<ReliefTechniqueData> activitiesList = activities;
   List<Widget> widgetList = [];
 
-  Widget buildBoxes(SortOptions sort) {
+  Widget buildBoxes(SearchAndSortOptions options) {
+    var sort = options.sortOption;
     switch (sort) {
       case SortOptions.NONE:
         break;
@@ -35,41 +37,33 @@ class ReliefActivityBoxContainerState
         break;
       default:
     }
-    List<Widget> rowComponents = [];
-    int durationRemainingCounter = 90;
     widgetList = [];
     for (int i = 0; i < activitiesList.length; i++) {
-      if (durationRemainingCounter - activitiesList[i].duration < 0) {
-        widgetList.add(Row(
-            children: rowComponents,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween));
-        rowComponents = [];
-        rowComponents.add(Flexible(
-            fit: FlexFit.tight,
-            flex: ((90 - activitiesList[i].duration) / 10).round(),
-            child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: ActivityButton(activity: activitiesList[i]))));
-        durationRemainingCounter = 90 - activitiesList[i].duration;
-      } else {
-        rowComponents.add(Flexible(
-            fit: FlexFit.tight,
-            flex: ((90 - activitiesList[i].duration) / 10).round(),
-            child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: ActivityButton(activity: activitiesList[i]))));
-        durationRemainingCounter -= activitiesList[i].duration;
+      if (options.searchString == '' ||
+          activitiesList[i]
+              .activityName
+              .toLowerCase()
+              .contains(options.searchString.toLowerCase())) {
+        widgetList.add(
+          Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ActivityButton(activity: activitiesList[i])),
+        );
       }
     }
-    if (rowComponents.isNotEmpty) {
-      widgetList.add(Row(children: rowComponents));
-    }
-    return Column(children: widgetList);
+
+    return GridView.count(
+      childAspectRatio: 1.5,
+      primary: true,
+      shrinkWrap: true,
+      crossAxisCount: 2,
+      children: widgetList,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<SortOptions>(
+    return ValueListenableBuilder<SearchAndSortOptions>(
         valueListenable: AppConstants.sortingOptions.optionNotifier,
         builder: (context, value, _) {
           return SingleChildScrollView(
