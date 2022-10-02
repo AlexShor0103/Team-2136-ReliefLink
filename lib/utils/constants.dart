@@ -8,8 +8,16 @@ class AppConstants {
   // That will lead you to the desired page with the sorting.
   static final sortingOptions = ActivitiesSorting();
   static setSortActivitiesBy(SortOptions sortOption) {
-    sortingOptions.optionNotifier.value = sortOption;
+    sortingOptions.optionNotifier.value =
+        SearchAndSortOptions(searchString, sortOption);
   }
+
+  static setSearchActivitiesBy(String searchString) {
+    sortingOptions.optionNotifier.value = SearchAndSortOptions(
+        searchString, sortingOptions.optionNotifier.value.sortOption);
+  }
+
+  static var searchString = '';
 
   // COLOR SCHEMA
   static final colorsByMood = {
@@ -146,8 +154,16 @@ class AppGrads {
 
 // SORTING UTILS
 class ActivitiesSorting with ChangeNotifier {
-  ValueNotifier<SortOptions> optionNotifier =
-      ValueNotifier<SortOptions>(SortOptions.NONE);
+  ValueNotifier<SearchAndSortOptions> optionNotifier =
+      ValueNotifier<SearchAndSortOptions>(
+          SearchAndSortOptions('', SortOptions.NONE));
 }
 
 enum SortOptions { NONE, FAVORITE, MOOD, TIME }
+
+class SearchAndSortOptions {
+  String searchString;
+  SortOptions sortOption;
+
+  SearchAndSortOptions(this.searchString, this.sortOption);
+}
