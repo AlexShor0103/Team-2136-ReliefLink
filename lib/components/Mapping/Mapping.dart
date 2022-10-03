@@ -71,11 +71,18 @@ class MapSampleState extends State<Mapping> {
           : MapType.normal;
     });
   }
-
   void _addMarker() {
-    setState(() {
-      _markers.addAll(_list);
-    });
+    count = count + 1;
+    if(count % 2 == 1) {
+      setState(() {
+        _markers.addAll(_list);
+      });
+    }
+    else {
+      setState(() {
+        _markers.clear();
+      });
+    }
   }
 
   @override
