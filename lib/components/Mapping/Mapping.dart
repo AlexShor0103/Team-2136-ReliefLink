@@ -18,6 +18,7 @@ class MapSampleState extends State<Mapping> {
       zoom: 13);
   MapType _currentMapType = MapType.normal;
 
+  static int count = 0;
   final Set<Marker> _markers = {};
   final List<Marker> _list = const [
     Marker(
@@ -56,9 +57,18 @@ class MapSampleState extends State<Mapping> {
   }
 
   void _addMarker() {
-    setState(() {
-      _markers.addAll(_list);
-    });
+    count = count + 1;
+    if(count % 2 == 1) {
+      setState(() {
+        _markers.addAll(_list);
+      });
+    }
+    else {
+      setState(() {
+        _markers.clear();
+      });
+    }
+  }
   }
   @override
   Widget build(BuildContext context) {
