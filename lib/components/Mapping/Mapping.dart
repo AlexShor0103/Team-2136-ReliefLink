@@ -73,17 +73,9 @@ class MapSampleState extends State<Mapping> {
   }
 
   void _addMarker() {
-    count = count + 1;
-    if(count % 2 == 1) {
-      setState(() {
-        _markers.addAll(_list);
-      });
-    }
-    else {
-      setState(() {
-        _markers.clear();
-      });
-    }
+    setState(() {
+      _markers.addAll(_list);
+    });
   }
 
   @override
