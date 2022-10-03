@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/components/Profile/ProfileScreen.dart';
-import 'package:relieflink/recommendations/RecommendationButtons.dart';
+import 'package:relieflink/recommendations/RecommendationScreen.dart';
 
 class MeScreen extends StatelessWidget {
   @override

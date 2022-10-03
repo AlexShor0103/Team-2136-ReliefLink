@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:relieflink/recommendations/RecommendationButtons.dart';
+import 'package:relieflink/recommendations/RecommendationScreen.dart';
 import 'package:relieflink/screens/DiaryScreen.dart';
 import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
