@@ -31,6 +31,10 @@ dependencies:
     sdk: flutter
   chewie: ^1.3.5
   video_player: ^2.4.7
+  dio: ^4.0.0
+  flutter_polyline_points: ^0.2.6
+  google_maps_flutter: ^2.0.2
+  google_maps_flutter_web: ^0.3.2+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
