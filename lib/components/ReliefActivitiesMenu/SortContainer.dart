@@ -2,49 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
 class SortContainer extends StatefulWidget {
-  static SortOptions? option;
+  SortOptions? option;
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return SortContainerState();
   }
 }
 
 class SortContainerState extends State<SortContainer> {
-  static SortOptions? optionState;
+  static SortOptions? optionState = SortOptions.NONE;
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     void setNewSort(SortOptions option) {
       setState(() {
         optionState = option;
       });
     }
 
-    return Column(
-      //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-
-      children: [
-        SortingButton(
-          text: "Sort by Favorite",
-          option: SortOptions.FAVORITE,
-          groupOption: optionState ?? SortOptions.NONE,
-          callback: setNewSort,
-        ),
-        SortingButton(
-          text: "Sort by Mood",
-          option: SortOptions.MOOD,
-          groupOption: optionState ?? SortOptions.NONE,
-          callback: setNewSort,
-        ),
-        SortingButton(
-          text: "Sort by Time Taken",
-          option: SortOptions.TIME,
-          groupOption: optionState ?? SortOptions.NONE,
-          callback: setNewSort,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Row(
+        children: [
+          const Text('Sort By'),
+          const Spacer(),
+          SizedBox(
+            child: DropdownButton<SortOptions>(
+                value: optionState,
+                icon: const Icon(Icons.arrow_downward),
+                elevation: 16,
+                style: const TextStyle(color: AppColors.black),
+                underline: Container(
+                  height: 2,
+                  color: AppColors.black,
+                ),
+                onChanged: (SortOptions? value) {
+                  // This is called when the user selects an item.
+                  setNewSort(value ?? SortOptions.NONE);
+                  AppConstants.setSortActivitiesBy(value ?? SortOptions.NONE);
+                },
+                items: const [
+                  DropdownMenuItem<SortOptions>(
+                    value: SortOptions.NONE,
+                    child: Text('None'),
+                  ),
+                  DropdownMenuItem<SortOptions>(
+                    value: SortOptions.FAVORITE,
+                    child: Text('Favorite'),
+                  ),
+                  DropdownMenuItem<SortOptions>(
+                    value: SortOptions.MOOD,
+                    child: Text('Mood'),
+                  ),
+                  DropdownMenuItem<SortOptions>(
+                    value: SortOptions.TIME,
+                    child: Text('Time Taken'),
+                  )
+                ]),
+          ),
+        ],
+      ),
     );
   }
 }
