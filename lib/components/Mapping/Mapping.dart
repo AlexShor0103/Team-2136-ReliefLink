@@ -15,16 +15,37 @@ class MapSampleState extends State<Mapping> {
   static const double _defaultLong = -84.390165106;
   static const CameraPosition _defaultLocation = CameraPosition(
       target: LatLng(37.43296265331129, -122.08832357078792),
-      zoom: 15);
+      zoom: 13);
   MapType _currentMapType = MapType.normal;
 
-  Completer<GoogleMapController> _controller = Completer();
+  final Set<Marker> _markers = {};
+  final List<Marker> _list = const [
+    Marker(
+        markerId: MarkerId('1'),
+        position: LatLng(33.768677, -84.386786),
+        infoWindow: InfoWindow(
+          title: 'Emory University Hospital Midtown',
+        )
+    ),
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+    Marker(
+        markerId: MarkerId('2'),
+        position: LatLng(33.809319, -84.395363),
+        infoWindow: InfoWindow(
+          title: 'Piedmont Hospital',
+        )
+    ),
+
+    Marker(
+        markerId: MarkerId('3'),
+        position: LatLng(33.774831, -84.403125),
+        infoWindow: InfoWindow(
+          title: 'Stamps Student Health Center',
+        )
+    ),
+  ];
+
+  Completer<GoogleMapController> _controller = Completer();
 
   void _changeMapType() {
     setState(() {
@@ -33,43 +54,46 @@ class MapSampleState extends State<Mapping> {
           : MapType.normal;
     });
   }
+
+  void _addMarker() {
+    setState(() {
+      _markers.addAll(_list);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-        GoogleMap(
-          initialCameraPosition: _defaultLocation,
-          mapType: _currentMapType,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-        ),
-        Container(
-        padding: const EdgeInsets.only(top:24, right:12),
-        alignment: Alignment.topRight,
-        child: Column(
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: _changeMapType,
-              backgroundColor: Colors.green,
-              child: const Icon(Icons.map_outlined, size: 30.0),
-              ),
-            ],
+          GoogleMap(
+            initialCameraPosition: _defaultLocation,
+            mapType: _currentMapType,
+            markers: _markers,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
           ),
-        ),
+          Container(
+            padding: const EdgeInsets.only(top:24, right:12),
+            alignment: Alignment.topRight,
+            child: Column(
+              children: <Widget>[
+                FloatingActionButton(
+                  onPressed: _changeMapType,
+                  backgroundColor: Colors.green,
+                  child: const Icon(Icons.map_outlined, size: 30.0),
+                ),
+                const SizedBox(height:20.0),
+                FloatingActionButton(
+                    onPressed: _addMarker,
+                    backgroundColor: Colors.redAccent,
+                    child: const Icon(Icons.medical_services_outlined, size: 30.0)
+                ),
+              ],
+            ),
+          ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
-      ),
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
