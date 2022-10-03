@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../../utils/user_account_utils.dart';
 import '../../utils/data_storage.dart';
@@ -11,7 +13,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool showInsuranceCompanyNameConfidential = false;
   bool showPolicyNumberConfidential = false;
   bool showMemberIDConfidential = false;
-  
+
   String firstName = "";
   String lastName = "";
   String age = "";
@@ -21,16 +23,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    UserAccountData? userData = (new DataStorage()).getUserAccountData() == null
-        ? null
-        : (new DataStorage()).getUserAccountData();
-    if (userData != null) {
-      firstName = userData.firstName;
-      lastName = userData.lastName;
-      age = userData.age;
-      insuranceCompanyName = userData.insuranceCompanyName;
-      policyNumber = userData.policyNumber;
-      memberID = userData.memberID;
+    DataStorage ds = new DataStorage();
+    ds.init();
+    if (ds.data != null) {
+      firstName = jsonDecode(ds.data!['account_data'])['firstName'];
+      lastName = jsonDecode(ds.data!['account_data'])['lastName'];
+      age = jsonDecode(ds.data!['account_data'])['age'];
+      insuranceCompanyName =
+          jsonDecode(ds.data!['account_data'])['insuranceCompanyName'];
+      policyNumber = jsonDecode(ds.data!['account_data'])['policyNumber'];
+      memberID = jsonDecode(ds.data!['account_data'])['memberID'];
     }
 
     return GestureDetector(
@@ -80,7 +82,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     policyNumber: policyNumber,
                     insuranceCompanyName: insuranceCompanyName,
                   );
-                  bool result = (new DataStorage()).addUserAccount(newData);
+                  bool result = (ds).addUserAccount(newData);
+                  print(
+                      result); // check if data storage runs successfully (should return true)
+                  print(ds
+                      .data); // check the current data storage (should include current inputs)
                 }),
                 icon: Icon(
                   Icons.sync,
