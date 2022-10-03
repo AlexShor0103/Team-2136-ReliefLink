@@ -47,7 +47,7 @@ class MapSampleState extends State<Mapping> {
 
     Marker(
       markerId: MarkerId('4'),
-      position: LatLng(33.773425638560056,-84.38915953183991)
+      position: LatLng(33.773425638560056,-84.38915953183991),
       infoWindow: InfoWindow(
         title: 'Concentra Urgent Care'
       )
@@ -55,10 +55,10 @@ class MapSampleState extends State<Mapping> {
     
     Marker(
       markerId: MarkerId('5'),
-      position: LatLng(33.77248152717527,-84.37556854746298)
+      position: LatLng(33.77248152717527,-84.37556854746298),
       infoWindow: InfoWindow(
         title: 'Grady Health Center'
-      )
+      ),
     )
   ];
 
@@ -85,7 +85,7 @@ class MapSampleState extends State<Mapping> {
       });
     }
   }
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
