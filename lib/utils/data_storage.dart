@@ -33,6 +33,19 @@ class DataStorage {
     }
   }
 
+  static bool setDefaultData() {
+    if (data == null) {
+      return false;
+    }
+    if (!data!.containsKey("applist_contacts")) {
+      data!["applist_contacts"] = List.empty(growable: true);
+    }
+    if (!data!.containsKey("account_data")) {
+      setUserAccountData(UserAccountData.blankAccount());
+    }
+    return true;
+  }
+
   /// Sets a key-value pair in the local copy of the data store, with [key] and [value].
   /// Better not to use this directly, but use the abstracted methods for each type
   /// of stored data.
@@ -73,7 +86,7 @@ class DataStorage {
   /// Adds or update a user account object [accountData] to the local copy of the data store.
   /// Returns true if the pair is successfully set, false otherwise.
   /// Check to make sure init() has been called if false is returned.
-  static bool addUserAccount(UserAccountData accountData) {
+  static bool setUserAccountData(UserAccountData accountData) {
     try {
       setPair("account_data", jsonEncode(accountData));
       return true;

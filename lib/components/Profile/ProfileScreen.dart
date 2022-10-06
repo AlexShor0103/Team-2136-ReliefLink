@@ -78,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     policyNumber: policyNumber,
                     insuranceCompanyName: insuranceCompanyName,
                   );
-                  DataStorage.addUserAccount(newData);
+                  DataStorage.setUserAccountData(newData);
                 }),
                 icon: Icon(
                   Icons.sync,
