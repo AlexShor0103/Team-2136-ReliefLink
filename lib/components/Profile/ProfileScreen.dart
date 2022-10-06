@@ -23,16 +23,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DataStorage ds = new DataStorage();
-    ds.init();
-    if (ds.data != null) {
-      firstName = jsonDecode(ds.data!['account_data'])['firstName'];
-      lastName = jsonDecode(ds.data!['account_data'])['lastName'];
-      age = jsonDecode(ds.data!['account_data'])['age'];
-      insuranceCompanyName =
-          jsonDecode(ds.data!['account_data'])['insuranceCompanyName'];
-      policyNumber = jsonDecode(ds.data!['account_data'])['policyNumber'];
-      memberID = jsonDecode(ds.data!['account_data'])['memberID'];
+
+    UserAccountData? data = DataStorage.getUserAccountData();
+    if (data == null) {
+      DataStorage.init().then((success) {
+        data = DataStorage.getUserAccountData();
+      });
     }
 
     return GestureDetector(
@@ -82,11 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     policyNumber: policyNumber,
                     insuranceCompanyName: insuranceCompanyName,
                   );
-                  bool result = (ds).addUserAccount(newData);
-                  print(
-                      result); // check if data storage runs successfully (should return true)
-                  print(ds
-                      .data); // check the current data storage (should include current inputs)
+                  DataStorage.addUserAccount(newData);
                 }),
                 icon: Icon(
                   Icons.sync,
