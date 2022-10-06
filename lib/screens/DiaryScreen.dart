@@ -7,4 +7,5 @@ class DiaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(child: Text('Write to clear your mind'),);
   }
+
 }

@@ -5,6 +5,8 @@ import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/screens/MeScreen.dart';
 import 'ReliefHomeScreen.dart';
+import '../components/Profile/ProfileScreen.dart';
+import 'FavoritesScreen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -82,6 +84,12 @@ class _NavState extends State<Nav> {
                     ),
                     label: 'Me',
                   ),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.grade_sharp,
+                      ),
+                    label: 'Favorites',
+                   )
                 ],
               )),
         ));

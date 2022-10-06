@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
 class SortContainer extends StatefulWidget {
-  static SortOptions? option;
+  SortOptions? option;
 
   @override
   State<StatefulWidget> createState() {
