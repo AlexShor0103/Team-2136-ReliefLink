@@ -15,14 +15,15 @@ class DataStorage {
   /// Returns true if successful, false if unsuccessful
   static Future<bool> init() async {
     try {
-      if (prefs != null) {
-        prefs ??= await SharedPreferences.getInstance();
+      if (prefs == null) {
+        prefs = await SharedPreferences.getInstance();
         Set<String> keys = prefs!.getKeys();
         Map<String, dynamic> newData = {};
         for (String key in keys) {
           newData[key] = prefs!.get(key);
         }
         data = newData;
+        setDefaultData();
       }
       return true;
     } catch (e) {
@@ -101,7 +102,7 @@ class DataStorage {
   /// has been called.
   static dynamic getValue(String key) {
     try {
-      return data!['key'];
+      return data![key];
     } catch (e) {
       return null;
     }

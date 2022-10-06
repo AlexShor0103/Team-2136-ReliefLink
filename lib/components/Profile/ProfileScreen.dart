@@ -22,14 +22,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String memberID = "";
 
   @override
-  Widget build(BuildContext context) {
-
+  void initState() {
+    super.initState();
     UserAccountData? data = DataStorage.getUserAccountData();
     if (data == null) {
       DataStorage.init().then((success) {
         data = DataStorage.getUserAccountData();
+      }).then((arg) {
+        firstName = data!.firstName;
+        lastName = data!.lastName;
+        age = data!.age;
+        insuranceCompanyName = data!.insuranceCompanyName;
+        policyNumber = data!.policyNumber;
+        memberID = data!.memberID;
+        setState(() {}); // Manually call build
       });
+    } else {
+      firstName = data.firstName;
+      lastName = data.lastName;
+      age = data.age;
+      insuranceCompanyName = data.insuranceCompanyName;
+      policyNumber = data.policyNumber;
+      memberID = data.memberID;
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return GestureDetector(
       onTap: () {
@@ -66,10 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               IconButton(
                 onPressed: (() {
-                  setState(() {
-                    //state reinforcement to update firstName, lastName UI.
-                    print(firstName);
-                  });
+                  setState(() {}); // Manually call build
                   UserAccountData newData = new UserAccountData(
                     firstName: firstName,
                     lastName: lastName,
@@ -79,6 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     insuranceCompanyName: insuranceCompanyName,
                   );
                   DataStorage.setUserAccountData(newData);
+                  DataStorage.saveToDisk();
                 }),
                 icon: Icon(
                   Icons.sync,
