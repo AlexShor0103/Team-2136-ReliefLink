@@ -18,6 +18,7 @@ class MapSampleState extends State<Mapping> {
       zoom: 13);
   MapType _currentMapType = MapType.normal;
 
+  static int count = 0;
   final Set<Marker> _markers = {};
   final List<Marker> _list = const [
     Marker(
@@ -43,6 +44,22 @@ class MapSampleState extends State<Mapping> {
           title: 'Stamps Student Health Center',
         )
     ),
+
+    Marker(
+      markerId: MarkerId('4'),
+      position: LatLng(33.773425638560056,-84.38915953183991),
+      infoWindow: InfoWindow(
+        title: 'Concentra Urgent Care'
+      )
+    ),
+    
+    Marker(
+      markerId: MarkerId('5'),
+      position: LatLng(33.77248152717527,-84.37556854746298),
+      infoWindow: InfoWindow(
+        title: 'Grady Health Center'
+      ),
+    )
   ];
 
   Completer<GoogleMapController> _controller = Completer();
@@ -60,6 +77,7 @@ class MapSampleState extends State<Mapping> {
       _markers.addAll(_list);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
