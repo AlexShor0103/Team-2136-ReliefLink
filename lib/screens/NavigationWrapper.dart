@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/recommendations/RecommendationScreen.dart';
+import 'package:relieflink/screens/DiaryScreen.dart';
+import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
-
+import 'package:relieflink/screens/MeScreen.dart';
 import 'ReliefHomeScreen.dart';
 import '../components/Profile/ProfileScreen.dart';
+import 'FavoritesScreen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -15,26 +19,11 @@ class _NavState extends State<Nav> {
   //currentIndex: selected screen(icon) index
   //start from relief screen (2)
   int currentIndex = 2;
-  //TODO: These 'Centers' are going to be replaced with actual screens.
   final screens = [
-    //diaryScreen()
-    //contactScreen()
-    //reliefScreen()
-    //meScreen()
-    Center(
-      child: Text(
-        'Diary',
-        style: TextStyle(fontSize: 60),
-      ),
-    ),
-    Center(
-      child: Text(
-        'Contact',
-        style: TextStyle(fontSize: 60),
-      ),
-    ),
-    ReliefHomeScreen(),
-    ProfileScreen(),
+    const DiaryScreen(),
+    const ContactsScreen(),
+    const ReliefHomeScreen(),
+    MeScreen(),
   ];
 
   @override
@@ -52,7 +41,7 @@ class _NavState extends State<Nav> {
                 color: AppColors.font.withOpacity(0.8),
                 spreadRadius: 5,
                 blurRadius: 20,
-                offset: Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3), // changes position of shadow
               ),
             ],
           ),
@@ -81,7 +70,7 @@ class _NavState extends State<Nav> {
                     icon: Icon(
                       Icons.phone_outlined,
                     ),
-                    label: 'Contact',
+                    label: 'Contacts',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(
@@ -95,6 +84,12 @@ class _NavState extends State<Nav> {
                     ),
                     label: 'Me',
                   ),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.grade_sharp,
+                      ),
+                    label: 'Favorites',
+                   )
                 ],
               )),
         ));
