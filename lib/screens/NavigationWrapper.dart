@@ -46,7 +46,7 @@ class _NavState extends State<Nav> {
             ],
           ),
           child: SizedBox(
-              height: 70,
+              height: 100,
               child: BottomNavigationBar(
                 //currentIndex: selected screen(icon) index
                 currentIndex: currentIndex,
