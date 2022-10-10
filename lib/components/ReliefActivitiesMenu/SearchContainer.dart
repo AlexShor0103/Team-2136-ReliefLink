@@ -17,9 +17,9 @@ class _SearchContainerState extends State<SearchContainer> {
         borderRadius: BorderRadius.all(Radius.circular(100)),
         color: Color.fromRGBO(0, 0, 0, 0),
         boxShadow: [
-          BoxShadow(color: AppColors.black.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 7,
+          BoxShadow(color: AppColors.black.withOpacity(0.25),
+            spreadRadius: 0,
+            blurRadius: 13,
           )
         ],
       ),
@@ -34,6 +34,11 @@ class _SearchContainerState extends State<SearchContainer> {
           fontSize: 17,
         ),
         decoration: const InputDecoration(
+
+          
+          isDense: true,
+          prefixIcon: Icon(Icons.search),
+          contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
           hintText: 'Search For an Activity',
           hintStyle: const TextStyle(
             color: AppColors.font,
