@@ -1,25 +1,37 @@
 import 'dart:async';
+import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Mapping extends StatefulWidget {
-  const Mapping({Key? key}) : super(key: key);
+void main() => runApp(MyApp());
 
+class MyApp extends StatelessWidget {
   @override
-  MapSampleState createState() => MapSampleState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Google Maps Demo',
+      home: MapSample(),
+    );
+  }
 }
 
-class MapSampleState extends State<Mapping> {
+class MapSample extends StatefulWidget {
+  @override
+  State<MapSample> createState() => MapSampleState();
+}
+
+class MapSampleState extends State<MapSample> {
   static const double _defaultLat = 33.772163578;
   static const double _defaultLong = -84.390165106;
   static const CameraPosition _defaultLocation = CameraPosition(
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(_defaultLat, _defaultLong),
       zoom: 13);
   MapType _currentMapType = MapType.normal;
-
-  static int count = 0;
   final Set<Marker> _markers = {};
+  final Set<Marker> _policeMarker = {};
+  static int count = 0;
+
   final List<Marker> _list = const [
     Marker(
         markerId: MarkerId('1'),
@@ -44,22 +56,32 @@ class MapSampleState extends State<Mapping> {
           title: 'Stamps Student Health Center',
         )
     ),
+  ];
+
+  final List<Marker> _policeList = const [
+    Marker(
+        markerId: MarkerId('4'),
+        position: LatLng(33.781237774545616, -84.4038649460332),
+        infoWindow: InfoWindow(
+          title: 'Georgia Tech Police Department',
+        )
+    ),
 
     Marker(
-      markerId: MarkerId('4'),
-      position: LatLng(33.773425638560056,-84.38915953183991),
-      infoWindow: InfoWindow(
-        title: 'Concentra Urgent Care'
-      )
+        markerId: MarkerId('5'),
+        position: LatLng(33.76488029632767, -84.39925166189168),
+        infoWindow: InfoWindow(
+          title: 'GWCC Police Department',
+        )
     ),
-    
+
     Marker(
-      markerId: MarkerId('5'),
-      position: LatLng(33.77248152717527,-84.37556854746298),
-      infoWindow: InfoWindow(
-        title: 'Grady Health Center'
-      ),
-    )
+        markerId: MarkerId('6'),
+        position: LatLng(33.76388134540889, -84.3725583176755),
+        infoWindow: InfoWindow(
+          title: 'Atlanta Police Department Boulevard Precinct',
+        )
+    ),
   ];
 
   Completer<GoogleMapController> _controller = Completer();
@@ -71,6 +93,7 @@ class MapSampleState extends State<Mapping> {
           : MapType.normal;
     });
   }
+
   void _addMarker() {
     count = count + 1;
     if(count % 2 == 1) {
@@ -85,6 +108,19 @@ class MapSampleState extends State<Mapping> {
     }
   }
 
+  void _addPoliceMarker() {
+    count = count + 1;
+    if(count % 2 == 1) {
+      setState(() {
+        _markers.addAll(_policeList);
+      });
+    }
+    else {
+      setState(() {
+        _markers.clear();
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,6 +150,12 @@ class MapSampleState extends State<Mapping> {
                     backgroundColor: Colors.redAccent,
                     child: const Icon(Icons.medical_services_outlined, size: 30.0)
                 ),
+                const SizedBox(height:20.0),
+                FloatingActionButton(
+                    onPressed: _addPoliceMarker,
+                    backgroundColor: Colors.blueAccent,
+                    child: const Icon(Icons.local_police, size: 30.0)
+                ),
               ],
             ),
           ),
@@ -122,3 +164,4 @@ class MapSampleState extends State<Mapping> {
     );
   }
 }
+
