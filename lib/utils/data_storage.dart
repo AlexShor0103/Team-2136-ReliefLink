@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './emergency_contact_utils.dart';
 import './user_account_utils.dart';
+import '../activities/activities.dart';
 
 class DataStorage {
   static SharedPreferences? prefs;
@@ -39,10 +41,18 @@ class DataStorage {
       return false;
     }
     if (!data!.containsKey("applist_contacts")) {
-      data!["applist_contacts"] = List.empty(growable: true);
+      setPair("applist_contacts", List<String>.empty(growable: true));
     }
     if (!data!.containsKey("account_data")) {
       setUserAccountData(UserAccountData.blankAccount());
+    }
+    if (!data!.containsKey("applist_relief")) {
+      List<String> activityNames = List<String>.empty(growable: true);
+      for (ReliefTechniqueData activityData in activities) {
+        activityNames.add(activityData.activityName);
+        setPair("relief_" + activityData.activityName, jsonEncode(activityData));
+      }
+      setPair("applist_relief", activities);
     }
     return true;
   }
@@ -96,6 +106,18 @@ class DataStorage {
     }
   }
 
+  /// Updates the data for a relief technique, given relief technique data [techniqueData].
+  /// If the technique does not already exist, creates it
+  /// Returns true if successful, false otherwise
+  static bool updateReliefTechniqueData(ReliefTechniqueData techniqueData) {
+    try {
+      setPair("relief_" + techniqueData.activityName, jsonEncode(techniqueData));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /// Gets a value corresponding to a [key] in the local copy of the
   /// key-value store.
   /// If there is an error getting the data, returns null. Check to make sure init()
@@ -120,12 +142,23 @@ class DataStorage {
     }
   }
 
-  // Gets the class for the data of user account from the local copy.
+  /// Gets the class for the data of user account from the local copy.
   /// If the user account is not in the local copy or an error occurs, null is returned.
   /// Check to make sure init() has been called.
   static UserAccountData? getUserAccountData() {
     try {
       return UserAccountData.fromJson(jsonDecode(getValue("account_data")));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Gets the class for the data of a relief technique from the local copy.
+  /// If a relief technique of the given name is not in the local copy or an error occurs, null is returned.
+  /// Make sure init() has been called.
+  static ReliefTechniqueData? getReliefTechniqueData(String activityName) {
+    try {
+      return ReliefTechniqueData.fromJson(jsonDecode(getValue("relief_" + activityName)));
     } catch (e) {
       return null;
     }
