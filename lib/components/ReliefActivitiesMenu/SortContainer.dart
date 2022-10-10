@@ -21,17 +21,28 @@ class SortContainerState extends State<SortContainer> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
       child: Row(
         children: [
-          const Text('Sort By'),
+          const Text('Sort By',
+            style: const TextStyle(
+              color: AppColors.black,
+              fontFamily: 'MainFont',
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+            ),
+          ),
           const Spacer(),
           SizedBox(
             child: DropdownButton<SortOptions>(
                 value: optionState,
                 icon: const Icon(Icons.arrow_downward),
                 elevation: 16,
-                style: const TextStyle(color: AppColors.black),
+                style: const TextStyle(
+                  color: AppColors.black,
+                  fontFamily: 'MainFont',
+                  fontSize: 17,
+                ),
                 underline: Container(
                   height: 2,
                   color: AppColors.black,

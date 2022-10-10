@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'DiaryScreen.dart';
-import 'ContactsScreen.dart';
-
+import 'package:relieflink/recommendations/RecommendationScreen.dart';
+import 'package:relieflink/screens/DiaryScreen.dart';
+import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
-
+import 'package:relieflink/screens/MeScreen.dart';
+import 'ReliefHomeScreen.dart';
 import '../components/Profile/ProfileScreen.dart';
 import 'FavoritesScreen.dart';
-import 'ReliefHomeScreen.dart';
-
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -21,11 +20,10 @@ class _NavState extends State<Nav> {
   //start from relief screen (2)
   int currentIndex = 2;
   final screens = [
-    DiaryScreen(),
-    ContactsScreen(),
+    const DiaryScreen(),
+    const ContactsScreen(),
     const ReliefHomeScreen(),
-    ProfileScreen(),
-    const FavoritesScreen(),
+    MeScreen(),
   ];
 
   @override
@@ -48,7 +46,7 @@ class _NavState extends State<Nav> {
             ],
           ),
           child: SizedBox(
-              height: 70,
+              height: 100,
               child: BottomNavigationBar(
                 //currentIndex: selected screen(icon) index
                 currentIndex: currentIndex,
@@ -72,7 +70,7 @@ class _NavState extends State<Nav> {
                     icon: Icon(
                       Icons.phone_outlined,
                     ),
-                    label: 'Contact',
+                    label: 'Contacts',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(
