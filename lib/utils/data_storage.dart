@@ -13,7 +13,7 @@ class DataStorage {
 
   /// Initializes the local storage instance and updates the local copy of data.
   /// This function should be run before using a DataStorage object.
-  /// Beware of race conditions.
+  /// Beware of async bugs.
   /// Returns true if successful, false if unsuccessful
   static Future<bool> init() async {
     try {
@@ -52,7 +52,7 @@ class DataStorage {
         activityNames.add(activityData.activityName);
         setPair("relief_" + activityData.activityName, jsonEncode(activityData));
       }
-      setPair("applist_relief", activities);
+      setPair("applist_relief", activityNames);
     }
     return true;
   }
@@ -159,6 +159,19 @@ class DataStorage {
   static ReliefTechniqueData? getReliefTechniqueData(String activityName) {
     try {
       return ReliefTechniqueData.fromJson(jsonDecode(getValue("relief_" + activityName)));
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static List<ReliefTechniqueData>? getReliefTechniqueDataList() {
+    try {
+      List reliefList = getValue("applist_relief");
+      List<ReliefTechniqueData> dataList = List.empty(growable: true);
+      for (String name in reliefList) {
+        dataList.add(getReliefTechniqueData(name)!);
+      }
+      return dataList;
     } catch (e) {
       return null;
     }
