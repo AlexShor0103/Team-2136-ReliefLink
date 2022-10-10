@@ -67,7 +67,12 @@ class ReliefActivityBoxContainerState
         valueListenable: AppConstants.sortingOptions.optionNotifier,
         builder: (context, value, _) {
           return SingleChildScrollView(
-              physics: BouncingScrollPhysics(), child: buildBoxes(value));
+              physics: BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child:  buildBoxes(value)
+              ), 
+             );
         });
   }
 }
