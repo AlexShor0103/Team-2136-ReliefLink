@@ -34,8 +34,6 @@ class _SearchContainerState extends State<SearchContainer> {
           fontSize: 17,
         ),
         decoration: const InputDecoration(
-
-          
           isDense: true,
           prefixIcon: Icon(Icons.search),
           contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
@@ -54,41 +52,5 @@ class _SearchContainerState extends State<SearchContainer> {
         ),
       ),
     );
-
-    // return Padding(
-    //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-    //   child: Container(
-    //       decoration: BoxDecoration(boxShadow: [
-    //         BoxShadow(),
-    //       ]),
-    //       child: TextField(
-    //           onChanged: (text) {
-    //             AppConstants.searchString = text;
-    //             AppConstants.setSearchActivitiesBy(text);
-    //           },
-    //           style: const TextStyle(
-    //             color: AppColors.font,
-    //             fontFamily: 'MainFont',
-    //             fontSize: 17,
-    //           ),
-    //           decoration: const InputDecoration(
-    //             // contentPadding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-
-    //             filled: true,
-    //             fillColor: AppColors.white,
-    //             border: OutlineInputBorder(
-    //               borderRadius: BorderRadius.all(Radius.circular(100)),
-    //               borderSide: BorderSide.none,
-    //             ),
-    //             prefixIcon: Icon(Icons.search),
-    //             prefixIconColor: AppColors.font,
-    //             hintText: 'Search for an Activity',
-    //             hintStyle: const TextStyle(
-    //               color: AppColors.font,
-    //               fontFamily: 'MainFont',
-    //               fontSize: 17,
-    //             ),
-    //           ))),
-    // );
   }
 }
