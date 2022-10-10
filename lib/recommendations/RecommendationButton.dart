@@ -13,33 +13,80 @@ class RecommendationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double radius = 10;
+    const double radius = 20;
 
     return Container(
-      // width: 200,
-      height: 100,
-      constraints: BoxConstraints.expand(height: 100),
       decoration: BoxDecoration(
+        color: AppColors.white,
         borderRadius: BorderRadius.all(Radius.circular(radius)),
-        color: AppColors.font,
         boxShadow: [
-          BoxShadow(color: AppColors.black.withOpacity(0.25),
-            spreadRadius: 0,
-            blurRadius: 13,
+          BoxShadow(color: AppColors.font.withOpacity(0.25),
+            spreadRadius: 7,
+            blurRadius: 10,
           )
         ]
       ),
-      
-      child: Center(
-        child: Text(rec.title,
-          style: const TextStyle(
-            color: AppColors.font,
-            fontFamily: 'MainFont',
-            fontWeight: FontWeight.w800,
-            fontSize: 17,
-          )
-        ),
-      ),
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(padding: EdgeInsets.only(bottom: 10),
+            child: 
+            Row(
+              children: [
+                rec.icon,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(rec.title,
+                    style: const TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 20,
+                    )
+                  )
+                ),
+              ],
+            ),
+          ),
+          
+          
+          Text(rec.description,
+            style: const TextStyle(
+              color: AppColors.font,
+              fontFamily: 'MainFont',
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+            )
+          ),
+        ]
+      )
     );
+    // return Container(
+    //   // width: 200,
+    //   height: 100,
+    //   constraints: BoxConstraints.expand(height: 100),
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.all(Radius.circular(radius)),
+    //     color: AppColors.white,
+    //     boxShadow: [
+    //       BoxShadow(color: AppColors.black.withOpacity(0.25),
+    //         spreadRadius: 7,
+    //         blurRadius: 10,
+    //       )
+    //     ]
+    //   ),
+
+    //   child: Center(
+    //     child: Text(rec.title,
+    //       style: const TextStyle(
+    //         color: AppColors.font,
+    //         fontFamily: 'MainFont',
+    //         fontWeight: FontWeight.w800,
+    //         fontSize: 17,
+    //       )
+    //     ),
+    //   ),
+    // );
   }
 }
