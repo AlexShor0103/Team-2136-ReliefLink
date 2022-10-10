@@ -6,26 +6,45 @@ import './emergency_contact_utils.dart';
 import './user_account_utils.dart';
 
 class DataStorage {
-  SharedPreferences? prefs;
-  Map<String, dynamic>? data;
+  static SharedPreferences? prefs;
+  static Map<String, dynamic>? data;
 
   /// Initializes the local storage instance and updates the local copy of data.
   /// This function should be run before using a DataStorage object.
   /// Beware of race conditions.
-  Future<void> init() async {
+  /// Returns true if successful, false if unsuccessful
+  static Future<bool> init() async {
     try {
-      prefs ??= await SharedPreferences.getInstance();
-      Set<String> keys = prefs!.getKeys();
-      Map<String, dynamic> newData = {};
-      for (String key in keys) {
-        newData[key] = prefs!.get(key);
+      if (prefs == null) {
+        prefs = await SharedPreferences.getInstance();
+        Set<String> keys = prefs!.getKeys();
+        Map<String, dynamic> newData = {};
+        for (String key in keys) {
+          newData[key] = prefs!.get(key);
+        }
+        data = newData;
+        setDefaultData();
       }
-      data = newData;
+      return true;
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
+      return false;
     }
+  }
+
+  static bool setDefaultData() {
+    if (data == null) {
+      return false;
+    }
+    if (!data!.containsKey("applist_contacts")) {
+      data!["applist_contacts"] = List.empty(growable: true);
+    }
+    if (!data!.containsKey("account_data")) {
+      setUserAccountData(UserAccountData.blankAccount());
+    }
+    return true;
   }
 
   /// Sets a key-value pair in the local copy of the data store, with [key] and [value].
@@ -33,7 +52,7 @@ class DataStorage {
   /// of stored data.
   /// Returns true if the pair is successfully set, false otherwise.
   /// Check to make sure init() has been called if false is returned.
-  bool setPair(String key, dynamic value) {
+  static bool setPair(String key, dynamic value) {
     try {
       data![key] = value;
       return true;
@@ -53,7 +72,7 @@ class DataStorage {
   /// Adds an emergency contact object [contactData] to the local copy of the data store.
   /// Returns true if the pair is successfully set, false otherwise.
   /// Check to make sure init() has been called if false is returned.
-  bool addEmergencyContact(EmergencyContactData contactData) {
+  static bool addEmergencyContact(EmergencyContactData contactData) {
     try {
       List<String> contactsList = data!['applist_contacts'];
       contactsList.add(contactData.id);
@@ -68,7 +87,7 @@ class DataStorage {
   /// Adds or update a user account object [accountData] to the local copy of the data store.
   /// Returns true if the pair is successfully set, false otherwise.
   /// Check to make sure init() has been called if false is returned.
-  bool addUserAccount(UserAccountData accountData) {
+  static bool setUserAccountData(UserAccountData accountData) {
     try {
       setPair("account_data", jsonEncode(accountData));
       return true;
@@ -81,9 +100,9 @@ class DataStorage {
   /// key-value store.
   /// If there is an error getting the data, returns null. Check to make sure init()
   /// has been called.
-  dynamic getValue(String key) {
+  static dynamic getValue(String key) {
     try {
-      return data!['key'];
+      return data![key];
     } catch (e) {
       return null;
     }
@@ -92,7 +111,7 @@ class DataStorage {
   /// Gets the class for the data of an emergency contact from the local copy, given an [id].
   /// If the emergency contact is not in the local copy or an error occurs, null is returned.
   /// Check to make sure init() has been called.
-  EmergencyContactData? getEmergencyContact(String id) {
+  static EmergencyContactData? getEmergencyContact(String id) {
     try {
       return EmergencyContactData.fromJson(
           jsonDecode(getValue("contact_" + id)));
@@ -104,7 +123,7 @@ class DataStorage {
   // Gets the class for the data of user account from the local copy.
   /// If the user account is not in the local copy or an error occurs, null is returned.
   /// Check to make sure init() has been called.
-  UserAccountData? getUserAccountData() {
+  static UserAccountData? getUserAccountData() {
     try {
       return UserAccountData.fromJson(jsonDecode(getValue("account_data")));
     } catch (e) {
@@ -115,14 +134,14 @@ class DataStorage {
   /// Gets the local copy of the entire key-value store. Does NOT return a copy
   /// of the data, but a reference to the local copy of the data.
   /// If the data is null, make sure init() has been called.
-  Map<String, dynamic>? getData() {
+  static Map<String, dynamic>? getData() {
     return data;
   }
 
   /// Saves the local copy of the data to disk.
   /// Returns true if the data is successfully saved, false otherwise.
   /// If false is returned, make sure init() has been called.
-  bool saveToDisk() {
+  static bool saveToDisk() {
     try {
       for (String key in data!.keys) {
         dynamic value = data![key];

@@ -22,18 +22,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String memberID = "";
 
   @override
-  Widget build(BuildContext context) {
-    DataStorage ds = new DataStorage();
-    ds.init();
-    if (ds.data != null) {
-      firstName = jsonDecode(ds.data!['account_data'])['firstName'];
-      lastName = jsonDecode(ds.data!['account_data'])['lastName'];
-      age = jsonDecode(ds.data!['account_data'])['age'];
-      insuranceCompanyName =
-          jsonDecode(ds.data!['account_data'])['insuranceCompanyName'];
-      policyNumber = jsonDecode(ds.data!['account_data'])['policyNumber'];
-      memberID = jsonDecode(ds.data!['account_data'])['memberID'];
+  void initState() {
+    super.initState();
+    UserAccountData? data = DataStorage.getUserAccountData();
+    if (data == null) {
+      DataStorage.init().then((success) {
+        data = DataStorage.getUserAccountData();
+      }).then((arg) {
+        firstName = data!.firstName;
+        lastName = data!.lastName;
+        age = data!.age;
+        insuranceCompanyName = data!.insuranceCompanyName;
+        policyNumber = data!.policyNumber;
+        memberID = data!.memberID;
+        setState(() {}); // Manually call build
+      });
+    } else {
+      firstName = data.firstName;
+      lastName = data.lastName;
+      age = data.age;
+      insuranceCompanyName = data.insuranceCompanyName;
+      policyNumber = data.policyNumber;
+      memberID = data.memberID;
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return GestureDetector(
       onTap: () {
@@ -70,10 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               IconButton(
                 onPressed: (() {
-                  setState(() {
-                    //state reinforcement to update firstName, lastName UI.
-                    print(firstName);
-                  });
+                  setState(() {}); // Manually call build
                   UserAccountData newData = new UserAccountData(
                     firstName: firstName,
                     lastName: lastName,
@@ -82,11 +94,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     policyNumber: policyNumber,
                     insuranceCompanyName: insuranceCompanyName,
                   );
-                  bool result = (ds).addUserAccount(newData);
-                  print(
-                      result); // check if data storage runs successfully (should return true)
-                  print(ds
-                      .data); // check the current data storage (should include current inputs)
+                  DataStorage.setUserAccountData(newData);
+                  DataStorage.saveToDisk();
                 }),
                 icon: Icon(
                   Icons.sync,

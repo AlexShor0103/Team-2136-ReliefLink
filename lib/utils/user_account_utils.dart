@@ -15,6 +15,14 @@ class UserAccountData {
     required this.memberID,
   });
 
+  UserAccountData.blankAccount():
+    firstName = "",
+    lastName = "",
+    age = "",
+    insuranceCompanyName = "",
+    policyNumber = "",
+    memberID = "";
+
   UserAccountData.fromJson(Map<String, dynamic> json)
       : firstName = json['firstName'],
         lastName = json['lastName'],
