@@ -32,10 +32,11 @@ class ReliefActivityBoxContainerState
     if (data == null) {
       DataStorage.init().then((success) {
         activitiesList = DataStorage.getReliefTechniqueDataList()!;
-        setState(() {}); // Call build again
+        setState(() {});
       });
     } else {
       activitiesList = data;
+      setState(() {});
     }
   }
 

@@ -88,6 +88,7 @@ class _ActivityButtonState extends State<ActivityButton> {
                 });
                 DataStorage.updateReliefTechniqueData(widget.activity);
                 DataStorage.saveToDisk();
+                widget.updateParent();
               },
               icon: Icon(
                 iconData,
