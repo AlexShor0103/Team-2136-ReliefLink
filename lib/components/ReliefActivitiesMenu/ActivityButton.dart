@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
@@ -6,6 +5,7 @@ import '../../screens/ReliefHomeScreen.dart';
 import '../ReliefActivity/ReliefRateScreen.dart';
 import '../ReliefActivity/ReliefScreen.dart';
 import '../../utils/relief_technique_utils.dart';
+import '../../utils/data_storage.dart';
 
 class ActivityButton extends StatefulWidget {
   final ReliefTechniqueData activity;
@@ -83,6 +83,8 @@ class _ActivityButtonState extends State<ActivityButton> {
                   iconData =
                       iconData == Icons.star ? Icons.star_outline : Icons.star;
                 });
+                DataStorage.updateReliefTechniqueData(widget.activity);
+                DataStorage.saveToDisk();
               },
               icon: Icon(
                 iconData,
