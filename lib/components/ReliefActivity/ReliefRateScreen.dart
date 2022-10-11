@@ -75,7 +75,6 @@ class RateButton extends StatelessWidget {
           primary: Colors.white, backgroundColor: Colors.orange),
       child: const Text("Rate"),
       onPressed: () {
-        DataStorage.saveToDisk();
         Navigator.pop(context);
         Navigator.pop(context);
       },
@@ -100,6 +99,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
 
   @override
   void initState() {
+    super.initState();
     _favorite = widget.activity.favorite;
     if (_favorite) {
       _iconData = Icons.star;
@@ -113,6 +113,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   void flipFavorite() {
     widget.activity.toggleActivityFavorite();
     DataStorage.updateReliefTechniqueData(widget.activity);
+    DataStorage.saveToDisk();
     setState(() {
       _favorite = !_favorite;
       if (_favorite) {
