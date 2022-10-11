@@ -24,14 +24,19 @@ class ReliefActivityBoxContainerState
   @override
   void initState() {
     super.initState();
+    updateActivities();
+  }
+
+  void updateActivities() {
     List<ReliefTechniqueData>? data = DataStorage.getReliefTechniqueDataList();
     if (data == null) {
       DataStorage.init().then((success) {
         activitiesList = DataStorage.getReliefTechniqueDataList()!;
-        setState(() {}); // Call build again
+        setState(() {});
       });
     } else {
       activitiesList = data;
+      setState(() {});
     }
   }
 
@@ -62,7 +67,8 @@ class ReliefActivityBoxContainerState
         widgetList.add(
           Padding(
               padding: const EdgeInsets.all(10.0),
-              child: ActivityButton(activity: activitiesList[i])),
+              child: ActivityButton(activity: activitiesList[i], updateParent: updateActivities)
+          ),
         );
       }
     }
