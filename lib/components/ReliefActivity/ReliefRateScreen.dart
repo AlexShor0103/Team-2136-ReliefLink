@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
+import '../../utils/data_storage.dart';
 
 class ReliefRateScreen extends StatelessWidget {
   final ReliefTechniqueData data;
@@ -74,6 +75,7 @@ class RateButton extends StatelessWidget {
           primary: Colors.white, backgroundColor: Colors.orange),
       child: const Text("Rate"),
       onPressed: () {
+        DataStorage.saveToDisk();
         Navigator.pop(context);
         Navigator.pop(context);
       },
@@ -110,6 +112,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
 
   void flipFavorite() {
     widget.activity.toggleActivityFavorite();
+    DataStorage.updateReliefTechniqueData(widget.activity);
     setState(() {
       _favorite = !_favorite;
       if (_favorite) {
