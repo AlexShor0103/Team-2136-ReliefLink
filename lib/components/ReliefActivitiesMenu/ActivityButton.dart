@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
@@ -6,10 +5,12 @@ import '../../screens/ReliefHomeScreen.dart';
 import '../ReliefActivity/ReliefRateScreen.dart';
 import '../ReliefActivity/ReliefScreen.dart';
 import '../../utils/relief_technique_utils.dart';
+import '../../utils/data_storage.dart';
 
 class ActivityButton extends StatefulWidget {
   final ReliefTechniqueData activity;
-  const ActivityButton({Key? key, required this.activity}) : super(key: key);
+  final Function updateParent;
+  const ActivityButton({Key? key, required this.activity, required this.updateParent}) : super(key: key);
 
   @override
   State<ActivityButton> createState() => _ActivityButtonState();
@@ -35,7 +36,9 @@ class _ActivityButtonState extends State<ActivityButton> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ReliefScreen(data: widget.activity)));
+                builder: (context) => ReliefScreen(data: widget.activity)
+            )
+        ).then((success) => widget.updateParent()).then((success) => setState(() {}));
       },
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all<Color>(AppColors.white),
@@ -83,6 +86,9 @@ class _ActivityButtonState extends State<ActivityButton> {
                   iconData =
                       iconData == Icons.star ? Icons.star_outline : Icons.star;
                 });
+                DataStorage.updateReliefTechniqueData(widget.activity);
+                DataStorage.saveToDisk();
+                widget.updateParent();
               },
               icon: Icon(
                 iconData,

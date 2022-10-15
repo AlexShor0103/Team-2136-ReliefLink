@@ -42,3 +42,28 @@ Soon!
 - Some titles of activities get broken down and overflow in the cards due to the cards being too small
 - Favoriting an activity resets when the app is closed
 - Favorite Icon overflows on some Relief Technique cards
+
+
+
+## v0.2.0
+
+### Features
+
+- Activities search on the home screen is enabled
+- Ability to access the favorite activities from the navigation bar
+- Settings tab created, where you can access the profile page and recommended external coping techniques (such as other apps)
+- Personal information is now stored in the device (and not lost when closing the app)
+- The ability to search for health resources in the area is now available!
+
+
+### Bug Fixes
+
+- Overflow of the cards is fixed, as well as all overflows in icons
+- Information in the personal profile is now persistent accress sessions
+
+### Known Issues
+
+- Favoriting an acitivity when looking at the favorites tab in the home screen does not update instantly
+- Favoriting an activity resets when the app is closed
+- Buggy formatting of settings tab and external coping activities
+- Map API is not using the user's current location

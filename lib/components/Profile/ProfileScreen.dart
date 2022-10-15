@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import '../../utils/user_account_utils.dart';
+import '../../utils/data_storage.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -18,7 +22,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String memberID = "";
 
   @override
+  void initState() {
+    super.initState();
+    UserAccountData? data = DataStorage.getUserAccountData();
+    if (data == null) {
+      DataStorage.init().then((success) {
+        data = DataStorage.getUserAccountData();
+      }).then((arg) {
+        firstName = data!.firstName;
+        lastName = data!.lastName;
+        age = data!.age;
+        insuranceCompanyName = data!.insuranceCompanyName;
+        policyNumber = data!.policyNumber;
+        memberID = data!.memberID;
+        setState(() {}); // Manually call build
+      });
+    } else {
+      firstName = data.firstName;
+      lastName = data.lastName;
+      age = data.age;
+      insuranceCompanyName = data.insuranceCompanyName;
+      policyNumber = data.policyNumber;
+      memberID = data.memberID;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -54,11 +85,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               IconButton(
                 onPressed: (() {
-                  setState(() {
-                    //state reinforcement to update firstName, lastName UI.
-                    print(firstName);
-                  });
-                  //UPDATE INFO TO BACKEND
+                  setState(() {}); // Manually call build
+                  UserAccountData newData = new UserAccountData(
+                    firstName: firstName,
+                    lastName: lastName,
+                    age: age,
+                    memberID: memberID,
+                    policyNumber: policyNumber,
+                    insuranceCompanyName: insuranceCompanyName,
+                  );
+                  DataStorage.setUserAccountData(newData);
+                  DataStorage.saveToDisk();
                 }),
                 icon: Icon(
                   Icons.sync,
