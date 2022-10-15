@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/components/Profile/ProfileScreen.dart';
 import 'package:relieflink/recommendations/RecommendationScreen.dart';
+import 'package:relieflink/screens/MapScreen.dart';
 
 class MeScreen extends StatelessWidget {
   @override
@@ -37,8 +38,22 @@ class MeScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ],
-        ),
+            ElevatedButton(onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MapScreen())); },
+              child: Column(
+                children: const [
+                  Icon(
+                    Icons.location_on_outlined,
+                ),
+                Text('Find a Counselor Near You'),
+                ]
+              )
+            )
+          ]
+      ),
     );
   }
 }
