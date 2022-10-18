@@ -2,43 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/components/Profile/ProfileScreen.dart';
 import 'package:relieflink/recommendations/RecommendationScreen.dart';
 
+import '../utils/constants.dart';
+
 class MeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Column(
+      home: Scaffold(
+        backgroundColor: AppColors.bg,
+        body: ListView(
+          padding: const EdgeInsets.only(left: 650.0, right: 650.0),
+          //adjust the paddings from the two edges
           children: [
-            ElevatedButton(
+            const SizedBox(
+              height: 60,
+            ),
+            MaterialButton(
+              color: AppColors.orange,
+              height: 80.0,
+              minWidth: 70.0,
               onPressed: () {
-              Navigator.push(
-                  context,
-                MaterialPageRoute(
-                    builder: (context) => ProfileScreen())); },
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()));
+              },
               child: Column(
                 children: const [
-              Icon(
-                  Icons.account_circle
-              ),
+                  Icon(Icons.account_circle),
                   Text('Profile'),
                 ],
               ),
             ),
-            ElevatedButton(onPressed: () {
-              Navigator.push(
-                  context,
-                MaterialPageRoute(
-                    builder: (context) => RecommendationScreen())); },
+            const SizedBox(
+              height: 60,
+            ),
+            MaterialButton(
+              color: AppColors.orange,
+              height: 80.0,
+              minWidth: 70.0,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RecommendationScreen()));
+              },
               child: Column(
                 children: const [
-                  Icon(
-                      Icons.airline_stops,
-                  ),
+                  Icon(Icons.airline_stops),
                   Text('Recommendations'),
                 ],
               ),
             ),
           ],
         ),
+      ),
     );
   }
 }
