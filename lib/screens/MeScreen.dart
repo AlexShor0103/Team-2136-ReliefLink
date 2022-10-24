@@ -48,7 +48,7 @@ class MeScreen extends StatelessWidget {
                   Icon(
                     Icons.location_on_outlined,
                 ),
-                Text('Find a Counselor Near You'),
+                Text('Find a Health Care Center Near You'),
                 ]
               )
             )
