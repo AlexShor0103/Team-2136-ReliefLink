@@ -90,8 +90,7 @@ Soon!
 
 ### Known Issues
 
-- Inconsistent tabbing of elements in the "Relation" field in EMergency Contact cards
+- Inconsistent tabbing of elements in the "Relation" field in Emergency Contact cards
 - Map API is not using the user's current location
 - Favoriting an acitivity when looking at the favorites tab in the home screen does not update instantly
-- Favoriting an activity resets when the app is closed
-- Buggy formatting of settings tab and external coping activities
+- Buggy formatting of settings tab, with the Profile, Maps and External Coping Activities tab
