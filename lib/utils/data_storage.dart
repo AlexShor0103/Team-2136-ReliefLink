@@ -50,7 +50,8 @@ class DataStorage {
       List<String> activityNames = List<String>.empty(growable: true);
       for (ReliefTechniqueData activityData in activities) {
         activityNames.add(activityData.activityName);
-        setPair("relief_" + activityData.activityName, jsonEncode(activityData));
+        setPair(
+            "relief_" + activityData.activityName, jsonEncode(activityData));
       }
       setPair("applist_relief", activityNames);
     }
@@ -86,8 +87,27 @@ class DataStorage {
     try {
       List<String> contactsList = data!['applist_contacts'];
       contactsList.add(contactData.id);
+      contactsList = contactsList.toSet().toList();
       setPair("applist_contacts", contactsList);
       setPair("contact_" + contactData.id, jsonEncode(contactData));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Removes an emergency contact object [contactData] from the local copy of the data store.
+  /// Returns true if the pair is successfully removed, false otherwise.
+  /// Check to make sure init() has been called if false is returned.
+  static bool removeEmergencyContact(String id) {
+    try {
+      List<String> contactsList = data!['applist_contacts'];
+      contactsList.remove(id);
+      contactsList = contactsList.toSet().toList();
+
+      setPair("applist_contacts", contactsList);
+      data!.remove('contact_' + id);
+
       return true;
     } catch (e) {
       return false;
@@ -111,7 +131,8 @@ class DataStorage {
   /// Returns true if successful, false otherwise
   static bool updateReliefTechniqueData(ReliefTechniqueData techniqueData) {
     try {
-      setPair("relief_" + techniqueData.activityName, jsonEncode(techniqueData));
+      setPair(
+          "relief_" + techniqueData.activityName, jsonEncode(techniqueData));
       return true;
     } catch (e) {
       return false;
@@ -158,7 +179,8 @@ class DataStorage {
   /// Make sure init() has been called.
   static ReliefTechniqueData? getReliefTechniqueData(String activityName) {
     try {
-      return ReliefTechniqueData.fromJson(jsonDecode(getValue("relief_" + activityName)));
+      return ReliefTechniqueData.fromJson(
+          jsonDecode(getValue("relief_" + activityName)));
     } catch (e) {
       return null;
     }
