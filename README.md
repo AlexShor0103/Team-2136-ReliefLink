@@ -67,3 +67,30 @@ Soon!
 - Favoriting an activity resets when the app is closed
 - Buggy formatting of settings tab and external coping activities
 - Map API is not using the user's current location
+
+
+## v0.3.0
+
+
+### Features
+
+- Find mental health clinics near me
+  - Users can now search the map to find health resources near them
+- Add and reach out to Emergency Contacts
+  - Emergency contacts can be saved to the app, with the ability to call or text them
+-  Access to external suggestions of resources
+   -  A curated list of apps and services that can assist the users, on top of our own features, can be found in the app now. That includes breathing exercises, relaxation and meditation apps
+
+
+### Bug Fixes
+
+- Profile tab is no longer breaking when accessed through the menu bar
+- Map API now works on all devices
+- Favoriting an acitivity is now consistent across sessions
+
+### Known Issues
+
+- Inconsistent tabbing of elements in the "Relation" field in Emergency Contact cards
+- Map API is not using the user's current location
+- Favoriting an acitivity when looking at the favorites tab in the home screen does not update instantly
+- Buggy formatting of settings tab, with the Profile, Maps and External Coping Activities tab

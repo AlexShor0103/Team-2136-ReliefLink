@@ -67,7 +67,7 @@ class MeScreen extends StatelessWidget {
               child: Column(
                 children: const [
                   Icon(Icons.location_on_outlined),
-                  Text('Find a Conselor Near You'),
+                  Text('Find a Health Care Center Near You'),
                 ],
               ),
             ),
