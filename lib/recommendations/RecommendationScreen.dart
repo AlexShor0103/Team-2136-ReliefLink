@@ -64,14 +64,21 @@ class RecommendationScreen extends StatelessWidget {
               padding: EdgeInsets.only(right: 15),
             ),
             Text(
-              recommendations[index].title +
-                  ' - ' +
-                  recommendations[index].description,
+              recommendations[index].title,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.clip,
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Flexible(
+                child: Text(
+              recommendations[index].description,
               style: const TextStyle(
                 fontSize: 20,
               ),
               overflow: TextOverflow.clip,
-            ),
+            ))
           ],
         ),
       )),

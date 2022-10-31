@@ -16,64 +16,64 @@ class MeScreen extends StatelessWidget {
           //adjust the paddings from the two edges
           children: [
             const SizedBox(
-              height: 60,
+              height: 200,
             ),
-            MaterialButton(
-              color: AppColors.orange,
-              height: 80.0,
-              minWidth: 70.0,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfileScreen()));
-              },
-              child: Column(
-                children: const [
-                  Icon(Icons.account_circle),
-                  Text('Profile'),
-                ],
-              ),
-            ),
+            meScreenButton(context, "Profile"),
             const SizedBox(
               height: 60,
             ),
-            MaterialButton(
-              color: AppColors.orange,
-              height: 80.0,
-              minWidth: 70.0,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RecommendationScreen()));
-              },
-              child: Column(
-                children: const [
-                  Icon(Icons.airline_stops),
-                  Text('Recommendations'),
-                ],
-              ),
-            ),
+            meScreenButton(context, "Recommendations"),
             const SizedBox(
               height: 60,
             ),
-            MaterialButton(
-              color: AppColors.orange,
-              height: 80.0,
-              minWidth: 70.0,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MapScreen()));
-              },
-              child: Column(
-                children: const [
-                  Icon(Icons.location_on_outlined),
-                  Text('Find a Health Care Center Near You'),
-                ],
-              ),
-            ),
+            meScreenButton(context, "Find a Health Care Center Near You")
           ],
         ),
       ),
+    );
+  }
+
+  Widget meScreenButton(BuildContext context, String screenName) {
+    Widget goto = ProfileScreen();
+    IconData screenIcon = Icons.account_circle;
+    switch (screenName) {
+      case "Profile":
+        goto = ProfileScreen();
+        screenIcon = Icons.account_circle;
+        break;
+      case "Recommendations":
+        goto = RecommendationScreen();
+        screenIcon = Icons.airline_stops;
+        break;
+      case "Find a Health Care Center Near You":
+        goto = MapScreen();
+        screenIcon = Icons.location_on_outlined;
+        break;
+    }
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 40),
+      child: (MaterialButton(
+        color: AppColors.orange,
+        height: 80.0,
+        minWidth: 70.0,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => (goto)));
+        },
+        child: Row(
+          children: [
+            Icon(screenIcon),
+            SizedBox(
+              width: 30,
+            ),
+            Flexible(
+                child: Text(
+              "${screenName}",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )),
+          ],
+        ),
+      )),
     );
   }
 }
