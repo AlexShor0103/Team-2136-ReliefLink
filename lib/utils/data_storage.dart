@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './emergency_contact_utils.dart';
 import './user_account_utils.dart';
 import '../activities/activities.dart';
+import 'package:relieflink/utils/crisis_data_utils.dart';
 
 class DataStorage {
   static SharedPreferences? prefs;
@@ -45,6 +46,9 @@ class DataStorage {
     }
     if (!data!.containsKey("account_data")) {
       setUserAccountData(UserAccountData.blankAccount());
+    }
+    if (!data!.containsKey("crisis_data")) {
+      setCrisisData(CrisisData.blankAccount());
     }
     if (!data!.containsKey("applist_relief")) {
       List<String> activityNames = List<String>.empty(growable: true);
@@ -126,6 +130,18 @@ class DataStorage {
     }
   }
 
+  /// Adds or updates a crisis data object [crisisData] to the local copy of the data store.
+  /// returns true if the pair is successfully set, false otherwise.
+  /// Check to make sure init() has been called if false is returned.
+  static bool setCrisisData(CrisisData crisisData) {
+    try {
+      setPair("crisis_data", jsonEncode(crisisData));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /// Updates the data for a relief technique, given relief technique data [techniqueData].
   /// If the technique does not already exist, creates it
   /// Returns true if successful, false otherwise
@@ -173,6 +189,18 @@ class DataStorage {
       return null;
     }
   }
+
+  /// Gets the class for the data of a crisis plan from the local copy.
+  /// If a crisis plan is not in the local copy or an error occurs, null is returned.
+  /// Check to make sure init() has been called.
+  static CrisisData? getCrisisData() {
+    try {
+      return CrisisData.fromJson(jsonDecode(getValue("crisis_data")));
+    } catch (e) {
+      return null;
+    }
+  }
+
 
   /// Gets the class for the data of a relief technique from the local copy.
   /// If a relief technique of the given name is not in the local copy or an error occurs, null is returned.

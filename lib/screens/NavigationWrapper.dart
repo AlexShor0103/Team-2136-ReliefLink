@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:relieflink/recommendations/RecommendationScreen.dart';
 import 'package:relieflink/screens/DiaryScreen.dart';
 import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/screens/MeScreen.dart';
 import 'ReliefHomeScreen.dart';
-import '../components/Profile/ProfileScreen.dart';
+import 'package:relieflink/screens/CrisisPlan.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -29,6 +28,17 @@ class _NavState extends State<Nav> {
   Widget build(BuildContext context) {
     return Scaffold(
         //state within screens are maintained
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.local_florist), //icon ideas: balance cloud crisis_alert emergency_sharp foggy front_hand handshake healing health_and_safety
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CrisisPlan()));
+        },
+      ),
+      floatingActionButtonLocation:
+        FloatingActionButtonLocation.centerDocked,
         body: IndexedStack(
           index: currentIndex,
           children: screens,
