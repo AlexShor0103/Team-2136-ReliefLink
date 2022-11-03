@@ -12,11 +12,11 @@ class MeScreen extends StatelessWidget {
       home: Scaffold(
         backgroundColor: AppColors.bg,
         body: ListView(
-          padding: const EdgeInsets.only(left: 650.0, right: 650.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           //adjust the paddings from the two edges
           children: [
             const SizedBox(
-              height: 200,
+              height: 20,
             ),
             meScreenButton(context, "Profile"),
             const SizedBox(
