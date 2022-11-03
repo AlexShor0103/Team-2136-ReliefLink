@@ -6,6 +6,7 @@ import 'package:relieflink/screens/MeScreen.dart';
 import 'package:relieflink/screens/ReliefHomeScreen.dart';
 
 import '../components/Navigation/TopBars.dart';
+import '../utils/constants.dart';
 import 'NavigationWrapper.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -20,16 +21,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text('Welcome to ReliefLink!'),
-                const Text('We are here to help you.'),
-                const Text(
-                    'Let`s start with a few questions to get you know better, how does that sound?.'),
-                ElevatedButton.icon(
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Welcome to ReliefLink!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: AppColors.black),
+                  ),
+                  const Text(
+                    'We are here to help you.',
+                    style: TextStyle(fontSize: 19, color: AppColors.black),
+                  ),
+                  const Text(
+                      'Let`s start with a few questions to get you know better, how does that sound?.',
+                      style: TextStyle(fontSize: 16, color: AppColors.black)),
+                  ElevatedButton.icon(
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -68,14 +83,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       'This is the main screen. Here you find information on relief techniques.')));
                     },
                     icon: const Icon(Icons.start_outlined),
-                    label: const Text('Let`s do it!')),
-                GestureDetector(
-                  onTap: () {
-                    print('SKIP');
-                  },
-                  child: const Text("Skip"),
-                ),
-              ]),
+                    label: const Text('Let`s do it!'),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(AppColors.cyan),
+                    ),
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Scaffold(
+                                    appBar: const Top_Relief(),
+                                    body: SafeArea(child: Nav()))));
+                      },
+                      child: const Text(
+                        "Skip",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            decoration: TextDecoration.underline,
+                            color: AppColors.grey),
+                      )),
+                ]),
+          ),
         ),
       ),
     );
