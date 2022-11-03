@@ -4,6 +4,7 @@ import 'package:relieflink/recommendations/RecommendationScreen.dart';
 import 'package:relieflink/screens/MapScreen.dart';
 
 import '../utils/constants.dart';
+import 'OnboardingScreen.dart';
 
 class MeScreen extends StatelessWidget {
   @override
@@ -26,7 +27,11 @@ class MeScreen extends StatelessWidget {
             const SizedBox(
               height: 60,
             ),
-            meScreenButton(context, "Find a Health Care Center Near You")
+            meScreenButton(context, "Find a Health Care Center Near You"),
+            const SizedBox(
+              height: 60,
+            ),
+            meScreenButton(context, "Onboarding")
           ],
         ),
       ),
@@ -48,6 +53,10 @@ class MeScreen extends StatelessWidget {
       case "Find a Health Care Center Near You":
         goto = MapScreen();
         screenIcon = Icons.location_on_outlined;
+        break;
+      case "Onboarding":
+        goto = OnboardingScreen();
+        screenIcon = Icons.offline_bolt_sharp;
         break;
     }
     return Padding(
