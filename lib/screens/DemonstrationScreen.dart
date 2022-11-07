@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:relieflink/utils/constants.dart';
+import 'package:relieflink/utils/data_storage.dart';
 
 import '../components/Navigation/TopBars.dart';
 
@@ -35,7 +36,8 @@ class DemonstrationScreen extends StatelessWidget {
         Positioned(
             bottom: 0,
             child: Container(
-              color: Color.fromRGBO(0, 0, 0, 0.95),
+              decoration: BoxDecoration(
+                  gradient: AppConstants.gradsByMood['sleepless']),
               child: SizedBox(
                 height: 100,
                 child: Column(
