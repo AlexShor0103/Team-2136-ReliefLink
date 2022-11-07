@@ -26,7 +26,41 @@ class MeScreen extends StatelessWidget {
             const SizedBox(
               height: 60,
             ),
-            meScreenButton(context, "Find a Health Care Center Near You")
+            meScreenButton(context, "Find a Health Care Center Near You"),
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text("Mood Tracker"),
+                    content: const Text("You have raised a Alert Dialog Box"),
+                    actions: <Widget>[
+                      IconButton(
+                        icon: Image.asset('lib/assets/sad.png'),
+                        onPressed: () {  },
+                      ),
+                      IconButton(
+                        icon: Image.asset('lib/assets/poor.png'),
+                        onPressed: () {  },
+                      ),
+                      IconButton(
+                        icon: Image.asset('lib/assets/okay.png'),
+                        onPressed: () {  },
+                      ),
+                      IconButton(
+                        icon: Image.asset('lib/assets/good.png'),
+                        onPressed: () {  },
+                      ),
+                      IconButton(
+                        icon: Image.asset('lib/assets/great.png'),
+                        onPressed: () {  },
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: const Text("How are you feeling today?"),
+            ),
           ],
         ),
       ),
