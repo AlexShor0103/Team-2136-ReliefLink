@@ -67,8 +67,16 @@ class _ContactsScreenState extends State<ContactsScreen> {
             }
           });
         },
-        backgroundColor: AppColors.grey,
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.transparent,
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(13.0),
+            child: Icon(Icons.add),
+          ),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: AppConstants.gradsByMood['anxious']),
+        ),
       ),
     );
   }
