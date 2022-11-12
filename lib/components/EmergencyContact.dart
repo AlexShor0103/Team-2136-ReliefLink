@@ -34,9 +34,9 @@ class _EmergencyContactState extends State<EmergencyContact> {
       contactId = widget.contactIdPassed;
     }
 
-    String contactNumber = contact?.phoneNumber ?? '';
-    String name = contact?.name ?? '';
-    String relation = contact?.relation ?? '';
+    String contactNumber = contact?.phoneNumber ?? 'Phone number';
+    String name = contact?.name ?? 'Name';
+    String relation = contact?.relation ?? 'Relation';
 
     Future<bool> _showMyDialog(BuildContext context) async {
       await DataStorage.init();
@@ -175,102 +175,149 @@ class _EmergencyContactState extends State<EmergencyContact> {
       return true;
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: AppColors.green,
+    return Container(
+      height: 190,
+      width: MediaQuery.of(context).size.width * 0.5,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                  color: AppColors.black,
-                  blurRadius: 5,
-                  offset: Offset.fromDirection(1, 3))
-            ]),
-        height: 160,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Text(name,
-                          style: const TextStyle(
-                            color: AppColors.font,
-                            fontFamily: 'MainFont',
-                            fontWeight: FontWeight.w800,
-                            fontSize: 20,
-                          )),
-                      Text(relation,
-                          style: const TextStyle(
-                            color: AppColors.font,
-                            fontFamily: 'MainFont',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                          )),
-                    ],
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        _showMyDialog(context);
-                      },
-                      icon: const Icon(
-                        Icons.edit,
-                        color: AppColors.white,
-                      ))
-                ],
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
               ),
-              Row(
-                children: [
-                  Text(contactNumber,
-                      style: const TextStyle(
-                        color: AppColors.font,
-                        fontFamily: 'MainFont',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      )),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.white,
-                      radius: 20,
-                      child: IconButton(
-                        color: AppColors.white,
-                        onPressed: () {
-                          launchUrl(Uri.parse("sms:+1" + contactNumber));
-                        },
-                        icon: const Icon(
-                          Icons.chat_rounded,
-                          color: AppColors.green,
-                        ),
-                      ),
+            ],
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(10)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: AppConstants.gradsByMood['anxious'],
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.white,
-                      radius: 20,
-                      child: IconButton(
-                        color: AppColors.white,
-                        onPressed: () {
-                          launchUrl(Uri.parse("tel://" + contactNumber));
-                        },
-                        icon: const Icon(
-                          Icons.call,
-                          color: AppColors.green,
+                  height: 200 * 0.2,
+                ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(name,
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                  color: AppColors.font,
+                                  fontFamily: 'MainFont',
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 17,
+                                )),
+                            Text(relation,
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                    color: AppColors.font,
+                                    fontFamily: 'MainFont',
+                                    fontWeight: FontWeight.w200,
+                                    fontSize: 16)),
+                          ],
                         ),
-                      ),
+                        IconButton(
+                            onPressed: () {
+                              _showMyDialog(context);
+                            },
+                            icon: const Icon(
+                              Icons.edit,
+                              color: AppColors.white,
+                            ))
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(contactNumber,
+                            style: const TextStyle(
+                                color: AppColors.font,
+                                fontFamily: 'MainFont',
+                                fontWeight: FontWeight.w200,
+                                fontSize: 16)),
+                        Spacer(flex: 1),
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: AppConstants.gradsByMood['anxious'],
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 20,
+                              child: IconButton(
+                                color: Colors.transparent,
+                                onPressed: () {
+                                  launchUrl(
+                                      Uri.parse("sms:+1" + contactNumber));
+                                },
+                                icon: const Icon(
+                                  Icons.chat_rounded,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: AppConstants.gradsByMood['anxious'],
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 20,
+                              child: IconButton(
+                                color: Colors.transparent,
+                                onPressed: () {
+                                  launchUrl(
+                                      Uri.parse("tel://" + contactNumber));
+                                },
+                                icon: const Icon(
+                                  Icons.call,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ]),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
