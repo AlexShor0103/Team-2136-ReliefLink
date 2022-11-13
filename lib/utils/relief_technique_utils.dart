@@ -43,6 +43,9 @@ class ReliefTechniqueData {
   }
 
   double getAverageRating() {
+    if (ratings.isEmpty) {
+      return -1;
+    }
     double total = 0;
     for (double rating in ratings) {
       total += rating;
