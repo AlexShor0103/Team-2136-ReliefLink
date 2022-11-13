@@ -9,15 +9,16 @@ class ReliefTechniqueData {
   int duration;
   Queue<double> ratings;
   double averageRating;
-  ReliefTechniqueData(this.videoLink,
-      this.activityName,
-      this.mood,
-      this.favorite,
-      this.duration,
-      Queue<double>? ratings,
-      double? averageRating):
-      ratings = ratings ?? Queue(),
-      averageRating = averageRating ?? -1;
+  ReliefTechniqueData(
+      {required this.videoLink,
+        required this.activityName,
+        required this.mood,
+        required this.favorite,
+        required this.duration,
+        Queue<double>? ratings,
+        double? averageRating}):
+        ratings = ratings ?? Queue(),
+        averageRating = averageRating ?? -1;
 
   ReliefTechniqueData.fromJson(Map<String, dynamic> json):
       videoLink = json['videoLink'],
