@@ -34,9 +34,9 @@ class _EmergencyContactState extends State<EmergencyContact> {
       contactId = widget.contactIdPassed;
     }
 
-    String contactNumber = contact?.phoneNumber ?? 'Phone number';
-    String name = contact?.name ?? 'Name';
-    String relation = contact?.relation ?? 'Relation';
+    String? contactNumber = contact?.phoneNumber;
+    String? name = contact?.name;
+    String? relation = contact?.relation;
 
     Future<bool> _showMyDialog(BuildContext context) async {
       await DataStorage.init();
@@ -45,13 +45,18 @@ class _EmergencyContactState extends State<EmergencyContact> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Edit Contact',
-                  style: TextStyle(
-                    color: AppColors.font,
-                    fontFamily: 'MainFont',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  )),
+              title: Row(
+                children: [
+                  BackButton(),
+                  const Text('Edit Contact',
+                      style: TextStyle(
+                        color: AppColors.font,
+                        fontFamily: 'MainFont',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                      )),
+                ],
+              ),
               content: SingleChildScrollView(
                   child: Padding(
                 padding: const EdgeInsets.all(20),
@@ -77,7 +82,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                                 fontSize: 17,
                               )),
                           onSaved: (String? value) {
-                            name = value ?? '';
+                            name = value ?? 'Contact\'s name';
                           },
                         ),
                         TextFormField(
@@ -98,7 +103,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                                 fontSize: 17,
                               )),
                           onSaved: (String? value) {
-                            relation = value ?? '';
+                            relation = value ?? 'Contact\'s relation';
                           },
                         ),
                         TextFormField(
@@ -120,7 +125,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                             ),
                           ),
                           onSaved: (String? value) {
-                            contactNumber = value ?? '';
+                            contactNumber = value ?? 'Contact\'s phone number';
                           },
                           keyboardType: TextInputType.phone,
                         ),
@@ -158,13 +163,15 @@ class _EmergencyContactState extends State<EmergencyContact> {
                   ),
                   onPressed: () async {
                     _formKey.currentState!.save();
-                    await DataStorage.init();
-                    DataStorage.addEmergencyContact(EmergencyContactData(
-                        name: name,
-                        id: contactId,
-                        phoneNumber: contactNumber,
-                        relation: relation));
-                    DataStorage.saveToDisk();
+                    if (name != '' && contactNumber != '' && relation != '') {
+                      await DataStorage.init();
+                      DataStorage.addEmergencyContact(EmergencyContactData(
+                          name: name ?? '',
+                          id: contactId,
+                          phoneNumber: contactNumber ?? '',
+                          relation: relation ?? ''));
+                      DataStorage.saveToDisk();
+                    }
                     widget.update();
                     Navigator.of(context).pop();
                   },
@@ -222,7 +229,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(name,
+                            Text(name ?? 'Contact\'s name',
                                 textAlign: TextAlign.left,
                                 style: const TextStyle(
                                   color: AppColors.font,
@@ -230,7 +237,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                                   fontWeight: FontWeight.w800,
                                   fontSize: 17,
                                 )),
-                            Text(relation,
+                            Text(relation ?? 'Contact\'s relation',
                                 textAlign: TextAlign.left,
                                 style: const TextStyle(
                                     color: AppColors.font,
@@ -245,7 +252,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                             },
                             icon: const Icon(
                               Icons.edit,
-                              color: AppColors.white,
+                              color: AppColors.black,
                             ))
                       ],
                     ),
@@ -253,7 +260,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(contactNumber,
+                        Text(contactNumber ?? 'Contact\'s phone number',
                             style: const TextStyle(
                                 color: AppColors.font,
                                 fontFamily: 'MainFont',
@@ -274,8 +281,8 @@ class _EmergencyContactState extends State<EmergencyContact> {
                               child: IconButton(
                                 color: Colors.transparent,
                                 onPressed: () {
-                                  launchUrl(
-                                      Uri.parse("sms:+1" + contactNumber));
+                                  launchUrl(Uri.parse(
+                                      "sms:+1" + (contactNumber ?? '')));
                                 },
                                 icon: const Icon(
                                   Icons.chat_rounded,
@@ -299,8 +306,8 @@ class _EmergencyContactState extends State<EmergencyContact> {
                               child: IconButton(
                                 color: Colors.transparent,
                                 onPressed: () {
-                                  launchUrl(
-                                      Uri.parse("tel://" + contactNumber));
+                                  launchUrl(Uri.parse(
+                                      "tel://" + (contactNumber ?? '')));
                                 },
                                 icon: const Icon(
                                   Icons.call,

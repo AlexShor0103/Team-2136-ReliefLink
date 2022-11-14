@@ -48,36 +48,81 @@ class _ContactsScreenState extends State<ContactsScreen> {
       );
     }).toList();
 
+    if (cardsList.isEmpty) {
+      cardsList = [
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Container(
+              height: 50,
+              width: MediaQuery.of(context).size.height * 0.4,
+              decoration: BoxDecoration(
+                gradient: AppConstants.gradsByMood['anxious'],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (list.contains('')) {
+                      } else {
+                        list.add('');
+                        list.sort();
+                      }
+                    });
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                    shadowColor: MaterialStateProperty.all(Colors.transparent),
+                  ),
+                  child: const Text('Add your first contact',
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontFamily: 'MainFont',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                      ))),
+            ),
+          ),
+        )
+      ];
+    }
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: cardsList),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            if (list.contains('')) {
-            } else {
-              list.add('');
-              list.sort();
-            }
-          });
-        },
-        backgroundColor: Colors.transparent,
-        child: Container(
           child: Padding(
-            padding: const EdgeInsets.all(13.0),
-            child: Icon(Icons.add),
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: cardsList),
           ),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: AppConstants.gradsByMood['anxious']),
         ),
       ),
+      floatingActionButton: list.isEmpty
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  if (list.contains('')) {
+                  } else {
+                    list.add('');
+                    list.sort();
+                  }
+                });
+              },
+              backgroundColor: Colors.transparent,
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(13.0),
+                  child: Icon(Icons.add),
+                ),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: AppConstants.gradsByMood['anxious']),
+              ),
+            ),
     );
   }
 }
