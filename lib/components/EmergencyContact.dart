@@ -202,7 +202,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    gradient: AppConstants.gradsByMood['anxious'],
+                    gradient: AppConstants.getGradByName('distractingContact'),
                     borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(10),
                       topLeft: Radius.circular(10),
@@ -266,7 +266,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: AppConstants.gradsByMood['anxious'],
+                              gradient: AppConstants.getGradByName('distractingContact'),
                             ),
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
@@ -291,7 +291,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: AppConstants.gradsByMood['anxious'],
+                              gradient: AppConstants.getGradByName('distractingContact'),
                             ),
                             child: CircleAvatar(
                               backgroundColor: Colors.transparent,
