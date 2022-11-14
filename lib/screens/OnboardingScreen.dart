@@ -84,10 +84,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                     icon: const Icon(Icons.start_outlined),
                     label: const Text('Let`s do it!'),
-                    style: ButtonStyle(
+                    /*style: ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll<Color>(AppColors.cyan),
-                    ),
+                    ),*/
                   ),
                   GestureDetector(
                       onTap: () {

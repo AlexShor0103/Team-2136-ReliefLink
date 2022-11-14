@@ -113,13 +113,13 @@ class ReliefActivityBoxContainerState
         for (ReliefTechniqueData activity in activitiesList) {
           double rating = activity.averageRating;
           // Note: unrated activities have ratings of -1
-          if (rating > 4) {
+          if (rating >= 4) {
             buckets[0].add(activity);
-          } else if (rating > 3) {
+          } else if (rating >= 3) {
             buckets[1].add(activity);
-          } else if (rating > 2) {
+          } else if (rating >= 2) {
             buckets[2].add(activity);
-          } else if (rating > 1) {
+          } else if (rating >= 1) {
             buckets[3].add(activity);
           } else if (rating > -0.5) {
             buckets[4].add(activity);

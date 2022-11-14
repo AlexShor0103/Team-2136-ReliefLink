@@ -26,20 +26,28 @@ class ReliefTechniqueData {
       mood = json['mood'],
       favorite = json['favorite'],
       duration = json['duration'],
-      ratings = json['ratings'] ?? Queue(), averageRating = 3 {
+      ratings = Queue<double>(), averageRating = 3 {
+        if (json.containsKey('ratings')) {
+          ratings.addAll(json['ratings'].cast<double>());
+        }
         averageRating = getAverageRating();
       }
 
 
   Map<String, dynamic> toJson() {
-    return {
+    Map<String, dynamic> ret = {
       'videoLink': videoLink,
       'activityName': activityName,
       'mood': mood,
       'favorite': favorite,
       'duration': duration,
-      'ratings': ratings
+      'ratings': ratings.toList()
     };
+    // for (int i = 0; i < 30; i++) {
+    //   print("TO JSON:");
+    //   print(ret);
+    // }
+    return ret;
   }
 
   void addRating(double rating) {
