@@ -21,15 +21,15 @@ class MeScreen extends StatelessWidget {
             ),
             meScreenButton(context, "Profile"),
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
             meScreenButton(context, "Recommendations"),
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
             meScreenButton(context, "Find a Health Care Center Near You"),
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
             meScreenButton(context, "Onboarding")
           ],
@@ -44,11 +44,11 @@ class MeScreen extends StatelessWidget {
     switch (screenName) {
       case "Profile":
         goto = ProfileScreen();
-        screenIcon = Icons.account_circle;
+        screenIcon = Icons.account_circle_outlined;
         break;
       case "Recommendations":
         goto = RecommendationScreen();
-        screenIcon = Icons.airline_stops;
+        screenIcon = Icons.star_border_outlined;
         break;
       case "Find a Health Care Center Near You":
         goto = MapScreen();
@@ -56,30 +56,59 @@ class MeScreen extends StatelessWidget {
         break;
       case "Onboarding":
         goto = OnboardingScreen();
-        screenIcon = Icons.offline_bolt_sharp;
+        screenIcon = Icons.offline_bolt_outlined;
         break;
     }
+
+    LinearGradient grad = AppConstants.getGradByMood("blue");
+    Color color = AppConstants.getColorByMood("cyan");
+    const double radius = 10;
+    double buttonMinHeight = 60;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: (MaterialButton(
-        color: AppColors.orange,
-        height: 80.0,
-        minWidth: 70.0,
+      padding: const EdgeInsets.only(bottom: 10),
+      child: (ElevatedButton(
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => (goto)));
         },
-        child: Row(
-          children: [
-            Icon(screenIcon),
-            SizedBox(
-              width: 30,
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(AppColors.white),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(radius))),
             ),
-            Flexible(
-                child: Text(
-              "${screenName}",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            )),
+            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+            fixedSize:
+                MaterialStateProperty.all<Size>(Size(0, buttonMinHeight)),
+            alignment: Alignment.centerLeft),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+                color: AppColors.font,
+                onPressed: () {},
+                icon: Icon(
+                  screenIcon,
+                  size: 20,
+                )),
+            Text("${screenName}",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16,
+                )),
+            Spacer(),
+            IconButton(
+                color: AppColors.font,
+                onPressed: () {},
+                icon: Icon(
+                  Icons.arrow_forward_ios_outlined,
+                  size: 20,
+                )),
           ],
         ),
       )),
