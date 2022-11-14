@@ -101,10 +101,10 @@ class ReliefActivityBoxContainerState
         activitiesList.sort((a, b) {
           double diff = a.averageRating - b.averageRating;
           if (diff < 0) {
-            return -1;
+            return 1;
           }
           if (diff > 0) {
-            return 1;
+            return -1;
           }
           return 0;
         });
