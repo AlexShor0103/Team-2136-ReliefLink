@@ -86,6 +86,14 @@ class AppConstants {
         return AppGrads.green;
       case 'orange':
         return AppGrads.orange;
+      case 'distractingcontact':
+        return AppGrads.phoneContact1;
+      case 'helpingcontact':
+        return AppGrads.phoneContact2;
+      case 'professionalcontact':
+        return AppGrads.phoneContact3;
+      case 'maingreen':
+        return AppGrads.mainGreen;
       default:
         return 'orange';
     }
@@ -171,11 +179,10 @@ class AppGrads {
   ], begin: Alignment.topLeft, end: Alignment.bottomRight);
 
   //Gradient for main green color (used for confirm)
-  static const LinearGradient greenConfirm = LinearGradient(colors: [
+  static const LinearGradient mainGreen = LinearGradient(colors: [
     Color.fromRGBO(190, 255, 204, 1),
     Color.fromRGBO(129, 212, 188, 1),
   ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
-
 
   //series of gradients used for lichert scale
   static const LinearGradient lowest = LinearGradient(colors: [

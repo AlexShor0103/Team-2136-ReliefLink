@@ -75,7 +75,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
           ),
           decoration: BoxDecoration(
               shape: BoxShape.circle,
-              gradient: AppConstants.gradsByMood['anxious']),
+              gradient: AppConstants.getGradByName('mainGreen')),
         ),
       ),
     );

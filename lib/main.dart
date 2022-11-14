@@ -8,8 +8,11 @@ import 'package:relieflink/components/Navigation/TopBars.dart';
 import 'components/ReliefActivitiesMenu/ActivitiesContainer.dart';
 import 'components/ReliefActivitiesMenu/SortContainer.dart';
 import 'package:relieflink/utils/data_storage.dart';
+import 'package:relieflink/utils/constants.dart';
 
 void main() {
+  // print(AppConstants.getGradByName('mainGreen'));
+
   runApp(const MyApp());
 }
 
