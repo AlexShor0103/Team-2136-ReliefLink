@@ -67,7 +67,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
             }
           });
         },
-        backgroundColor: AppColors.font,
+        backgroundColor: Colors.transparent,
         child: Container(
           child: Padding(
             padding: const EdgeInsets.all(13.0),
