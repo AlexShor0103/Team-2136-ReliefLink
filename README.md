@@ -94,3 +94,33 @@ Soon!
 - Map API is not using the user's current location
 - Favoriting an acitivity when looking at the favorites tab in the home screen does not update instantly
 - Buggy formatting of settings tab, with the Profile, Maps and External Coping Activities tab
+
+## v0.4.0
+
+
+### Features
+
+- Crisis Plan
+  - Users can now add their own crisis plan and access when needed
+  - The plan's structured was carefully indicated to us by our clients over from Emory University
+- Onboarding is available for new users
+  - New users can now go through a tutorial of the screens on the first time they open the app, or skip it
+  - They can revisit it in the future if needed
+-  New sorting and organizing features
+   - On the relief techniques page, cards can be sorted by ratings now
+   - Card's categories by which they were sorted also available on the sorted screen
+
+
+### Bug Fixes
+
+- Fixed inconsistent tabbing of elements in the "Relation" field in Emergency Contact cards
+- Favoriting an acitivity when looking at the favorites tab in the home screen now updates instantly
+- Correct formatting of settings tab
+- Recommendations screen now fully revamped
+- Several color and style fixes across the app
+
+### Known Issues
+
+- Map API is not using the user's current location
+- Relief Technique cards overflow in some devices
+- Onboarding flow not popping up upon first start of app
