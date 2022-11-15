@@ -159,7 +159,7 @@ class ActivitiesSorting with ChangeNotifier {
           SearchAndSortOptions('', SortOptions.NONE));
 }
 
-enum SortOptions { NONE, FAVORITE, MOOD, TIME }
+enum SortOptions { NONE, FAVORITE, MOOD, TIME, RATING }
 
 class SearchAndSortOptions {
   String searchString;

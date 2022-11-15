@@ -62,6 +62,10 @@ class SortContainerState extends State<SortContainer> {
                     child: Text('Favorite'),
                   ),
                   DropdownMenuItem<SortOptions>(
+                      value: SortOptions.RATING,
+                      child: Text('Rating')
+                  ),
+                  DropdownMenuItem<SortOptions>(
                     value: SortOptions.MOOD,
                     child: Text('Mood'),
                   ),

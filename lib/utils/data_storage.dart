@@ -27,6 +27,7 @@ class DataStorage {
         }
         data = newData;
         setDefaultData();
+        saveToDisk();
       }
       return true;
     } catch (e) {

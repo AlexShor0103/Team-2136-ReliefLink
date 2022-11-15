@@ -97,6 +97,45 @@ class ReliefActivityBoxContainerState
           '60+ minutes'
         ];
         break;
+      case SortOptions.RATING:
+        activitiesList.sort((a, b) {
+          double diff = a.averageRating - b.averageRating;
+          if (diff < 0) {
+            return 1;
+          }
+          if (diff > 0) {
+            return -1;
+          }
+          return 0;
+        });
+
+        buckets = [[], [], [], [], [], []];
+        for (ReliefTechniqueData activity in activitiesList) {
+          double rating = activity.averageRating;
+          // Note: unrated activities have ratings of -1
+          if (rating >= 4) {
+            buckets[0].add(activity);
+          } else if (rating >= 3) {
+            buckets[1].add(activity);
+          } else if (rating >= 2) {
+            buckets[2].add(activity);
+          } else if (rating >= 1) {
+            buckets[3].add(activity);
+          } else if (rating > -0.5) {
+            buckets[4].add(activity);
+          } else {
+            buckets[5].add(activity);
+          }
+        }
+        categories = [
+          '4 to 5',
+          '3 to 4',
+          '2 to 3',
+          '1 to 2',
+          'Less than 1',
+          'Not Rated'
+        ];
+        break;
       default:
         categories = ['All'];
         buckets = [activitiesList];
