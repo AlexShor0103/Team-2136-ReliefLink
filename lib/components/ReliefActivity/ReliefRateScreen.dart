@@ -32,6 +32,10 @@ class _RatingSectionState extends State<RatingSection> {
   static const double defaultRating = 3;
   double _value = defaultRating;
 
+  double getRatingValue() {
+    return _value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -57,16 +61,18 @@ class _RatingSectionState extends State<RatingSection> {
             Text("$_value"),
           ])),
       Center(child: FavoriteButton(data: widget.data)),
-      const Padding(
-        child: RateButton(),
-        padding: EdgeInsets.all(20),
+      Padding(
+        child: RateButton(data: widget.data, getRatingValue: getRatingValue),
+        padding: const EdgeInsets.all(20),
       ),
     ]);
   }
 }
 
 class RateButton extends StatelessWidget {
-  const RateButton({Key? key}) : super(key: key);
+  final ReliefTechniqueData data;
+  Function getRatingValue;
+  RateButton({Key? key, required this.data, required this.getRatingValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +81,9 @@ class RateButton extends StatelessWidget {
           primary: Colors.white, backgroundColor: Colors.orange),
       child: const Text("Rate"),
       onPressed: () {
+        data.addRating(getRatingValue());
+        DataStorage.updateReliefTechniqueData(data);
+        DataStorage.saveToDisk();
         Navigator.pop(context);
         Navigator.pop(context);
       },
