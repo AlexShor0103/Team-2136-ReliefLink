@@ -4,6 +4,7 @@ import 'package:relieflink/recommendations/RecommendationScreen.dart';
 import 'package:relieflink/screens/MapScreen.dart';
 
 import '../utils/constants.dart';
+import 'OnboardingScreen.dart';
 
 class MeScreen extends StatelessWidget {
   @override
@@ -19,74 +20,18 @@ class MeScreen extends StatelessWidget {
               height: 20,
             ),
             meScreenButton(context, "Profile"),
-
-            meScreenButton(context, "Recommendations"),
-
-            meScreenButton(context, "Find a Health Care Center Near You"),
-            MaterialButton(
-              color: AppColors.orange,
-              height: 80.0,
-              minWidth: 70.0,
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: const Text("Mood Tracker"),
-                    content: const Text("Please enter how you are feeling so far today."),
-                    actions: <Widget>[
-                      IconButton(
-                        icon: const Icon(Icons.sentiment_very_dissatisfied_outlined),
-                        onPressed: () {
-                          Navigator.of(ctx).pop();
-                        },
-                        iconSize: 30,
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            Navigator.of(ctx).pop();
-                          },
-                          icon: const Icon(Icons.sentiment_dissatisfied_outlined),
-                          iconSize: 30,
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop();
-                        },
-                        iconSize: 30,
-                        icon: const Icon(Icons.sentiment_neutral_outlined),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop();
-                        },
-                        iconSize: 30,
-                        icon: const Icon(Icons.sentiment_satisfied_outlined),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop();
-                        },
-                        iconSize: 30,
-                        icon: const Icon(Icons.sentiment_very_satisfied_outlined),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              child: Row(
-                children: [
-                  Icon(Icons.mood_outlined),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Flexible(
-                      child: Text(
-                        "How are you feeling today?",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      )),
-                ],
-              ),
+            const SizedBox(
+              height: 60,
             ),
+            meScreenButton(context, "Recommendations"),
+            const SizedBox(
+              height: 60,
+            ),
+            meScreenButton(context, "Find a Health Care Center Near You"),
+            const SizedBox(
+              height: 60,
+            ),
+            meScreenButton(context, "Onboarding")
           ],
         ),
       ),
@@ -109,11 +54,11 @@ class MeScreen extends StatelessWidget {
         goto = MapScreen();
         screenIcon = Icons.location_on_outlined;
         break;
-      case "How are you feeling today?":
-        goto = MeScreen();
-        screenIcon  = Icons.mood_outlined;
+      case "Onboarding":
+        goto = OnboardingScreen();
+        screenIcon = Icons.offline_bolt_sharp;
+        break;
     }
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 40),
       child: (MaterialButton(

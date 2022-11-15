@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/components/ReliefActivity/ReliefRateScreen.dart';
 import 'package:relieflink/components/ReliefActivity/ReliefScreen.dart';
+import 'package:relieflink/screens/OnboardingScreen.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/screens/NavigationWrapper.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 import 'components/ReliefActivitiesMenu/ActivitiesContainer.dart';
 import 'components/ReliefActivitiesMenu/SortContainer.dart';
 import 'package:relieflink/utils/data_storage.dart';
+import 'package:relieflink/utils/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   void initState() {
     super.initState();
@@ -53,12 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    return Scaffold(
-      appBar: const Top_Relief(),
-      body: SafeArea(
-        child: Nav()
-      )
-      
-    );
-    }
+    return Scaffold(appBar: const Top_Relief(), body: SafeArea(child: Nav()));
+  }
 }

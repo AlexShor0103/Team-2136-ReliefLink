@@ -34,9 +34,9 @@ class _EmergencyContactState extends State<EmergencyContact> {
       contactId = widget.contactIdPassed;
     }
 
-    String contactNumber = contact?.phoneNumber ?? '';
-    String name = contact?.name ?? '';
-    String relation = contact?.relation ?? '';
+    String? contactNumber = contact?.phoneNumber;
+    String? name = contact?.name;
+    String? relation = contact?.relation;
 
     Future<bool> _showMyDialog(BuildContext context) async {
       await DataStorage.init();
@@ -45,13 +45,18 @@ class _EmergencyContactState extends State<EmergencyContact> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Edit Contact',
-                  style: TextStyle(
-                    color: AppColors.font,
-                    fontFamily: 'MainFont',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  )),
+              title: Row(
+                children: [
+                  BackButton(),
+                  const Text('Edit Contact',
+                      style: TextStyle(
+                        color: AppColors.font,
+                        fontFamily: 'MainFont',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                      )),
+                ],
+              ),
               content: SingleChildScrollView(
                   child: Padding(
                 padding: const EdgeInsets.all(20),
@@ -77,7 +82,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                                 fontSize: 17,
                               )),
                           onSaved: (String? value) {
-                            name = value ?? '';
+                            name = value ?? 'Contact\'s name';
                           },
                         ),
                         TextFormField(
@@ -98,7 +103,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                                 fontSize: 17,
                               )),
                           onSaved: (String? value) {
-                            relation = value ?? '';
+                            relation = value ?? 'Contact\'s relation';
                           },
                         ),
                         TextFormField(
@@ -120,7 +125,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                             ),
                           ),
                           onSaved: (String? value) {
-                            contactNumber = value ?? '';
+                            contactNumber = value ?? 'Contact\'s phone number';
                           },
                           keyboardType: TextInputType.phone,
                         ),
@@ -158,13 +163,15 @@ class _EmergencyContactState extends State<EmergencyContact> {
                   ),
                   onPressed: () async {
                     _formKey.currentState!.save();
-                    await DataStorage.init();
-                    DataStorage.addEmergencyContact(EmergencyContactData(
-                        name: name,
-                        id: contactId,
-                        phoneNumber: contactNumber,
-                        relation: relation));
-                    DataStorage.saveToDisk();
+                    if (name != '' && contactNumber != '' && relation != '') {
+                      await DataStorage.init();
+                      DataStorage.addEmergencyContact(EmergencyContactData(
+                          name: name ?? '',
+                          id: contactId,
+                          phoneNumber: contactNumber ?? '',
+                          relation: relation ?? ''));
+                      DataStorage.saveToDisk();
+                    }
                     widget.update();
                     Navigator.of(context).pop();
                   },
@@ -175,102 +182,149 @@ class _EmergencyContactState extends State<EmergencyContact> {
       return true;
     }
 
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: AppColors.green,
+    return Container(
+      height: 190,
+      width: MediaQuery.of(context).size.width * 0.5,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                  color: AppColors.black,
-                  blurRadius: 5,
-                  offset: Offset.fromDirection(1, 3))
-            ]),
-        height: 160,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Text(name,
-                          style: const TextStyle(
-                            color: AppColors.font,
-                            fontFamily: 'MainFont',
-                            fontWeight: FontWeight.w800,
-                            fontSize: 20,
-                          )),
-                      Text(relation,
-                          style: const TextStyle(
-                            color: AppColors.font,
-                            fontFamily: 'MainFont',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                          )),
-                    ],
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        _showMyDialog(context);
-                      },
-                      icon: const Icon(
-                        Icons.edit,
-                        color: AppColors.white,
-                      ))
-                ],
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
               ),
-              Row(
-                children: [
-                  Text(contactNumber,
-                      style: const TextStyle(
-                        color: AppColors.font,
-                        fontFamily: 'MainFont',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      )),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.white,
-                      radius: 20,
-                      child: IconButton(
-                        color: AppColors.white,
-                        onPressed: () {
-                          launchUrl(Uri.parse("sms:+1" + contactNumber));
-                        },
-                        icon: const Icon(
-                          Icons.chat_rounded,
-                          color: AppColors.green,
-                        ),
-                      ),
+            ],
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(10)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: AppConstants.getGradByName('distractingContact'),
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      topLeft: Radius.circular(10),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.white,
-                      radius: 20,
-                      child: IconButton(
-                        color: AppColors.white,
-                        onPressed: () {
-                          launchUrl(Uri.parse("tel://" + contactNumber));
-                        },
-                        icon: const Icon(
-                          Icons.call,
-                          color: AppColors.green,
+                  height: 200 * 0.2,
+                ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(name ?? 'Contact\'s name',
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                  color: AppColors.font,
+                                  fontFamily: 'MainFont',
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 17,
+                                )),
+                            Text(relation ?? 'Contact\'s relation',
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                    color: AppColors.font,
+                                    fontFamily: 'MainFont',
+                                    fontWeight: FontWeight.w200,
+                                    fontSize: 16)),
+                          ],
                         ),
-                      ),
+                        IconButton(
+                            onPressed: () {
+                              _showMyDialog(context);
+                            },
+                            icon: const Icon(
+                              Icons.edit,
+                              color: AppColors.black,
+                            ))
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(contactNumber ?? 'Contact\'s phone number',
+                            style: const TextStyle(
+                                color: AppColors.font,
+                                fontFamily: 'MainFont',
+                                fontWeight: FontWeight.w200,
+                                fontSize: 16)),
+                        Spacer(flex: 1),
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: AppConstants.getGradByName('distractingContact'),
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 20,
+                              child: IconButton(
+                                color: Colors.transparent,
+                                onPressed: () {
+                                  launchUrl(Uri.parse(
+                                      "sms:+1" + (contactNumber ?? '')));
+                                },
+                                icon: const Icon(
+                                  Icons.chat_rounded,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: AppConstants.getGradByName('distractingContact'),
+                            ),
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 20,
+                              child: IconButton(
+                                color: Colors.transparent,
+                                onPressed: () {
+                                  launchUrl(Uri.parse(
+                                      "tel://" + (contactNumber ?? '')));
+                                },
+                                icon: const Icon(
+                                  Icons.call,
+                                  color: AppColors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ]),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
