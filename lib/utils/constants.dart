@@ -220,6 +220,15 @@ class ActivitiesSorting with ChangeNotifier {
 
 enum SortOptions { NONE, FAVORITE, MOOD, TIME, RATING }
 
+enum Moods { ANXIOUS, SLEEPLESS, ENERGETIC, OTHER }
+
+extension ParseToString on Moods {
+  String toShortString() {
+    var lower = toString().toLowerCase();
+    return lower[6].toUpperCase() + lower.substring(7);
+  }
+}
+
 class SearchAndSortOptions {
   String searchString;
   SortOptions sortOption;
