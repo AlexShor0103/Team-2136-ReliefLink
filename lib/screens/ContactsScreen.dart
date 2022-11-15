@@ -53,35 +53,54 @@ class _ContactsScreenState extends State<ContactsScreen> {
         Container(
           child: Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Container(
-              height: 50,
-              width: MediaQuery.of(context).size.height * 0.4,
-              decoration: BoxDecoration(
-                gradient: AppConstants.gradsByMood['anxious'],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (list.contains('')) {
-                      } else {
-                        list.add('');
-                        list.sort();
-                      }
-                    });
-                  },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                    shadowColor: MaterialStateProperty.all(Colors.transparent),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                    'Here you can add your emergency contacts. Those are people who can help you when you need it the most! They will be 2 clicks from you.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    )),
+                Container(
+                  height: 100,
+                ),
+                Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.height * 0.4,
+                  decoration: BoxDecoration(
+                    gradient: AppConstants.getGradByName('maingreen'),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Text('Add your first contact',
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontFamily: 'MainFont',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                      ))),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          if (list.contains('')) {
+                          } else {
+                            list.add('');
+                            list.sort();
+                          }
+                        });
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                        shadowColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                      ),
+                      child: const Text('Add your first contact',
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontFamily: 'MainFont',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                          ))),
+                ),
+              ],
             ),
           ),
         )
@@ -114,13 +133,16 @@ class _ContactsScreenState extends State<ContactsScreen> {
               },
               backgroundColor: Colors.transparent,
               child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(13.0),
-                  child: Icon(Icons.add),
+                child: const Padding(
+                  padding: EdgeInsets.all(13.0),
+                  child: Icon(
+                    Icons.add,
+                    color: AppColors.black,
+                  ),
                 ),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: AppConstants.gradsByMood['anxious']),
+                    gradient: AppConstants.getGradByName('maingreen')),
               ),
             ),
     );
