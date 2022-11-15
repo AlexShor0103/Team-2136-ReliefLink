@@ -15,8 +15,10 @@ class ReliefHomeScreen extends StatelessWidget {
       child: ListView(children: <Widget>[
         SearchContainer(),
         SortContainer(),
-        ReliefActivityBoxContainer()
-      ]),
+        ReliefActivityBoxContainer(),
+      ])
+      ,
     );
+
   }
 }
