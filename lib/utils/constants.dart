@@ -86,6 +86,14 @@ class AppConstants {
         return AppGrads.green;
       case 'orange':
         return AppGrads.orange;
+      case 'distractingcontact':
+        return AppGrads.phoneContact1;
+      case 'helpingcontact':
+        return AppGrads.phoneContact2;
+      case 'professionalcontact':
+        return AppGrads.phoneContact3;
+      case 'maingreen':
+        return AppGrads.mainGreen;
       default:
         return 'orange';
     }
@@ -150,6 +158,57 @@ class AppGrads {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  // Series of Gradients used for phone contacts
+  static const LinearGradient phoneContact1 = LinearGradient(colors: [
+    Color.fromRGBO(255, 234, 202, 1),
+    Color.fromRGBO(255, 180, 180, 1),
+    Color.fromRGBO(234, 142, 242, 1),
+    Color.fromRGBO(162, 171, 247, 1),
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight);
+  static const LinearGradient phoneContact2 = LinearGradient(colors: [
+    Color.fromRGBO(255, 250, 131, 1),
+    Color.fromRGBO(201, 242, 149, 1),
+    Color.fromRGBO(82, 238, 145, 1),
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight);
+  static const LinearGradient phoneContact3 = LinearGradient(colors: [
+    Color.fromRGBO(255, 234, 202, 1),
+    Color.fromRGBO(255, 180, 180, 1),
+    Color.fromRGBO(234, 142, 242, 1),
+    Color.fromRGBO(162, 171, 247, 1),
+  ], begin: Alignment.topLeft, end: Alignment.bottomRight);
+
+  //Gradient for main green color (used for confirm)
+  static const LinearGradient mainGreen = LinearGradient(colors: [
+    Color.fromRGBO(190, 255, 204, 1),
+    Color.fromRGBO(129, 212, 188, 1),
+  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+
+  //series of gradients used for lichert scale
+  static const LinearGradient lowest = LinearGradient(colors: [
+    Color.fromRGBO(231, 99, 83, 1),
+    Color.fromRGBO(239, 149, 99, 1),
+  ], begin: Alignment.centerLeft, end: Alignment.centerRight);
+
+  static const LinearGradient secondLowest = LinearGradient(colors: [
+    Color.fromRGBO(239, 149, 99, 1),
+    Color.fromRGBO(246, 146, 199, 1),
+  ], begin: Alignment.centerLeft, end: Alignment.centerRight);
+
+  static const LinearGradient medium = LinearGradient(colors: [
+    Color.fromRGBO(246, 146, 199, 1),
+    Color.fromRGBO(176, 187, 225, 1),
+  ], begin: Alignment.centerLeft, end: Alignment.centerRight);
+
+  static const LinearGradient secondHighest = LinearGradient(colors: [
+    Color.fromRGBO(176, 187, 225, 1),
+    Color.fromRGBO(135, 227, 226, 1),
+  ], begin: Alignment.centerLeft, end: Alignment.centerRight);
+
+  static const LinearGradient highest = LinearGradient(colors: [
+    Color.fromRGBO(135, 227, 226, 1),
+    Color.fromRGBO(170, 255, 130, 1),
+  ], begin: Alignment.centerLeft, end: Alignment.centerRight);
 }
 
 // SORTING UTILS

@@ -98,6 +98,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: cardsList),
           ),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: AppConstants.getGradByName('mainGreen')),
         ),
       ),
       floatingActionButton: list.isEmpty
