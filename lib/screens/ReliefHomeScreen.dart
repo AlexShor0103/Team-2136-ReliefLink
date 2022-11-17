@@ -181,26 +181,6 @@ class _ReliefHomeScreenState extends State<ReliefHomeScreen> {
                         actions: <Widget>[
                           TextButton(
                             child: const Text(
-                              'Delete',
-                              style: TextStyle(
-                                color: AppColors.red,
-                                fontFamily: 'MainFont',
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18,
-                              ),
-                            ),
-                            onPressed: () async {
-                              await DataStorage.init();
-                              DataStorage.removeReliefTechnique(name);
-                              setState(() {
-                                key = ValueKey(Random().nextInt(100));
-                              });
-                              DataStorage.saveToDisk();
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          TextButton(
-                            child: const Text(
                               'Save',
                               style: TextStyle(
                                 color: AppColors.black,
@@ -222,6 +202,10 @@ class _ReliefHomeScreenState extends State<ReliefHomeScreen> {
                                         duration: duration,
                                         favorite: false));
                                 DataStorage.saveToDisk();
+                                name = '';
+                                mood = Moods.OTHER;
+                                duration = 0;
+                                URL = '';
                               }
                               setState(() {
                                 key = ValueKey(Random().nextInt(100));
