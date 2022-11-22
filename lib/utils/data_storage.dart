@@ -119,6 +119,24 @@ class DataStorage {
     }
   }
 
+  /// Removes an relief technique object [reliefTechnique] from the local copy of the data store.
+  /// Returns true if the pair is successfully removed, false otherwise.
+  /// Check to make sure init() has been called if false is returned.
+  static bool removeReliefTechnique(String name) {
+    try {
+      List<String> reliefList = data!['applist_relief'];
+      reliefList.remove(name);
+      reliefList = reliefList.toSet().toList();
+
+      setPair("applist_relief", reliefList);
+      data!.remove('relief_' + name);
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /// Adds or update a user account object [accountData] to the local copy of the data store.
   /// Returns true if the pair is successfully set, false otherwise.
   /// Check to make sure init() has been called if false is returned.
@@ -148,6 +166,11 @@ class DataStorage {
   /// Returns true if successful, false otherwise
   static bool updateReliefTechniqueData(ReliefTechniqueData techniqueData) {
     try {
+      List<String> reliefList = data!['applist_relief'];
+      reliefList.add(techniqueData.activityName);
+      reliefList = reliefList.toSet().toList();
+
+      setPair("applist_relief", reliefList);
       setPair(
           "relief_" + techniqueData.activityName, jsonEncode(techniqueData));
       return true;
@@ -201,7 +224,6 @@ class DataStorage {
       return null;
     }
   }
-
 
   /// Gets the class for the data of a relief technique from the local copy.
   /// If a relief technique of the given name is not in the local copy or an error occurs, null is returned.
