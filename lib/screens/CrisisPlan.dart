@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:relieflink/utils/constants.dart';
 import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
 
@@ -91,43 +92,42 @@ class _CrisisPlanState extends State<CrisisPlan> {
         body: ListView(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+          padding: const EdgeInsets.only(left: 30.0, right: 30.0),
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // IconButton(
-                //     onPressed: (() {
-                //       setState(() {});
-                //         CrisisData newData = CrisisData(
-                //             firstWarningSign: firstWarningSign,
-                //             secondWarningSign: secondWarningSign,
-                //             thirdWarningSign: thirdWarningSign,
-                //             firstCopingStrategy: firstCopingStrategy,
-                //             secondCopingStrategy: secondCopingStrategy,
-                //             thirdCopingStrategy: thirdCopingStrategy,
-                //             firstDistractingContact: firstDistractingContact,
-                //             secondDistractingContact: secondDistractingContact,
-                //             distractingPlace: distractingPlace,
-                //             firstHelpingContact: firstHelpingContact,
-                //             secondHelpingContact: secondHelpingContact,
-                //             thirdHelpingContact: thirdHelpingContact,
-                //             firstProfessionalContact: firstProfessionalContact,
-                //             secondProfessionalContact: secondProfessionalContact,
-                //             localUrgentCare: localUrgentCare,
-                //             firstEnvironmentalSafetyStep: firstEnvironmentalSafetyStep,
-                //             secondEnvironmentalSafetyStep: secondEnvironmentalSafetyStep
-                //         );
-                //         DataStorage.setCrisisData(newData);
-                //         DataStorage.saveToDisk();
-                //       }),
-                //       icon: const Icon(
-                //         Icons.sync,
-                //         size: 35,
-                //         color: Colors.grey,
-                //       ),
-                //     ),
+                //card for the Warning Signs
+                Card(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                  ),
+
+                  child: Container(
+                    height: 330,
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Text("Hello world!"),
+                          height: 40,
+                          constraints: BoxConstraints(minWidth: double.infinity),
+                          decoration: BoxDecoration(
+                            gradient: AppGrads.mainGreen,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            )
+                          ),
+                        ),
+                        SizedBox(height: 1),
+                        Text("Hello World"),
+                      ],
+                    )
+                  ),
+                  
+                ),
+                
                 const Text(
                   'Step 1 - Warning signs (thoughts, mood, '
                       'behavior) that a crisis may be developing:',
