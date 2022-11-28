@@ -39,7 +39,11 @@ class VideoArea extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(data.activityName,
-            style: const TextStyle(color: Colors.orange, fontSize: 30)),
+            style: const TextStyle(
+              color: AppColors.font, 
+              fontSize: 30,
+              fontFamily: 'MainFont',
+              fontWeight: FontWeight.w800)),
       ),
       ReliefVideoPlayer(
           controller: _controller, autoplay: true, looping: false),
