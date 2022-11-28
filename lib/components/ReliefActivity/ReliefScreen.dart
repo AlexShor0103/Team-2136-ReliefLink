@@ -4,6 +4,7 @@ import 'package:relieflink/components/ReliefActivity/ReliefVideoPlayer.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 import 'package:video_player/video_player.dart';
+import 'package:relieflink/utils/constants.dart';
 
 // this class is responsible for holding the video for the current relief technique
 class ReliefScreen extends StatelessWidget {
@@ -40,14 +41,8 @@ class VideoArea extends StatelessWidget {
         child: Text(data.activityName,
             style: const TextStyle(color: Colors.orange, fontSize: 30)),
       ),
-      Expanded(
-        child: Container(),
-      ),
       ReliefVideoPlayer(
           controller: _controller, autoplay: true, looping: false),
-      Expanded(
-        child: Container(),
-      ),
       NextButton(data: data)
     ]);
   }
@@ -60,21 +55,32 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 10.0),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            primary: Colors.white, backgroundColor: Colors.orange),
-        child: Container(
-          padding: EdgeInsets.all(20),
-          child: const Text("Mark as Completed"),
-        ),
-        onPressed: () {
-          Navigator.push(
+      decoration: BoxDecoration(
+        gradient: AppGrads.mainGreen,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ReliefRateScreen(data: data)));
-        },
-      ),
+          },
+          child: const Text("Mark As Completed",
+            style: TextStyle(
+              color: AppColors.font,
+              fontFamily: 'MainFont',
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+            )),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+          )
+        ),
+      ) 
     );
   }
 }
