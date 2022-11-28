@@ -39,7 +39,7 @@ class MeScreen extends StatelessWidget {
   }
 
   Widget meScreenButton(BuildContext context, String screenName) {
-    Widget goto = ProfileScreen();
+    Widget goto = MeScreen();
     IconData screenIcon = Icons.account_circle;
     switch (screenName) {
       case "Profile":
@@ -69,6 +69,7 @@ class MeScreen extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: (ElevatedButton(
         onPressed: () {
+          print(goto);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => (goto)));
         },
@@ -104,7 +105,10 @@ class MeScreen extends StatelessWidget {
             Spacer(),
             IconButton(
                 color: AppColors.font,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => (goto)));
+                },
                 icon: Icon(
                   Icons.arrow_forward_ios_outlined,
                   size: 20,

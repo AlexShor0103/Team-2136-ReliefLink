@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:relieflink/recommendations/recommendations.dart';
+import 'package:relieflink/screens/MeScreen.dart';
 import 'package:store_redirect/store_redirect.dart';
 
 import '../utils/constants.dart';
@@ -15,21 +16,13 @@ class RecommendationScreen extends StatelessWidget {
       home: Scaffold(
         backgroundColor: AppColors.bg,
         body: ListView(
-          padding: const EdgeInsets.only(left: 380.0, right: 380.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           //adjust the paddings from the two edges
           children: [
             const SizedBox(
-              height: 60,
+              height: 80,
             ),
-            Text(
-              "Other Recommended Apps",
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
+            backButton(context),
             recommendationButton(0),
             recommendationButton(1),
             recommendationButton(2),
@@ -43,42 +36,109 @@ class RecommendationScreen extends StatelessWidget {
     );
   }
 
+  Widget backButton(BuildContext context) {
+    return (MaterialButton(
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => (MeScreen())));
+      },
+      child: Row(
+        children: [
+          IconButton(
+              icon: Icon(Icons.chevron_left_outlined),
+              iconSize: 30,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => (MeScreen())));
+              }),
+          Text(
+            "Back",
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: AppColors.black,
+              fontSize: 20,
+            ),
+          ),
+        ],
+      ),
+    ));
+  }
+
   Widget recommendationButton(int index) {
+    LinearGradient grad = AppConstants.getGradByMood("blue");
+    Color color = AppConstants.getColorByMood("cyan");
+    const double radius = 10;
+    double buttonMinHeight = 120;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: (MaterialButton(
-        color: AppColors.green,
-        height: 70.0,
-        minWidth: 70.0,
+      padding: const EdgeInsets.only(bottom: 10),
+      child: (ElevatedButton(
         onPressed: () {
           StoreRedirect.redirect(
             androidAppId: androidAppId,
             iOSAppId: iOSAppId,
           );
         },
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(AppColors.white),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(radius))),
+            ),
+            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+            fixedSize:
+                MaterialStateProperty.all<Size>(Size(0, buttonMinHeight)),
+            alignment: Alignment.centerLeft),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: recommendations[index].icon,
-              onPressed: () {},
-              padding: EdgeInsets.only(right: 15),
-            ),
-            Text(
-              recommendations[index].title,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              overflow: TextOverflow.clip,
-            ),
             SizedBox(
               width: 15,
             ),
-            Flexible(
-                child: Text(
-              recommendations[index].description,
-              style: const TextStyle(
-                fontSize: 20,
+            SizedBox(
+              height: 120,
+              width: 300,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    recommendations[index].title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18,
+                    ),
+                    overflow: TextOverflow.clip,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    recommendations[index].description,
+                    style: const TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontSize: 14,
+                    ),
+                    overflow: TextOverflow.clip,
+                  ),
+                ],
               ),
-              overflow: TextOverflow.clip,
-            ))
+            ),
+            IconButton(
+              color: AppColors.font,
+              icon: Icon(Icons.arrow_circle_right_outlined),
+              onPressed: () {
+                StoreRedirect.redirect(
+                  androidAppId: androidAppId,
+                  iOSAppId: iOSAppId,
+                );
+              },
+            ),
           ],
         ),
       )),
