@@ -141,7 +141,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                 constraints: BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     )),
@@ -173,7 +173,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label,
-            style: TextStyle(
+            style: const TextStyle(
                 height: 0,
                 color: AppColors.font,
                 fontFamily: 'MainFont',
@@ -200,13 +200,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
             decoration: InputDecoration(
               isDense: true,
               hintText: placeholder,
-              // labelText: label,
-              // labelStyle: TextStyle(
-              //   color: AppColors.font,
-              //   fontFamily: 'MainFont',
-              //   fontWeight: FontWeight.w600,
-              //   fontSize: 17,
-              // )
             ),
           )
         ]
@@ -240,10 +233,10 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   ),
                 ),
                 height: 40,
-                constraints: BoxConstraints(minWidth: double.infinity),
+                constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     )),
@@ -258,11 +251,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   )),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               reliefTextInput("Relief Technique 1:", firstCopingStrategy),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               reliefTextInput("Relief Technique 2:", secondCopingStrategy),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               reliefTextInput("Relief Technique 3:", thirdCopingStrategy),
             ],
           )),
@@ -335,10 +328,10 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   ),
                 ),
                 height: 40,
-                constraints: BoxConstraints(minWidth: double.infinity),
+                constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     )),
@@ -353,11 +346,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   )),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               distractingContactsInput("Distracting Contact 1:", firstDistractingContact),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               distractingContactsInput("Distracting Contact 2:", secondDistractingContact),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               distractingContactsInput("Distracting Place:", distractingPlace),
             ],
           )),
@@ -430,10 +423,10 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   ),
                 ),
                 height: 40,
-                constraints: BoxConstraints(minWidth: double.infinity),
+                constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     )),
@@ -448,11 +441,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   )),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               reliefTextInput("Helping Contact 1:", firstHelpingContact),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               reliefTextInput("Helping Contact 2:", secondHelpingContact),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               reliefTextInput("Helping Contact 3:", thirdHelpingContact),
             ],
           )),
@@ -525,10 +518,10 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   ),
                 ),
                 height: 40,
-                constraints: BoxConstraints(minWidth: double.infinity),
+                constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     )),
@@ -543,11 +536,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   )),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               professionalContactsInput("Professional Contact 1:", firstProfessionalContact),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               professionalContactsInput("Professional Contact 2:", secondProfessionalContact),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               professionalContactsInput("Local Urgent Care:", localUrgentCare),
             ],
           )),
@@ -594,61 +587,4 @@ class _CrisisPlanState extends State<CrisisPlan> {
       
     );
   }
-
-  Widget textInputs(String label, String placeholder) {
-    return Padding(
-        padding: const EdgeInsets.only(bottom: 21),
-        child: (TextField(
-            onChanged: (value) => {
-                  if (label == "First Warning Sign")
-                    {firstWarningSign = value}
-                  else if (label == "Second Warning Sign")
-                    {secondWarningSign = value}
-                  else if (label == "Third Warning Sign")
-                    {thirdWarningSign = value}
-                  else if (label == "First Coping Strategy")
-                    {firstCopingStrategy = value}
-                  else if (label == "Second Coping Strategy")
-                    {secondCopingStrategy = value}
-                  else if (label == "Third Coping Strategy")
-                    {thirdCopingStrategy = value}
-                  else if (label == "First Distracting Contact")
-                    {firstDistractingContact = value}
-                  else if (label == "Second Distracting Contact")
-                    {secondDistractingContact = value}
-                  else if (label == "Distracting Place")
-                    {distractingPlace = value}
-                  else if (label == "First Helping Contact")
-                    {firstHelpingContact = value}
-                  else if (label == "Second Helping Contact")
-                    {secondHelpingContact = value}
-                  else if (label == "Third Helping Contact")
-                    {thirdHelpingContact = value}
-                  else if (label == "First Professional Contact")
-                    {firstProfessionalContact = value}
-                  else if (label == "Second Professional Contact")
-                    {secondProfessionalContact = value}
-                  else if (label == "Local Urgent Care")
-                    {localUrgentCare = value}
-                  else if (label == "First Environmental Step")
-                    {firstEnvironmentalSafetyStep = value}
-                  else
-                    {secondEnvironmentalSafetyStep = value}
-                },
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(bottom: 3),
-                labelText: label,
-                labelStyle: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlueAccent,
-                ),
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                hintText: placeholder,
-                hintStyle: TextStyle(
-                  fontSize: 16,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.black.withOpacity(0.9),
-                )))));
   }
-}
