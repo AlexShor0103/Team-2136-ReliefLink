@@ -69,7 +69,6 @@ class MeScreen extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: (ElevatedButton(
         onPressed: () {
-          print(goto);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => (goto)));
         },
