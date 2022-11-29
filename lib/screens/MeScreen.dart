@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/components/Profile/ProfileScreen.dart';
 import 'package:relieflink/recommendations/RecommendationScreen.dart';
+import 'package:relieflink/screens/DiaryScreen.dart';
 import 'package:relieflink/screens/MapScreen.dart';
 
 import '../utils/constants.dart';
@@ -17,21 +18,21 @@ class MeScreen extends StatelessWidget {
           //adjust the paddings from the two edges
           children: [
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             meScreenButton(context, "Profile"),
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
             meScreenButton(context, "Recommendations"),
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
             meScreenButton(context, "Find a Health Care Center Near You"),
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
-            meScreenButton(context, "Onboarding")
+            meScreenButton(context, "Onboarding"),
           ],
         ),
       ),
@@ -58,9 +59,10 @@ class MeScreen extends StatelessWidget {
         goto = OnboardingScreen();
         screenIcon = Icons.offline_bolt_sharp;
         break;
+
     }
     return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
+      padding: const EdgeInsets.only(bottom: 10),
       child: (MaterialButton(
         color: AppColors.orange,
         height: 80.0,
