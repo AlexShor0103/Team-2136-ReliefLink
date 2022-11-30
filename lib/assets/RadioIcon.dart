@@ -31,7 +31,7 @@ class _RadioIconState extends State<RadioIcon> {
             Icon(
               icon,
               size: 40,
-              color: _selected == index ? Colors.red : null,
+              color: _selected == index ? Colors.green : null,
             ),
             Text(text, style: TextStyle(color: _selected == index ? Colors.green : null)),
           ],
