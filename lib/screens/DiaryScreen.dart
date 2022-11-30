@@ -70,14 +70,50 @@ class _DiaryScreenState extends State<DiaryScreen> {
     );
     Widget continueButton = TextButton(
       child: Text("Continue"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+        showMoodDialog(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Journal"),
+      content: Text(
+          "Hi there! Would you like to get some of our thoughts out?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showMoodDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("Cancel"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text("Continue"),
       onPressed: () {},
     );
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("AlertDialog"),
+      title: Text("Mood"),
       content: Text(
-          "Would you like to continue learning how to use Flutter alerts?"),
+          "Please tell us how you are feeling."),
       actions: [
         cancelButton,
         continueButton,
