@@ -116,7 +116,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
       content: Text(
           "Please tell us how you are feeling."),
       actions: [
-        RadioIcon()
+        RadioIcon(),
+        continueButton,
       ],
     );
 

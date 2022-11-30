@@ -12,12 +12,12 @@ class _RadioIconState extends State<RadioIcon> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _icon(0, text: "No way", icon: Icons.face),
-        _icon(1, text: "Maybe", icon: Icons.local_movies),
-        _icon(2, text: "Looks good", icon: Icons.local_pizza),
-        _icon(3, text: "Can't wait", icon: Icons.local_fire_department),
-      ],
+        _icon(0, text: "Sad", icon: Icons.sentiment_dissatisfied_outlined),
+        _icon(1, text: "Neutral", icon: Icons.sentiment_neutral_outlined),
+        _icon(2, text: "Happy", icon: Icons.sentiment_very_satisfied_outlined),
+        ],
     );
   }
 
@@ -30,6 +30,7 @@ class _RadioIconState extends State<RadioIcon> {
           children: [
             Icon(
               icon,
+              size: 40,
               color: _selected == index ? Colors.red : null,
             ),
             Text(text, style: TextStyle(color: _selected == index ? Colors.green : null)),
