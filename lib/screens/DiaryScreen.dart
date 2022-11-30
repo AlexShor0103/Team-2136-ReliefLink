@@ -15,47 +15,81 @@ class _DiaryScreenState extends State<DiaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.bg,
-        body: Stack(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 600, right: 12),
-              alignment: Alignment.bottomRight,
+      backgroundColor: AppColors.bg,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(top: 490, right: 20),
+            alignment: Alignment.bottomRight,
+            child: Column(
+              children: <Widget>[
+                FloatingActionButton(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.black,
+                  highlightElevation: 30,
+                  onPressed: () {
+                    showAlertDialog(context);
+                  },
+                  child: Icon(Icons.add),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
               child: Column(
-                children: <Widget>[
-                  FloatingActionButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (ctx) => showAlertDialog(context),
-                      );
-                    },
-                    backgroundColor: Colors.blueAccent,
-                    child: const Icon(Icons.add_outlined, size: 30.0),
-                  ),
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                      'This is a space for you to journal! Get your thoughts out and help track your mood as you work towards a brighter tomorrow!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.font,
+                        fontFamily: 'MainFont',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      )),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
-  AlertDialog showAlertDialog(BuildContext context) {
-    return AlertDialog(
-        title: const Text("Journal"),
-        content: const Text("How are you feeling today?"),
-        actions: <Widget>[
-          TextButton(
-            child: Text("Cancel"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: Text("Continue"),
-            onPressed: () {},
-          ),
-        ]
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("Cancel"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text("Continue"),
+      onPressed: () {},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("AlertDialog"),
+      content: Text(
+          "Would you like to continue learning how to use Flutter alerts?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
