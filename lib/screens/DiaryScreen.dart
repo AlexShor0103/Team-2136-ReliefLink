@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/screens/MeScreen.dart';
 import 'package:relieflink/screens/ReliefHomeScreen.dart';
+import '../assets/RadioIcon.dart';
 
 import '../utils/constants.dart';
 
@@ -115,8 +116,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
       content: Text(
           "Please tell us how you are feeling."),
       actions: [
-        cancelButton,
-        continueButton,
+        RadioIcon()
       ],
     );
 
@@ -124,8 +124,23 @@ class _DiaryScreenState extends State<DiaryScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        shape: RoundedRectangleBorder(
+            borderRadius:
+            BorderRadius.all(
+                Radius.circular(10.0)));
+        content: Builder(
+          builder: (context) {
+        // Get available height and width of the build area of this widget. Make a choice depending on the size.
+            var height = MediaQuery.of(context).size.height;
+            var width = MediaQuery.of(context).size.width;
+
+            return Container(
+            height: height - 400,
+            width: width - 400,
+            );
+            });
         return alert;
-      },
+          },
     );
   }
 }
