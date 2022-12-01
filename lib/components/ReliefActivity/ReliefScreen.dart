@@ -73,7 +73,7 @@ class NextButton extends StatelessWidget {
           },
           child: const Text("Mark As Completed",
             style: TextStyle(
-              color: AppColors.black,
+              color: AppColors.font,
               fontFamily: 'MainFont',
               fontWeight: FontWeight.w800,
               fontSize: 20,
