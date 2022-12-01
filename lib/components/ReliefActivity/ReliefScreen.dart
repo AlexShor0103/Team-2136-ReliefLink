@@ -40,7 +40,7 @@ class VideoArea extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Text(data.activityName,
             style: const TextStyle(
-              color: AppColors.black, 
+              color: AppColors.font, 
               fontSize: 30,
               fontFamily: 'MainFont',
               fontWeight: FontWeight.w800)),
@@ -73,7 +73,7 @@ class NextButton extends StatelessWidget {
           },
           child: const Text("Mark As Completed",
             style: TextStyle(
-              color: AppColors.font,
+              color: AppColors.black,
               fontFamily: 'MainFont',
               fontWeight: FontWeight.w800,
               fontSize: 20,
