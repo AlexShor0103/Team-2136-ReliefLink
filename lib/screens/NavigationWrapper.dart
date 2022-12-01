@@ -25,6 +25,7 @@ class _NavState extends State<Nav> {
     const CrisisPlan(),
   ];
 
+//the problems lies in that the ciris plan is a floating button that builds the crisis plan on top, rather than simply changing the stack of
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,7 @@ class _NavState extends State<Nav> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CrisisPlan()));
+              builder: (context) => const CrisisPlan()));
         },
       ),
       floatingActionButtonLocation:
