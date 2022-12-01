@@ -14,7 +14,7 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     const black = AppColors.black;
     return AppBar(
-      iconTheme: IconThemeData(color: Colors.black),
+      iconTheme: const IconThemeData(color: AppColors.font),
       elevation: 10,
       title: Center(
         child: RichText(
@@ -24,16 +24,16 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget {
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
-                color: black,
+                color: AppColors.font,
               ),
               children: <TextSpan>[
                 TextSpan(
                   text:
-                      'You can choose what you prefer, or sort by time and mood',
+                      'Choose a technique, or \nby time and mood',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.black,
+                    color: AppColors.font,
                   ),
                 ),
               ]),
@@ -43,15 +43,29 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 80,
       actions: <Widget>[
         Padding(
-          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: ElevatedButton(
-            child: const Icon(
-              Icons.phone_outlined,
-              size: 30,
-              color: AppColors.white,
+            child: Column(
+              children: const <Widget> [
+                Icon(Icons.phone_outlined,
+                size: 34,
+                color: AppColors.white,
+            ),
+                Text("Call 988",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1,
+                    wordSpacing: 1,
+                  ),
+                  softWrap: false,
+                  maxLines: 1,
+                  textAlign: TextAlign.left,
+                ),
+              ],
             ),
             style: ElevatedButton.styleFrom(
-              fixedSize: const Size(60, 60),
+              fixedSize: const Size(80, 80),
               primary: AppColors.red2,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -62,6 +76,7 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 side: BorderSide(color: Colors.transparent),
               ),
+              padding: EdgeInsets.zero,
             ),
             onPressed: () {
               showDialog(
@@ -76,7 +91,7 @@ class Top_Relief extends StatelessWidget implements PreferredSizeWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        const Text("Call for emergency?"),
+                        const Text("Call 988, the Suicide \n& Crisis Lifeline?"),
                         const SizedBox(
                           height: 20,
                         ),
