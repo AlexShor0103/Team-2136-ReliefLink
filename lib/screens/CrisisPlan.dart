@@ -6,8 +6,9 @@ import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
 
 class CrisisPlan extends StatefulWidget {
+  const CrisisPlan({Key? key}) : super(key: key);
   @override
-  _CrisisPlanState createState() => _CrisisPlanState();
+  State<CrisisPlan> createState() => _CrisisPlanState();
 }
 
 class _CrisisPlanState extends State<CrisisPlan> {
@@ -85,32 +86,32 @@ class _CrisisPlanState extends State<CrisisPlan> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            backgroundColor: const Color.fromRGBO(252, 245, 235, 1),
-            body: ListView(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-                children: [
-                  Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        warningCard(),
-                        const SizedBox(height: 20),
-                        reliefCard(),
-                        const SizedBox(height: 20),
-                        distractingContactsCard(),
-                        const SizedBox(height: 20),
-                        helpingContactsCard(),
-                        const SizedBox(height: 20),
-                        professionalContactsCard(),
-                      ] // Children
-                      ),
-                ] // Children
-                )));
+    return Scaffold(
+        backgroundColor: const Color.fromRGBO(252, 245, 235, 1),
+        body: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+            children: [
+              Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
+                    warningCard(),
+                    const SizedBox(height: 20),
+                    reliefCard(),
+                    const SizedBox(height: 20),
+                    distractingContactsCard(),
+                    const SizedBox(height: 20),
+                    helpingContactsCard(),
+                    const SizedBox(height: 20),
+                    professionalContactsCard(),
+                    const SizedBox(height: 40),
+                  ] // Children
+                  ),
+            ] // Children
+            ));
   }
 
   Widget warningCard() {
@@ -166,46 +167,39 @@ class _CrisisPlanState extends State<CrisisPlan> {
           )),
     );
   }
+
   Widget warningTextInput(String label, String placeholder) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
-            style: const TextStyle(
+              style: const TextStyle(
                 height: 0,
                 color: AppColors.font,
                 fontFamily: 'MainFont',
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
-              )
-          ),
+              )),
           TextField(
             onChanged: (value) => {
-              if (label == "Warning 1:") {
-                firstWarningSign = value
-              } else if (label == "Warning 2:") {
-                secondWarningSign = value
-              } else if (label == "Warning 3:") {
-                thirdWarningSign = value
-              }
+              if (label == "Warning 1:")
+                {firstWarningSign = value}
+              else if (label == "Warning 2:")
+                {secondWarningSign = value}
+              else if (label == "Warning 3:")
+                {thirdWarningSign = value}
             },
             style: const TextStyle(
-              color: AppColors.font,
-              fontFamily: 'MainFont',
-              fontWeight: FontWeight.w600,
-              fontSize: 18
-            ),
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
             decoration: InputDecoration(
               isDense: true,
               hintText: placeholder,
             ),
           )
-        ]
-      )
-      
-    );
+        ]));
   }
 
   Widget reliefCard() {
@@ -261,46 +255,39 @@ class _CrisisPlanState extends State<CrisisPlan> {
           )),
     );
   }
+
   Widget reliefTextInput(String label, String placeholder) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
-            style: const TextStyle(
+              style: const TextStyle(
                 height: 0,
                 color: AppColors.font,
                 fontFamily: 'MainFont',
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
-              )
-          ),
+              )),
           TextField(
             onChanged: (value) => {
-              if (label == "Relief Technique 1:") {
-                firstCopingStrategy = value
-              } else if (label == "Relief Technique 2:") {
-                secondCopingStrategy = value
-              } else if (label == "Relief Technique 3:") {
-                thirdCopingStrategy = value
-              }
+              if (label == "Relief Technique 1:")
+                {firstCopingStrategy = value}
+              else if (label == "Relief Technique 2:")
+                {secondCopingStrategy = value}
+              else if (label == "Relief Technique 3:")
+                {thirdCopingStrategy = value}
             },
             style: const TextStyle(
-              color: AppColors.font,
-              fontFamily: 'MainFont',
-              fontWeight: FontWeight.w600,
-              fontSize: 18
-            ),
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
             decoration: InputDecoration(
               isDense: true,
               hintText: placeholder,
             ),
           )
-        ]
-      )
-      
-    );
+        ]));
   }
 
   Widget distractingContactsCard() {
@@ -347,55 +334,50 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-              distractingContactsInput("Distracting Contact 1:", firstDistractingContact),
+              distractingContactsInput(
+                  "Distracting Contact 1:", firstDistractingContact),
               const SizedBox(height: 15),
-              distractingContactsInput("Distracting Contact 2:", secondDistractingContact),
+              distractingContactsInput(
+                  "Distracting Contact 2:", secondDistractingContact),
               const SizedBox(height: 15),
               distractingContactsInput("Distracting Place:", distractingPlace),
             ],
           )),
     );
   }
+
   Widget distractingContactsInput(String label, String placeholder) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
-            style: const TextStyle(
+              style: const TextStyle(
                 height: 0,
                 color: AppColors.font,
                 fontFamily: 'MainFont',
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
-              )
-          ),
+              )),
           TextField(
             onChanged: (value) => {
-              if (label == "Distracting Contact 1:") {
-                firstDistractingContact = value
-              } else if (label == "Distracting Contact 2:") {
-                secondDistractingContact = value
-              } else if (label == "Distracting Place") {
-                distractingPlace = value
-              }
+              if (label == "Distracting Contact 1:")
+                {firstDistractingContact = value}
+              else if (label == "Distracting Contact 2:")
+                {secondDistractingContact = value}
+              else if (label == "Distracting Place")
+                {distractingPlace = value}
             },
             style: const TextStyle(
-              color: AppColors.font,
-              fontFamily: 'MainFont',
-              fontWeight: FontWeight.w600,
-              fontSize: 18
-            ),
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
             decoration: InputDecoration(
               isDense: true,
               hintText: placeholder,
             ),
           )
-        ]
-      )
-      
-    );
+        ]));
   }
 
   Widget helpingContactsCard() {
@@ -451,46 +433,39 @@ class _CrisisPlanState extends State<CrisisPlan> {
           )),
     );
   }
+
   Widget helpingContactsInput(String label, String placeholder) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
-            style: const TextStyle(
+              style: const TextStyle(
                 height: 0,
                 color: AppColors.font,
                 fontFamily: 'MainFont',
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
-              )
-          ),
+              )),
           TextField(
             onChanged: (value) => {
-              if (label == "Helping Contact 1:") {
-                firstHelpingContact = value
-              } else if (label == "Helping Contact 2:") {
-                secondHelpingContact = value
-              } else if (label == "Helping Contact 3:") {
-                thirdHelpingContact = value
-              }
+              if (label == "Helping Contact 1:")
+                {firstHelpingContact = value}
+              else if (label == "Helping Contact 2:")
+                {secondHelpingContact = value}
+              else if (label == "Helping Contact 3:")
+                {thirdHelpingContact = value}
             },
             style: const TextStyle(
-              color: AppColors.font,
-              fontFamily: 'MainFont',
-              fontWeight: FontWeight.w600,
-              fontSize: 18
-            ),
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
             decoration: InputDecoration(
               isDense: true,
               hintText: placeholder,
             ),
           )
-        ]
-      )
-      
-    );
+        ]));
   }
 
   Widget professionalContactsCard() {
@@ -537,54 +512,49 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-              professionalContactsInput("Professional Contact 1:", firstProfessionalContact),
+              professionalContactsInput(
+                  "Professional Contact 1:", firstProfessionalContact),
               const SizedBox(height: 15),
-              professionalContactsInput("Professional Contact 2:", secondProfessionalContact),
+              professionalContactsInput(
+                  "Professional Contact 2:", secondProfessionalContact),
               const SizedBox(height: 15),
               professionalContactsInput("Local Urgent Care:", localUrgentCare),
             ],
           )),
     );
   }
+
   Widget professionalContactsInput(String label, String placeholder) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
-            style: const TextStyle(
+              style: const TextStyle(
                 height: 0,
                 color: AppColors.font,
                 fontFamily: 'MainFont',
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
-              )
-          ),
+              )),
           TextField(
             onChanged: (value) => {
-              if (label == "Professional Contact 1:") {
-                firstProfessionalContact = value
-              } else if (label == "Professional Contact 2:") {
-                secondProfessionalContact = value
-              } else if (label == "Local Urgent Care:") {
-                localUrgentCare = value
-              }
+              if (label == "Professional Contact 1:")
+                {firstProfessionalContact = value}
+              else if (label == "Professional Contact 2:")
+                {secondProfessionalContact = value}
+              else if (label == "Local Urgent Care:")
+                {localUrgentCare = value}
             },
             style: const TextStyle(
-              color: AppColors.font,
-              fontFamily: 'MainFont',
-              fontWeight: FontWeight.w600,
-              fontSize: 18
-            ),
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
             decoration: InputDecoration(
               isDense: true,
               hintText: placeholder,
             ),
           )
-        ]
-      )
-      
-    );
+        ]));
   }
-  }
+}
