@@ -22,6 +22,7 @@ class _NavState extends State<Nav> {
     const ContactsScreen(),
     const ReliefHomeScreen(),
     MeScreen(),
+    const CrisisPlan(),
   ];
 
   @override
