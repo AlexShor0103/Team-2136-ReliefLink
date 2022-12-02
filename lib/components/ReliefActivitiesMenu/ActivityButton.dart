@@ -40,6 +40,7 @@ class _ActivityButtonState extends State<ActivityButton> {
 
     const double radius = 10;
     double buttonMinHeight = 130;
+    double buttonMaxHeight = 300;
 
     setState(() {
       iconData = widget.activity.favorite ? Icons.star : Icons.star_outline;
@@ -61,7 +62,6 @@ class _ActivityButtonState extends State<ActivityButton> {
                 borderRadius: BorderRadius.all(Radius.circular(radius))),
           ),
           padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
-          fixedSize: MaterialStateProperty.all<Size>(Size(0, buttonMinHeight)),
           alignment: Alignment.topLeft),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -301,7 +301,6 @@ class _ActivityButtonState extends State<ActivityButton> {
                 iconData,
                 size: 20,
               )),
-          const Spacer(),
         ],
       ),
     );

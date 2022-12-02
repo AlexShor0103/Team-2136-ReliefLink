@@ -15,7 +15,7 @@ class ReliefScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Top_Relief(),
+      appBar: const Top_Relief(),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: VideoArea(data: data),
@@ -25,16 +25,27 @@ class ReliefScreen extends StatelessWidget {
 }
 
 // This is where the video is played
-class VideoArea extends StatelessWidget {
+class VideoArea extends StatefulWidget {
   final ReliefTechniqueData data;
-  final VideoPlayerController _controller;
 
-  VideoArea({Key? key, required this.data})
-      : _controller = VideoPlayerController.network(data.videoLink),
-        super(key: key);
+  VideoArea({Key? key, required this.data}) : super(key: key);
+
+  @override
+  State<VideoArea> createState() => _VideoAreaState();
+}
+
+class _VideoAreaState extends State<VideoArea> {
+  late final VideoPlayerController _controller;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _controller = VideoPlayerController.network(widget.data.videoLink);
     return Column(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -54,7 +65,9 @@ class VideoArea extends StatelessWidget {
 
 class NextButton extends StatelessWidget {
   final ReliefTechniqueData data;
-  const NextButton({Key? key, required this.data}) : super(key: key);
+  final Function function;
+  const NextButton({Key? key, required this.data, required this.function})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

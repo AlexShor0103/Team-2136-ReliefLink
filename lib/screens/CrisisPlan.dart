@@ -1,12 +1,14 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:relieflink/utils/constants.dart';
 import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
 
 class CrisisPlan extends StatefulWidget {
+  const CrisisPlan({Key? key}) : super(key: key);
   @override
-  _CrisisPlanState createState() => _CrisisPlanState();
+  State<CrisisPlan> createState() => _CrisisPlanState();
 }
 
 class _CrisisPlanState extends State<CrisisPlan> {
@@ -82,191 +84,477 @@ class _CrisisPlanState extends State<CrisisPlan> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color.fromRGBO(252, 245, 235, 1),
+    return Scaffold(
+        backgroundColor: const Color.fromRGBO(252, 245, 235, 1),
         body: ListView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // IconButton(
-                //     onPressed: (() {
-                //       setState(() {});
-                //         CrisisData newData = CrisisData(
-                //             firstWarningSign: firstWarningSign,
-                //             secondWarningSign: secondWarningSign,
-                //             thirdWarningSign: thirdWarningSign,
-                //             firstCopingStrategy: firstCopingStrategy,
-                //             secondCopingStrategy: secondCopingStrategy,
-                //             thirdCopingStrategy: thirdCopingStrategy,
-                //             firstDistractingContact: firstDistractingContact,
-                //             secondDistractingContact: secondDistractingContact,
-                //             distractingPlace: distractingPlace,
-                //             firstHelpingContact: firstHelpingContact,
-                //             secondHelpingContact: secondHelpingContact,
-                //             thirdHelpingContact: thirdHelpingContact,
-                //             firstProfessionalContact: firstProfessionalContact,
-                //             secondProfessionalContact: secondProfessionalContact,
-                //             localUrgentCare: localUrgentCare,
-                //             firstEnvironmentalSafetyStep: firstEnvironmentalSafetyStep,
-                //             secondEnvironmentalSafetyStep: secondEnvironmentalSafetyStep
-                //         );
-                //         DataStorage.setCrisisData(newData);
-                //         DataStorage.saveToDisk();
-                //       }),
-                //       icon: const Icon(
-                //         Icons.sync,
-                //         size: 35,
-                //         color: Colors.grey,
-                //       ),
-                //     ),
-                const Text(
-                  'Step 1 - Warning signs (thoughts, mood, '
-                      'behavior) that a crisis may be developing:',
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.amberAccent),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                textInputs("First Warning Sign", firstWarningSign),
-                textInputs("Second Warning Sign", secondWarningSign),
-                textInputs("Third Warning Sign", thirdWarningSign),
-                const Text(
-                  'Step 2 - Internal coping strategies - Things I can do myself '
-                      'to take my mind off my problems:',
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.amberAccent),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                textInputs("First Coping Strategy", firstWarningSign),
-                textInputs("Second Coping Strategy", secondCopingStrategy),
-                textInputs("Third Coping Strategy", thirdCopingStrategy),
-                const Text(
-                  'Step 3 - People and social settings that provide distraction:',
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.amberAccent),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                textInputs("First Distracting Contact", firstDistractingContact),
-                textInputs("Second Distracting Contact", secondDistractingContact),
-                textInputs("Distracting Place", distractingPlace),
-                const Text(
-                  'Step 4 - People I can ask for help:',
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.amberAccent),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                textInputs("First Helping Contact", firstHelpingContact),
-                textInputs("Second Helping Contact", secondHelpingContact),
-                textInputs("Third Helping Contact", thirdHelpingContact),
-                const Text(
-                  'Step 5 - Professionals or agencies I can contact during a crisis:',
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.amberAccent),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                textInputs("First Professional Contact", firstProfessionalContact),
-                textInputs("Second Professional Contact", secondProfessionalContact),
-                textInputs("Local Urgent Care", localUrgentCare),
-                const Text(
-                  'Step 6 - Making my environment safe:',
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.amberAccent),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                textInputs("First Environmental Step", firstEnvironmentalSafetyStep),
-                textInputs("Second Environmental Step", secondEnvironmentalSafetyStep),
-                  ]  // Children
-                ),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+            children: [
+              Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
+                    warningCard(),
+                    const SizedBox(height: 20),
+                    reliefCard(),
+                    const SizedBox(height: 20),
+                    distractingContactsCard(),
+                    const SizedBox(height: 20),
+                    helpingContactsCard(),
+                    const SizedBox(height: 20),
+                    professionalContactsCard(),
+                    const SizedBox(height: 40),
+                  ] // Children
+                  ),
             ] // Children
-        )
-      )
+            ));
+  }
+
+  Widget warningCard() {
+    return Card(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Container(
+          height: 330,
+          child: Column(
+            children: [
+              //container for gradient
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Step 1: Warning Signs",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                height: 40,
+                constraints: BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
+              ),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we identify warning signs before crisis",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              SizedBox(height: 15),
+              warningTextInput("Warning 1:", firstWarningSign),
+              SizedBox(height: 15),
+              warningTextInput("Warning 2:", firstWarningSign),
+              SizedBox(height: 15),
+              warningTextInput("Warning 3:", firstWarningSign),
+            ],
+          )),
     );
   }
 
-  Widget textInputs(String label, String placeholder) {
+  Widget warningTextInput(String label, String placeholder) {
     return Padding(
-        padding: const EdgeInsets.only(bottom: 21),
-        child: (TextField(
-            onChanged: (value) =>
-            {
-              if (label == "First Warning Sign")
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(label,
+              style: const TextStyle(
+                height: 0,
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w900,
+                fontSize: 17,
+              )),
+          TextField(
+            onChanged: (value) => {
+              if (label == "Warning 1:")
                 {firstWarningSign = value}
-              else if (label == "Second Warning Sign")
+              else if (label == "Warning 2:")
                 {secondWarningSign = value}
-              else if (label == "Third Warning Sign")
+              else if (label == "Warning 3:")
                 {thirdWarningSign = value}
-              else if (label == "First Coping Strategy")
+            },
+            style: const TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
+            decoration: InputDecoration(
+              isDense: true,
+              hintText: placeholder,
+            ),
+          )
+        ]));
+  }
+
+  Widget reliefCard() {
+    return Card(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Container(
+          height: 330,
+          child: Column(
+            children: [
+              //container for gradient
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Step 2: Relief Techniques",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                height: 40,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
+              ),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we identify relief techniques that help",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
+              reliefTextInput("Relief Technique 1:", firstCopingStrategy),
+              const SizedBox(height: 15),
+              reliefTextInput("Relief Technique 2:", secondCopingStrategy),
+              const SizedBox(height: 15),
+              reliefTextInput("Relief Technique 3:", thirdCopingStrategy),
+            ],
+          )),
+    );
+  }
+
+  Widget reliefTextInput(String label, String placeholder) {
+    return Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(label,
+              style: const TextStyle(
+                height: 0,
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w900,
+                fontSize: 17,
+              )),
+          TextField(
+            onChanged: (value) => {
+              if (label == "Relief Technique 1:")
                 {firstCopingStrategy = value}
-              else if (label == "Second Coping Strategy")
+              else if (label == "Relief Technique 2:")
                 {secondCopingStrategy = value}
-              else if (label == "Third Coping Strategy")
+              else if (label == "Relief Technique 3:")
                 {thirdCopingStrategy = value}
-              else if (label == "First Distracting Contact")
+            },
+            style: const TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
+            decoration: InputDecoration(
+              isDense: true,
+              hintText: placeholder,
+            ),
+          )
+        ]));
+  }
+
+  Widget distractingContactsCard() {
+    return Card(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Container(
+          height: 330,
+          child: Column(
+            children: [
+              //container for gradient
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Step 3: Sources of Distraction",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                height: 40,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
+              ),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we list resources that can distract you",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
+              distractingContactsInput(
+                  "Distracting Contact 1:", firstDistractingContact),
+              const SizedBox(height: 15),
+              distractingContactsInput(
+                  "Distracting Contact 2:", secondDistractingContact),
+              const SizedBox(height: 15),
+              distractingContactsInput("Distracting Place:", distractingPlace),
+            ],
+          )),
+    );
+  }
+
+  Widget distractingContactsInput(String label, String placeholder) {
+    return Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(label,
+              style: const TextStyle(
+                height: 0,
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w900,
+                fontSize: 17,
+              )),
+          TextField(
+            onChanged: (value) => {
+              if (label == "Distracting Contact 1:")
                 {firstDistractingContact = value}
-              else if (label == "Second Distracting Contact")
+              else if (label == "Distracting Contact 2:")
                 {secondDistractingContact = value}
               else if (label == "Distracting Place")
                 {distractingPlace = value}
-              else if (label == "First Helping Contact")
-                {firstHelpingContact = value}
-              else if (label == "Second Helping Contact")
-                {secondHelpingContact = value}
-              else if (label == "Third Helping Contact")
-                {thirdHelpingContact = value}
-              else if (label == "First Professional Contact")
-                {firstProfessionalContact = value}
-              else if (label == "Second Professional Contact")
-                {secondProfessionalContact = value}
-              else if (label == "Local Urgent Care")
-                {localUrgentCare = value}
-              else if (label == "First Environmental Step")
-                {firstEnvironmentalSafetyStep = value}
-              else
-                {secondEnvironmentalSafetyStep = value }
             },
+            style: const TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
             decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(bottom: 3),
-                labelText: label,
-                labelStyle: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlueAccent,
+              isDense: true,
+              hintText: placeholder,
+            ),
+          )
+        ]));
+  }
+
+  Widget helpingContactsCard() {
+    return Card(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Container(
+          height: 330,
+          child: Column(
+            children: [
+              //container for gradient
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Step 4: Sources of Help",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 17,
+                    ),
+                  ),
                 ),
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                hintText: placeholder,
-                hintStyle: TextStyle(
-                  fontSize: 16,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.black.withOpacity(0.9),
-                )
-            )
-        ))
+                height: 40,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
+              ),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we list contacts that can help you",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
+              reliefTextInput("Helping Contact 1:", firstHelpingContact),
+              const SizedBox(height: 15),
+              reliefTextInput("Helping Contact 2:", secondHelpingContact),
+              const SizedBox(height: 15),
+              reliefTextInput("Helping Contact 3:", thirdHelpingContact),
+            ],
+          )),
     );
+  }
+
+  Widget helpingContactsInput(String label, String placeholder) {
+    return Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(label,
+              style: const TextStyle(
+                height: 0,
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w900,
+                fontSize: 17,
+              )),
+          TextField(
+            onChanged: (value) => {
+              if (label == "Helping Contact 1:")
+                {firstHelpingContact = value}
+              else if (label == "Helping Contact 2:")
+                {secondHelpingContact = value}
+              else if (label == "Helping Contact 3:")
+                {thirdHelpingContact = value}
+            },
+            style: const TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
+            decoration: InputDecoration(
+              isDense: true,
+              hintText: placeholder,
+            ),
+          )
+        ]));
+  }
+
+  Widget professionalContactsCard() {
+    return Card(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Container(
+          height: 330,
+          child: Column(
+            children: [
+              //container for gradient
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Step 5: Professional Resources",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                height: 40,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
+              ),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we list professional Mental Health Resources",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
+              professionalContactsInput(
+                  "Professional Contact 1:", firstProfessionalContact),
+              const SizedBox(height: 15),
+              professionalContactsInput(
+                  "Professional Contact 2:", secondProfessionalContact),
+              const SizedBox(height: 15),
+              professionalContactsInput("Local Urgent Care:", localUrgentCare),
+            ],
+          )),
+    );
+  }
+
+  Widget professionalContactsInput(String label, String placeholder) {
+    return Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(label,
+              style: const TextStyle(
+                height: 0,
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w900,
+                fontSize: 17,
+              )),
+          TextField(
+            onChanged: (value) => {
+              if (label == "Professional Contact 1:")
+                {firstProfessionalContact = value}
+              else if (label == "Professional Contact 2:")
+                {secondProfessionalContact = value}
+              else if (label == "Local Urgent Care:")
+                {localUrgentCare = value}
+            },
+            style: const TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+                fontSize: 18),
+            decoration: InputDecoration(
+              isDense: true,
+              hintText: placeholder,
+            ),
+          )
+        ]));
   }
 }

@@ -22,23 +22,23 @@ class _NavState extends State<Nav> {
     const ContactsScreen(),
     const ReliefHomeScreen(),
     MeScreen(),
+    const CrisisPlan(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         //state within screens are maintained
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.local_florist), //icon ideas: balance cloud crisis_alert emergency_sharp foggy front_hand handshake healing health_and_safety
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CrisisPlan()));
-        },
-      ),
-      floatingActionButtonLocation:
-        FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          heroTag: null,
+          child: const Icon(Icons
+              .local_florist), //icon ideas: balance cloud crisis_alert emergency_sharp foggy front_hand handshake healing health_and_safety
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => CrisisPlan()));
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: IndexedStack(
           index: currentIndex,
           children: screens,

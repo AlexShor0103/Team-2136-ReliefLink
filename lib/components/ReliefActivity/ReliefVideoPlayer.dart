@@ -33,7 +33,7 @@ class _ReliefVideoPlayerState extends State<ReliefVideoPlayer> {
         );
       },
     );
-    return Container(
+    return SizedBox(
       height: 400,
       child: Padding(
         padding: const EdgeInsets.all(2.0),
