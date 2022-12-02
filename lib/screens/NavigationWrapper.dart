@@ -4,7 +4,7 @@ import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/screens/MeScreen.dart';
 import 'ReliefHomeScreen.dart';
-import 'package:relieflink/screens/CrisisPlan.dart';
+import 'package:relieflink/screens/CrisisPlanScreen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);

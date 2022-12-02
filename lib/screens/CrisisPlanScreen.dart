@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
+import'package:relieflink/components/CrisisPlan/warningSigns.dart';
 
 class CrisisPlan extends StatefulWidget {
   const CrisisPlan({Key? key}) : super(key: key);
@@ -158,49 +159,17 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               SizedBox(height: 15),
-              warningTextInput("Warning 1:", firstWarningSign),
+              warningTextInputAuto("Warning 1:", firstWarningSign),
               SizedBox(height: 15),
-              warningTextInput("Warning 2:", firstWarningSign),
+              warningTextInput("Warning 2:", secondWarningSign),
               SizedBox(height: 15),
-              warningTextInput("Warning 3:", firstWarningSign),
+              warningTextInput("Warning 3:", thirdWarningSign),
             ],
           )),
     );
   }
 
-  Widget warningTextInput(String label, String placeholder) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(label,
-              style: const TextStyle(
-                height: 0,
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w900,
-                fontSize: 17,
-              )),
-          TextField(
-            onChanged: (value) => {
-              if (label == "Warning 1:")
-                {firstWarningSign = value}
-              else if (label == "Warning 2:")
-                {secondWarningSign = value}
-              else if (label == "Warning 3:")
-                {thirdWarningSign = value}
-            },
-            style: const TextStyle(
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w600,
-                fontSize: 18),
-            decoration: InputDecoration(
-              isDense: true,
-              hintText: placeholder,
-            ),
-          )
-        ]));
-  }
+
 
   Widget reliefCard() {
     return Card(
