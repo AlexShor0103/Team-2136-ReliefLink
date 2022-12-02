@@ -7,8 +7,6 @@ import 'package:store_redirect/store_redirect.dart';
 import '../utils/constants.dart';
 
 class RecommendationScreen extends StatelessWidget {
-  static const androidAppId = 'com.getsomeheadspace.android';
-  static const iOSAppId = '493145008';
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +73,8 @@ class RecommendationScreen extends StatelessWidget {
       child: (ElevatedButton(
         onPressed: () {
           StoreRedirect.redirect(
-            androidAppId: androidAppId,
-            iOSAppId: iOSAppId,
+            androidAppId: recommendations[index].androidAppId,
+            iOSAppId: recommendations[index].iOSAppId,
           );
         },
         style: ButtonStyle(
@@ -134,8 +132,8 @@ class RecommendationScreen extends StatelessWidget {
               icon: Icon(Icons.arrow_circle_right_outlined),
               onPressed: () {
                 StoreRedirect.redirect(
-                  androidAppId: androidAppId,
-                  iOSAppId: iOSAppId,
+                  androidAppId: recommendations[index].androidAppId,
+                  iOSAppId: recommendations[index].iOSAppId,
                 );
               },
             ),

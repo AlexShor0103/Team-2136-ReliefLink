@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 class RecommendationPanel {
-  Icon icon;
   String title;
   String description;
+  String androidAppId;
+  String iOSAppId;
 
   RecommendationPanel(
-    {required this.icon,
-    required this.title,
-    required this.description});
+    {required this.title,
+    required this.description,
+    required this.androidAppId,
+    required this.iOSAppId});
 }
