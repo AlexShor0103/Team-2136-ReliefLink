@@ -226,14 +226,57 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-              reliefTextInput("Relief Technique 1:", firstCopingStrategy),
+              // reliefTextInput("Relief Technique 1:", firstCopingStrategy),
               const SizedBox(height: 15),
-              reliefTextInput("Relief Technique 2:", secondCopingStrategy),
+              // reliefTextInput("Relief Technique 2:", secondCopingStrategy),
               const SizedBox(height: 15),
-              reliefTextInput("Relief Technique 3:", thirdCopingStrategy),
+              // reliefTextInput("Relief Technique 3:", thirdCopingStrategy),
             ],
           )),
     );
+  }
+
+  showReliefEditDialogue(BuildContext context) {
+    Widget confirmButton = TextButton(
+      child: Text("Confirm"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        //somehow save the code properly
+      },
+    );
+
+    Widget cancelButton = TextButton(
+      child: Text("Cancel"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    Widget ConfirmCancel = Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [cancelButton, confirmButton],
+    );
+
+    AlertDialog alert = AlertDialog(
+        title: Text("Choose Relief Techniques", style: TextStyle()),
+        content: Text(
+          "Here you can choose which Relief Techniques you would like to include",
+          textAlign: TextAlign.center,
+        ),
+        actions: [
+          ReliefTextDropdown(label: "Relief Technique 1", placeholder: firstCopingStrategy),
+          ReliefTextDropdown(label: "Relief Technique 2", placeholder: firstCopingStrategy),
+          ReliefTextDropdown(label: "Relief Technique 3", placeholder: firstCopingStrategy),
+          // reliefTextInput("hello", "hello"),
+          const SizedBox(height: 10),
+          ConfirmCancel
+        ]);
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
   }
 
   Widget distractingContactsCard() {
@@ -370,11 +413,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-              reliefTextInput("Helping Contact 1:", firstHelpingContact),
+              helpingContactsInput("Helping Contact 1:", firstHelpingContact),
               const SizedBox(height: 15),
-              reliefTextInput("Helping Contact 2:", secondHelpingContact),
+              helpingContactsInput("Helping Contact 2:", secondHelpingContact),
               const SizedBox(height: 15),
-              reliefTextInput("Helping Contact 3:", thirdHelpingContact),
+              helpingContactsInput("Helping Contact 3:", thirdHelpingContact),
             ],
           )),
     );

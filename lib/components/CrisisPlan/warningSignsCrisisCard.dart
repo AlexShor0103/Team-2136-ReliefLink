@@ -56,8 +56,7 @@ Widget warningTextInputAuto(String label, String placeholder) {
                         offset: const Offset(0, 4))
                   ]),
                   width: 330,
-                  constraints:
-                      const BoxConstraints(maxHeight: 300, minHeight: 100),
+                  constraints: BoxConstraints.tightForFinite(width: 303, height: options.length * 76),
                   child: ListView.builder(
                       padding: const EdgeInsets.all(10),
                       itemCount: options.length,
