@@ -257,6 +257,8 @@ class _CrisisPlanState extends State<CrisisPlan> {
       children: [cancelButton, confirmButton],
     );
 
+    Widget relief1 = ReliefTextDropdown(
+        label: "Relief Tehcnique 1", placeholder: firstCopingStrategy);
     AlertDialog alert = AlertDialog(
         title: Text("Choose Relief Techniques", style: TextStyle()),
         content: Text(
@@ -264,9 +266,12 @@ class _CrisisPlanState extends State<CrisisPlan> {
           textAlign: TextAlign.center,
         ),
         actions: [
-          ReliefTextDropdown(label: "Relief Technique 1", placeholder: firstCopingStrategy),
-          ReliefTextDropdown(label: "Relief Technique 2", placeholder: firstCopingStrategy),
-          ReliefTextDropdown(label: "Relief Technique 3", placeholder: firstCopingStrategy),
+          ReliefTextDropdown(
+              label: "Relief Technique 1", placeholder: firstCopingStrategy),
+          ReliefTextDropdown(
+              label: "Relief Technique 2", placeholder: firstCopingStrategy),
+          ReliefTextDropdown(
+              label: "Relief Technique 3", placeholder: firstCopingStrategy),
           // reliefTextInput("hello", "hello"),
           const SizedBox(height: 10),
           ConfirmCancel

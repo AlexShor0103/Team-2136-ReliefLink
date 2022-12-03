@@ -16,10 +16,21 @@ class ReliefTextDropdown extends StatefulWidget {
 }
 
 class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
-  String dropdownval = "Walking";
+  String dropdownval = "";
+  List names = activities
+      .map(
+        (e) => (e.activityName),
+      )
+      .toList();
   @override
   Widget build(BuildContext context) {
-    widget.placeholder = "Walking";
+    if (!names.contains(widget.placeholder)) {
+      print("oops");
+      widget.placeholder = "Walking";
+      print("${widget.placeholder}");
+    }
+    dropdownval = widget.placeholder;
+    print("$dropdownval");
     return DropdownButton<String>(
         value: dropdownval,
         items: activities.map((e) {
