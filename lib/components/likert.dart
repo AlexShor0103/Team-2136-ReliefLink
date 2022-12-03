@@ -37,48 +37,19 @@ class LikertScaleButton<T> extends StatelessWidget {
                     height: this.height - 8,
                     width: this.width - 8,
                     decoration: ShapeDecoration(
-                        shape: CircleBorder(),
-                        gradient: value == groupValue
-                            ? this.grad
-                            : LinearGradient(
-                                colors: [AppColors.bg, AppColors.bg]))),
+                        shape: CircleBorder(), color: AppColors.bg),
+                    child: Center(
+                        child: Container(
+                      height: this.height - 16,
+                      width: this.width - 16,
+                      decoration: ShapeDecoration(
+                          shape: CircleBorder(),
+                          gradient: value == groupValue
+                              ? this.grad
+                              : LinearGradient(
+                                  colors: [AppColors.bg, AppColors.bg])),
+                    ))),
               ))),
     );
   }
 }
-
-// Widget likertScale() {
-//   return Row(
-//     children: [
-//       likertScaleButton(AppGrads.lowest),
-//       likertScaleButton(AppGrads.secondLowest),
-//       likertScaleButton(AppGrads.medium),
-//       likertScaleButton(AppGrads.secondHighest),
-//       likertScaleButton(AppGrads.highest),
-//     ],
-//   );
-// }
-
-// Widget likertScaleButton(Gradient grad) {
-//   return Stack(
-//     alignment: Alignment.center,
-//     children: [
-//       Container(
-//         height: 40,
-//         width: 40,
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(20),
-//           gradient: grad,
-//         ),
-//       ),
-//       Container(
-//         height: 30,
-//         width: 30,
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(15),
-//           color: AppColors.bg,
-//         ),
-//       ),
-//     ],
-//   );
-// }
