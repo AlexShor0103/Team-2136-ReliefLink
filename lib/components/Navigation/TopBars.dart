@@ -18,7 +18,7 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     const black = AppColors.black;
     return AppBar(
-      iconTheme: IconThemeData(color: Colors.black),
+      iconTheme: const IconThemeData(color: AppColors.font),
       elevation: 10,
       title: Container(
         child: RichText(
@@ -32,7 +32,6 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: descriptiveText,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
@@ -79,6 +78,7 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   side: BorderSide(color: Colors.transparent),
               ),
+              padding: EdgeInsets.zero,
             ),
             onPressed: () {
               showDialog(
