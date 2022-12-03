@@ -32,6 +32,7 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
               ),
               children: <TextSpan>[
                 TextSpan(
+                  text: descriptiveText,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
