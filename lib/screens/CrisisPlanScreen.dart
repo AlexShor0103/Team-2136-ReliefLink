@@ -258,7 +258,10 @@ class _CrisisPlanState extends State<CrisisPlan> {
     );
 
     Widget relief1 = ReliefTextDropdown(
-        label: "Relief Tehcnique 1", placeholder: firstCopingStrategy);
+        label: "Relief Tehcnique 1", placeholder: firstCopingStrategy,
+        onChanged:(value) => {
+          print("print" + value),
+          firstCopingStrategy = value},);
     AlertDialog alert = AlertDialog(
         title: Text("Choose Relief Techniques", style: TextStyle()),
         content: Text(
@@ -266,12 +269,13 @@ class _CrisisPlanState extends State<CrisisPlan> {
           textAlign: TextAlign.center,
         ),
         actions: [
-          ReliefTextDropdown(
-              label: "Relief Technique 1", placeholder: firstCopingStrategy),
-          ReliefTextDropdown(
-              label: "Relief Technique 2", placeholder: firstCopingStrategy),
-          ReliefTextDropdown(
-              label: "Relief Technique 3", placeholder: firstCopingStrategy),
+          relief1,
+          // ReliefTextDropdown(
+          //     label: "Relief Technique 1", placeholder: firstCopingStrategy),
+          // ReliefTextDropdown(
+          //     label: "Relief Technique 2", placeholder: firstCopingStrategy),
+          // ReliefTextDropdown(
+          //     label: "Relief Technique 3", placeholder: firstCopingStrategy),
           // reliefTextInput("hello", "hello"),
           const SizedBox(height: 10),
           ConfirmCancel

@@ -8,7 +8,8 @@ import 'package:relieflink/utils/relief_technique_utils.dart';
 class ReliefTextDropdown extends StatefulWidget {
   final String label;
   String placeholder;
-  ReliefTextDropdown({Key? key, required this.label, required this.placeholder})
+  final ValueChanged onChanged;
+  ReliefTextDropdown({Key? key, required this.label, required this.placeholder, required this.onChanged})
       : super(key: key);
 
   @override
