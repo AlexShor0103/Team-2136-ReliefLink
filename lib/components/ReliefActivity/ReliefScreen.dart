@@ -49,16 +49,20 @@ class _VideoAreaState extends State<VideoArea> {
     return Column(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(data.activityName,
+        child: Text(widget.data.activityName,
             style: const TextStyle(
-              color: AppColors.font, 
-              fontSize: 30,
-              fontFamily: 'MainFont',
-              fontWeight: FontWeight.w800)),
+                color: AppColors.font,
+                fontSize: 30,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w800)),
       ),
       ReliefVideoPlayer(
           controller: _controller, autoplay: true, looping: false),
-      NextButton(data: data)
+      NextButton(
+          data: widget.data,
+          function: () {
+            _controller.pause();
+          })
     ]);
   }
 }
@@ -72,32 +76,32 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: AppGrads.mainGreen,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ReliefRateScreen(data: data)));
-          },
-          child: const Text("Mark As Completed",
-            style: TextStyle(
-              color: AppColors.font,
-              fontFamily: 'MainFont',
-              fontWeight: FontWeight.w800,
-              fontSize: 20,
-            )),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
-          )
+        decoration: BoxDecoration(
+          gradient: AppGrads.mainGreen,
+          borderRadius: BorderRadius.circular(10),
         ),
-      ) 
-    );
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+          child: ElevatedButton(
+              onPressed: () {
+                function();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ReliefRateScreen(data: data)));
+              },
+              child: const Text("Mark As Completed",
+                  style: TextStyle(
+                    color: AppColors.font,
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                  )),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)))),
+        ));
   }
 }
