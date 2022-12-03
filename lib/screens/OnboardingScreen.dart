@@ -66,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                                           () {
                                                                         Navigator.push(
                                                                             context,
-                                                                            MaterialPageRoute(builder: (context) => Scaffold(appBar: const Top_Relief(), body: SafeArea(child: Nav()))));
+                                                                            MaterialPageRoute(builder: (context) => Scaffold(appBar: TOP_BARS.ONBOARDING, body: SafeArea(child: Nav()))));
                                                                       },
                                                                       originalScreen:
                                                                           MeScreen(),
@@ -95,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Scaffold(
-                                    appBar: const Top_Relief(),
+                                    appBar: TOP_BARS.ONBOARDING,
                                     body: SafeArea(child: Nav()))));
                       },
                       child: const Text(

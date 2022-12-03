@@ -11,7 +11,7 @@ class ReliefRateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Top_Relief(), // Insert header here
+      appBar: TOP_BARS.RELIEF, // Insert header here
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: RatingSection(data: data),
@@ -72,7 +72,8 @@ class _RatingSectionState extends State<RatingSection> {
 class RateButton extends StatelessWidget {
   final ReliefTechniqueData data;
   Function getRatingValue;
-  RateButton({Key? key, required this.data, required this.getRatingValue}) : super(key: key);
+  RateButton({Key? key, required this.data, required this.getRatingValue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
