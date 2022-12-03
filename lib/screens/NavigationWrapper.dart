@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/components/Navigation/TopBars.dart';
 import 'package:relieflink/screens/DiaryScreen.dart';
 import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
@@ -27,8 +28,29 @@ class _NavState extends State<Nav> {
 
   @override
   Widget build(BuildContext context) {
+    var appBar;
+    switch (currentIndex) {
+      case 0:
+        appBar = TOP_BARS.DIARY;
+        break;
+      case 1:
+        appBar = TOP_BARS.CONTACTS;
+        break;
+      case 2:
+        appBar = TOP_BARS.RELIEF_MAIN;
+        break;
+      case 3:
+        appBar = TOP_BARS.ME;
+        break;
+      case 4:
+        appBar = TOP_BARS.CRISIS;
+        break;
+      default:
+    }
+
     return Scaffold(
         //state within screens are maintained
+        appBar: appBar,
         floatingActionButton: FloatingActionButton(
           heroTag: null,
           child: const Icon(Icons

@@ -24,7 +24,7 @@ class DemonstrationScreen extends StatelessWidget {
     return Material(
       child: Stack(children: [
         IgnorePointer(
-          child: Scaffold(appBar: const Top_Relief(), body: originalScreen),
+          child: Scaffold(appBar: TOP_BARS.ONBOARDING, body: originalScreen),
         ),
         Positioned(
             top: 0,
