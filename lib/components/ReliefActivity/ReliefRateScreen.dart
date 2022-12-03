@@ -115,18 +115,34 @@ class RateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-          primary: Colors.white, backgroundColor: Colors.orange),
-      child: const Text("Rate"),
-      onPressed: () {
-        data.addRating(getRatingValue());
-        DataStorage.updateReliefTechniqueData(data);
-        DataStorage.saveToDisk();
-        Navigator.pop(context);
-        Navigator.pop(context);
-      },
-    );
+    return Container(
+        decoration: BoxDecoration(
+          gradient: AppGrads.mainGreen,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+          child: ElevatedButton(
+              onPressed: () {
+                data.addRating(getRatingValue());
+                DataStorage.updateReliefTechniqueData(data);
+                DataStorage.saveToDisk();
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              child: const Text("Rate",
+                  style: TextStyle(
+                    color: AppColors.font,
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                  )),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)))),
+        ));
   }
 }
 
