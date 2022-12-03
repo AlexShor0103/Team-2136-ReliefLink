@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 import '../../utils/data_storage.dart';
+import 'package:relieflink/components/likert.dart';
 
 class ReliefRateScreen extends StatelessWidget {
   final ReliefTechniqueData data;
@@ -47,17 +49,53 @@ class _RatingSectionState extends State<RatingSection> {
       Padding(
           padding: const EdgeInsets.all(20),
           child: Column(children: [
-            Slider(
-              min: 0,
-              max: 5,
-              value: _value,
-              onChanged: ((value) {
-                setState(() {
-                  _value = value;
-                });
-              }),
-              divisions: 5,
-            ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              LikertScaleButton<double>(
+                  value: 1,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.secondLowest),
+              LikertScaleButton<double>(
+                  value: 2,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.lowest),
+              LikertScaleButton<double>(
+                  value: 3,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.medium),
+              LikertScaleButton<double>(
+                  value: 4,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.secondHighest),
+              LikertScaleButton<double>(
+                  value: 5,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.highest)
+            ]),
             Text("$_value"),
           ])),
       Center(child: FavoriteButton(data: widget.data)),
@@ -72,7 +110,8 @@ class _RatingSectionState extends State<RatingSection> {
 class RateButton extends StatelessWidget {
   final ReliefTechniqueData data;
   Function getRatingValue;
-  RateButton({Key? key, required this.data, required this.getRatingValue}) : super(key: key);
+  RateButton({Key? key, required this.data, required this.getRatingValue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
