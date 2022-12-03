@@ -3,16 +3,16 @@ import 'package:relieflink/utils/constants.dart';
 
 Widget warningTextInputAuto(String label, String placeholder) {
   const List<String> _warningSignOptions = <String>[
-    'sleeplessness',
-    'mood swings',
-    'extreme anger',
-    'substance abuse',
-    'self-injury',
-    'paranoia',
-    'suicidal ideation',
-    'hallucinations',
-    'delusions',
-    'not being able to do daily tasks'
+    'Sleeplessness',
+    'Mood swings',
+    'Extreme anger',
+    'Substance abuse',
+    'Self-injury',
+    'Paranoia',
+    'Suicidal ideation',
+    'Hallucinations',
+    'Delusions',
+    'Not being able to do daily tasks'
   ];
 
   return Padding(
@@ -48,11 +48,17 @@ Widget warningTextInputAuto(String label, String placeholder) {
                 alignment: Alignment.topLeft,
                 child: Material(
                     child: Container(
+                  decoration: BoxDecoration(color: AppColors.white, boxShadow: [
+                    BoxShadow(
+                        blurRadius: 10,
+                        spreadRadius: 1,
+                        color: AppColors.black.withOpacity(0.3),
+                        offset: const Offset(0, 4))
+                  ]),
                   width: 330,
-                  height: 150,
-                  color: AppColors.white,
+                  constraints: BoxConstraints(maxHeight: 300, minHeight: 100),
                   child: ListView.builder(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       itemCount: options.length,
                       itemBuilder: (BuildContext context, int index) {
                         final String option = options.elementAt(index);
