@@ -27,7 +27,7 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: black,
+                color: AppColors.font,
               ),
               children: <TextSpan>[
                 TextSpan(
@@ -35,7 +35,7 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.black,
+                    color: AppColors.font,
                   ),
                 ),
               ]),
@@ -46,23 +46,37 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
       actions: <Widget>[
         Padding(
           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          child: ElevatedButton(
-            child: const Icon(
-              Icons.phone_outlined,
-              size: 30,
-              color: AppColors.white,
-            ),
-            style: ElevatedButton.styleFrom(
-              fixedSize: const Size(60, 60),
-              primary: AppColors.red2,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0),
-                  bottomLeft: Radius.circular(10.0),
-                  bottomRight: Radius.circular(10.0),
+            child: ElevatedButton(
+              child: Column(
+                children: const <Widget> [
+                  Icon(Icons.phone_outlined,
+                    size: 34,
+                    color: AppColors.white,
                 ),
-                side: BorderSide(color: Colors.transparent),
+                  Text("Call 988",
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1,
+                      wordSpacing: 1,
+                ),
+                    softWrap: false,
+                    maxLines: 1,
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              ),
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(80, 80),
+                primary: AppColors.red2,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.0),
+                    topRight: Radius.circular(10.0),
+                    bottomLeft: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0),
+                  ),
+                  side: BorderSide(color: Colors.transparent),
               ),
             ),
             onPressed: () {
@@ -78,7 +92,7 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        const Text("Call for emergency?"),
+                        const Text("Call 988, the Suicide \n& Crisis Lifeline?"),
                         const SizedBox(
                           height: 20,
                         ),
