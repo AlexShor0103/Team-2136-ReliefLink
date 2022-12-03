@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
 import 'package:relieflink/components/Navigation/TopBars.dart';
 import '../../utils/data_storage.dart';
+import 'package:relieflink/components/likert.dart';
 
 class ReliefRateScreen extends StatelessWidget {
   final ReliefTechniqueData data;
@@ -47,17 +49,53 @@ class _RatingSectionState extends State<RatingSection> {
       Padding(
           padding: const EdgeInsets.all(20),
           child: Column(children: [
-            Slider(
-              min: 0,
-              max: 5,
-              value: _value,
-              onChanged: ((value) {
-                setState(() {
-                  _value = value;
-                });
-              }),
-              divisions: 5,
-            ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+              LikertScaleButton<double>(
+                  value: 1,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.secondLowest),
+              LikertScaleButton<double>(
+                  value: 2,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.lowest),
+              LikertScaleButton<double>(
+                  value: 3,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.medium),
+              LikertScaleButton<double>(
+                  value: 4,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.secondHighest),
+              LikertScaleButton<double>(
+                  value: 5,
+                  groupValue: _value,
+                  onChanged: (double value) {
+                    setState(() {
+                      _value = value;
+                    });
+                  },
+                  grad: AppGrads.highest)
+            ]),
             Text("$_value"),
           ])),
       Center(child: FavoriteButton(data: widget.data)),
@@ -77,18 +115,34 @@ class RateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-          primary: Colors.white, backgroundColor: Colors.orange),
-      child: const Text("Rate"),
-      onPressed: () {
-        data.addRating(getRatingValue());
-        DataStorage.updateReliefTechniqueData(data);
-        DataStorage.saveToDisk();
-        Navigator.pop(context);
-        Navigator.pop(context);
-      },
-    );
+    return Container(
+        decoration: BoxDecoration(
+          gradient: AppGrads.mainGreen,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+          child: ElevatedButton(
+              onPressed: () {
+                data.addRating(getRatingValue());
+                DataStorage.updateReliefTechniqueData(data);
+                DataStorage.saveToDisk();
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+              child: const Text("Rate",
+                  style: TextStyle(
+                    color: AppColors.font,
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                  )),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)))),
+        ));
   }
 }
 
