@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
-import'package:relieflink/components/CrisisPlan/warningSigns.dart';
+import 'package:relieflink/components/CrisisPlan/warningSigns.dart';
 
 class CrisisPlan extends StatefulWidget {
   const CrisisPlan({Key? key}) : super(key: key);
@@ -158,18 +158,16 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   )),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               warningTextInputAuto("Warning 1:", firstWarningSign),
-              SizedBox(height: 15),
-              warningTextInput("Warning 2:", secondWarningSign),
-              SizedBox(height: 15),
-              warningTextInput("Warning 3:", thirdWarningSign),
+              const SizedBox(height: 15),
+              warningTextInputAuto("Warning 2:", secondWarningSign),
+              const SizedBox(height: 15),
+              warningTextInputAuto("Warning 3:", thirdWarningSign),
             ],
           )),
     );
   }
-
-
 
   Widget reliefCard() {
     return Card(

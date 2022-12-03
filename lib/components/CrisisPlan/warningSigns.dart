@@ -1,43 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 
-class WarningSignAuto extends StatelessWidget {
-  const WarningSignAuto({Key? key}) : super(key: key);
-
-  static const List<String> _warningSignOptions = <String>[
-    'sleeplessness',
-    'mood swings',
-    'extreme anger',
-    'increased substance abuse',
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Autocomplete<String>(
-        optionsBuilder: (TextEditingValue textEditingValue) {
-      if (textEditingValue.text == '') {
-        return const Iterable<String>.empty();
-      }
-      return _warningSignOptions.where((String option) {
-        return option.contains(textEditingValue.text.toLowerCase());
-      });
-    }, onSelected: (String selection) {
-      debugPrint('You just selected $selection');
-    });
-  }
-}
-
 Widget warningTextInputAuto(String label, String placeholder) {
   const List<String> _warningSignOptions = <String>[
     'sleeplessness',
     'mood swings',
     'extreme anger',
-    'increased substance abuse',
+    'substance abuse',
+    'self-injury',
+    'paranoia',
+    'suicidal ideation',
+    'hallucinations',
+    'delusions',
+    'not being able to do daily tasks'
   ];
 
   return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        //label text
         Text(label,
             style: const TextStyle(
               height: 0,
@@ -46,17 +27,35 @@ Widget warningTextInputAuto(String label, String placeholder) {
               fontWeight: FontWeight.w900,
               fontSize: 17,
             )),
+        //search bar
         Autocomplete<String>(
           optionsBuilder: (TextEditingValue textEditingValue) {
-          if (textEditingValue.text == '') {
-            return const Iterable<String>.empty();
-          }
-          return _warningSignOptions.where((String option) {
-            return option.contains(textEditingValue.text.toLowerCase());
-          });
-        }, onSelected: (String selection) {
-          debugPrint('You just selected $selection');
-        }),
+            if (textEditingValue.text == '') {
+              return const Iterable<String>.empty();
+            }
+            return _warningSignOptions.where((String option) {
+              return option.contains(textEditingValue.text.toLowerCase());
+            });
+          },
+          onSelected: (String selection) {
+            placeholder = selection;
+            debugPrint('You just selected $selection');
+          },
+          fieldViewBuilder:
+              (context, textEditingController, focusNode, onFieldSubmitted) {
+            return TextField(
+              style: const TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18),
+              controller: textEditingController,
+              focusNode: focusNode,
+              onEditingComplete: onFieldSubmitted,
+              decoration: InputDecoration(hintText: placeholder, isDense: true),
+            );
+          },
+        ),
       ]));
 }
 
