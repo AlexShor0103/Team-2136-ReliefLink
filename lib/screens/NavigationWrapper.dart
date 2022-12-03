@@ -21,9 +21,9 @@ class _NavState extends State<Nav> {
   final screens = [
     const DiaryScreen(),
     const ContactsScreen(),
+    const CrisisPlan(),
     const ReliefHomeScreen(),
     MeScreen(),
-    const CrisisPlan(),
   ];
 
   @override
@@ -37,30 +37,19 @@ class _NavState extends State<Nav> {
         appBar = TOP_BARS.CONTACTS;
         break;
       case 2:
-        appBar = TOP_BARS.RELIEF_MAIN;
+        appBar = TOP_BARS.CRISIS;
         break;
       case 3:
-        appBar = TOP_BARS.ME;
+        appBar = TOP_BARS.RELIEF_MAIN;
         break;
       case 4:
-        appBar = TOP_BARS.CRISIS;
+        appBar = TOP_BARS.ME;
         break;
       default:
     }
 
     return Scaffold(
-        //state within screens are maintained
         appBar: appBar,
-        floatingActionButton: FloatingActionButton(
-          heroTag: null,
-          child: const Icon(Icons
-              .local_florist), //icon ideas: balance cloud crisis_alert emergency_sharp foggy front_hand handshake healing health_and_safety
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => CrisisPlan()));
-          },
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: IndexedStack(
           index: currentIndex,
           children: screens,
@@ -72,7 +61,7 @@ class _NavState extends State<Nav> {
                 color: AppColors.font.withOpacity(0.8),
                 spreadRadius: 5,
                 blurRadius: 20,
-                offset: const Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -102,6 +91,12 @@ class _NavState extends State<Nav> {
                       Icons.phone_outlined,
                     ),
                     label: 'Contacts',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.local_florist,
+                    ),
+                    label: 'Plan',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(
