@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/recommendations/recommendations.dart';
 import 'package:relieflink/screens/MeScreen.dart';
 import 'package:store_redirect/store_redirect.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart';
 
 import '../utils/constants.dart';
 
@@ -72,10 +74,16 @@ class RecommendationScreen extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: (ElevatedButton(
         onPressed: () {
-          StoreRedirect.redirect(
-            androidAppId: recommendations[index].androidAppId,
-            iOSAppId: recommendations[index].iOSAppId,
-          );
+          if (!kIsWeb) {
+            StoreRedirect.redirect(
+              androidAppId: recommendations[index].androidAppId,
+              iOSAppId: recommendations[index].iOSAppId,
+            );
+          } else {
+            launchUrl(Uri.parse(recommendations[index].webUrl),
+              webOnlyWindowName: '_self',
+            );
+          }
         },
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(AppColors.white),
@@ -131,10 +139,16 @@ class RecommendationScreen extends StatelessWidget {
               color: AppColors.font,
               icon: Icon(Icons.arrow_circle_right_outlined),
               onPressed: () {
-                StoreRedirect.redirect(
-                  androidAppId: recommendations[index].androidAppId,
-                  iOSAppId: recommendations[index].iOSAppId,
-                );
+                if (!kIsWeb) {
+                  StoreRedirect.redirect(
+                    androidAppId: recommendations[index].androidAppId,
+                    iOSAppId: recommendations[index].iOSAppId,
+                  );
+                } else {
+                  launchUrl(Uri.parse(recommendations[index].webUrl),
+                    webOnlyWindowName: '_self',
+                  );
+                }
               },
             ),
           ],
