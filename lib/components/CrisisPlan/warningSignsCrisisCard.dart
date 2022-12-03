@@ -34,7 +34,7 @@ Widget warningTextInputAuto(String label, String placeholder) {
               return const Iterable<String>.empty();
             }
             return _warningSignOptions.where((String option) {
-              return option.contains(textEditingValue.text.toLowerCase());
+              return option.toLowerCase().contains(textEditingValue.text.toLowerCase());
             });
           },
           onSelected: (String selection) {

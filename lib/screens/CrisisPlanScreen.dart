@@ -175,26 +175,38 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
+          height: 350,
           child: Column(
             children: [
               //container for gradient
               Container(
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Step 2: Relief Techniques",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: AppColors.font,
-                      fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 17,
-                    ),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Step 2: Relief Techniques",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: AppColors.font,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.w800,
+                          fontSize: 17,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          showReliefEditDialogue(context);
+                        },
+                        child: Container(
+                            height: 30, width: 30, color: AppColors.bg),
+                      ),
+                    ],
                   ),
                 ),
-                height: 40,
+                height: 50,
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
