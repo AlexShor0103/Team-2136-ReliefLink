@@ -41,6 +41,39 @@ Widget warningTextInputAuto(String label, String placeholder) {
             placeholder = selection;
             debugPrint('You just selected $selection');
           },
+          optionsViewBuilder: (BuildContext context,
+              AutocompleteOnSelected<String> onSelected,
+              Iterable<String> options) {
+            return Align(
+                alignment: Alignment.topLeft,
+                child: Material(
+                    child: Container(
+                  width: 330,
+                  height: 150,
+                  color: AppColors.white,
+                  child: ListView.builder(
+                      padding: EdgeInsets.all(10),
+                      itemCount: options.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final String option = options.elementAt(index);
+                        debugPrint('$index');
+                        return GestureDetector(
+                          onTap: () {
+                            onSelected(option);
+                          },
+                          child: ListTile(
+                              title: Text(
+                            option,
+                            style: const TextStyle(
+                                color: AppColors.font,
+                                fontFamily: 'MainFont',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18),
+                          )),
+                        );
+                      }),
+                )));
+          },
           fieldViewBuilder:
               (context, textEditingController, focusNode, onFieldSubmitted) {
             return TextField(
