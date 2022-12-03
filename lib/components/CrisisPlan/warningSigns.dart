@@ -56,13 +56,13 @@ Widget warningTextInputAuto(String label, String placeholder) {
                         offset: const Offset(0, 4))
                   ]),
                   width: 330,
-                  constraints: BoxConstraints(maxHeight: 300, minHeight: 100),
+                  constraints:
+                      const BoxConstraints(maxHeight: 300, minHeight: 100),
                   child: ListView.builder(
                       padding: const EdgeInsets.all(10),
                       itemCount: options.length,
                       itemBuilder: (BuildContext context, int index) {
                         final String option = options.elementAt(index);
-                        debugPrint('$index');
                         return GestureDetector(
                           onTap: () {
                             onSelected(option);
