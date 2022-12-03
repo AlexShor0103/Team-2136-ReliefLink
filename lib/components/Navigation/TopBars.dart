@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:relieflink/screens/NavigationWrapper.dart';
 import 'package:relieflink/utils/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopBars extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -118,8 +119,7 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
                                   child: const Icon(Icons.check),
                                   //TODO: call actual contacts
                                   onPressed: () =>
-                                      Navigator.of(context, rootNavigator: true)
-                                          .pop('dialog'),
+                                      launchUrl(Uri.parse("tel://988")),
                                 ),
                               ]),
                         ),
