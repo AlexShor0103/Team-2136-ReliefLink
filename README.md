@@ -23,6 +23,47 @@ We had some awesome people thinking on how to make this app look good. The proce
 ### Screenshots
 Soon!
 
+
+# Installation Guide
+
+## For programmers
+
+This app was entirely built on Flutter. Since there is not back-end to it, its deployment is the creation of the APK for Android and iOS devices and its addition to the app stores.
+
+To run it locally, one needs to:
+
+1. [Install Flutter](https://docs.flutter.dev/get-started/install)
+2. Clone this repository
+3. On the main directory, run `flutter run` and choose a device to run it on
+
+There are some dependencies for this project. They are automatically installed on the `flutter run` command, but here they are:
+
+```
+  chewie: ^1.3.5
+  video_player: ^2.4.7
+  dio: ^4.0.0
+  flutter_polyline_points: ^0.2.6
+  google_maps_flutter: ^2.0.2
+  google_maps_flutter_web: ^0.3.2+2
+  url_launcher:
+  store_redirect: ^2.0.1
+  overlay_support: ^1.0.0
+  cupertino_icons: ^1.0.2
+  shared_preferences: ^2.0.15
+  fl_chart: ^0.55.2
+  pie_chart: ^5.3.2
+  syncfusion_flutter_charts: ^20.3.59
+```
+
+This is enough to run the project locally and in any connected Android device, as long as it is on developer mode. To build it for the Google App Store, [this tutorial](https://docs.flutter.dev/deployment/android) should do it. This is the [tutorial for iOS](https://docs.flutter.dev/deployment/ios).
+
+For demo purposes, we suggest you to deploy the Flutter app to Firebase - so that people can open in on their phone's browsers. If you do so, update the link in the next section. Here is a guide for doing it: [Guide](https://medium.com/flutter/must-try-use-firebase-to-host-your-flutter-app-on-the-web-852ee533a469).
+
+## For non-programmers
+
+We suggest that you speak to the programmers on your team. You can try this link, too: Link. It might contain a working version of the deployed app for your phone!
+
+
 # Release Notes
 
 ## v0.1.0
@@ -126,5 +167,28 @@ Soon!
 - Onboarding flow not popping up upon first start of app
 
 ## v1.0
+
+The first public deployment of the app!
+
+### Features
+
+- Users can edit the Relief Techniques
+  - They can add, remove and edit the relief techniques present in the app to their liking!
+- Journaling
+  - Users now have a space to write down how their are feeling and keep track of their trends
+- Restyled Emergency Button
+  - Which will now call 988
+- Likert-scale based activity rating
+  - Users can now use a Likert scale to rate the relieft activity completed
+- Overall design changes
+  - Cleaner and more intuitive UI, with consistent colors and patterns
+
+### Bug Fixes
+- Relief Technique cards overflow in some devices has been fixed
+- Relief Technique's video will pause after exiting the page
+- Top bar will now update according to the screen the user is in
+- Crisis screen now shows as a page, not a pop up
+
 ### Known Issues
 - Autocomplete in Crisis Plan can miss suggestions
+- Mood chart overflow on Chrome
