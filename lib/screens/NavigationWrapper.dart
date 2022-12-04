@@ -81,7 +81,7 @@ class _NavState extends State<Nav> {
                 selectedFontSize: 15,
                 unselectedFontSize: 15,
                 unselectedItemColor: AppColors.grey.withOpacity(0.6),
-                selectedItemColor: AppColors.font,
+                selectedItemColor: AppColors.black,
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(
