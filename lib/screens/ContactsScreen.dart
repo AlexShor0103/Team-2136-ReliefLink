@@ -123,7 +123,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: cardsList),
             ),
