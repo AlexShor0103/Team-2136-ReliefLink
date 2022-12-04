@@ -18,7 +18,7 @@ class DiaryScreen extends StatefulWidget {
 }
 
 class _DiaryScreenState extends State<DiaryScreen> {
-  final List<bool> _selectedStates = <bool>[true, false];
+  final List<bool> _selectedStates = <bool>[false, false];
   bool vertical = false;
   @override
   Widget build(BuildContext context) {
@@ -78,12 +78,19 @@ class _DiaryScreenState extends State<DiaryScreen> {
               direction: vertical ? Axis.vertical : Axis.horizontal,
               onPressed: (int index) {
                 setState(() {
-                  for (int buttonIndex = 0; buttonIndex < _selectedStates.length; buttonIndex++) {
-                    if (buttonIndex == index) {
-                      _selectedStates[buttonIndex] = true;
-                    } else {
-                      _selectedStates[buttonIndex] = false;
-                    }
+                  _selectedStates[index]=!_selectedStates[index];
+                  if(index==0 && _selectedStates[index]){
+                    TxtBold=FontWeight.bold;
+                  }
+                  else if(index==0 && !_selectedStates[index]){
+                    TxtBold=FontWeight.normal;
+                  }
+
+                  if(index==1 && _selectedStates[index]){
+                    TxtItalic=FontStyle.italic;
+                  }
+                  else if(index==1 && !_selectedStates[index]){
+                    TxtItalic=FontStyle.normal;
                   }
                 });
               },
