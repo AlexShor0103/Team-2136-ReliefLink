@@ -82,6 +82,13 @@ class NextButton extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: AppGrads.mainGreen,
           borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              spreadRadius: 1,
+              color: AppColors.black.withOpacity(0.25)
+            )
+          ]
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
