@@ -16,10 +16,13 @@ class ReliefScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TOP_BARS.RELIEF,
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: VideoArea(data: data),
-      ),
+      body:Container(
+        color: AppColors.bg,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: VideoArea(data: data),
+        ),
+      ) 
     );
   }
 }

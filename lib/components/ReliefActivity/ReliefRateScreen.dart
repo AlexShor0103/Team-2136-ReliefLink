@@ -14,10 +14,13 @@ class ReliefRateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TOP_BARS.RELIEF, // Insert header here
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: RatingSection(data: data),
-      ),
+      body: Container(
+        color: AppColors.bg,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: RatingSection(data: data),
+        ),
+      )
     );
   }
 }
