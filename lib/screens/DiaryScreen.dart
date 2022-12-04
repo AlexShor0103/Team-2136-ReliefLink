@@ -22,9 +22,9 @@ const List<Widget> states = <Widget>[
 ];
 
 Map<String, double> dataMap = {
-  "Happy": 12,
-  "Neutral": 13,
-  "Sad": 9
+  "Happy": 3,
+  "Neutral": 3,
+  "Sad": 2
 };
 
 final colorList = <Color>[
@@ -78,21 +78,37 @@ class _DiaryScreenState extends State<DiaryScreen> {
                         fontSize: 18,
                       )),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  meScreenButton(context, "Profile"),
+                  journalButton(context, "January 19, 2022"),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  meScreenButton(context, "Recommendations"),
+                  journalButton(context, "January 18, 2022"),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  meScreenButton(context, "Find a Health Care Center"),
+                  journalButton(context, "January 17, 2022"),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  meScreenButton(context, "Onboarding")
+                  journalButton(context, "January 16, 2022"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  journalButton(context, "January 15, 2022"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  journalButton(context, "January 14, 2022"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  journalButton(context, "January 13, 2022"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  journalButton(context, "January 12, 2022")
                 ],
               ),
             ),
@@ -323,25 +339,74 @@ class _DiaryScreenState extends State<DiaryScreen> {
     );
   }
 
-  Widget meScreenButton(BuildContext context, String screenName) {
-    Widget goto = MeScreen();
+  showJournalDialog(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    // set up the buttons
+    Widget continueButton = TextButton(
+        child: Text("Done"),
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop();
+        });
+
+    Widget entry = Text(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt. Ipsum dolor sit amet consectetur adipiscing. Nunc aliquet bibendum enim facilisis gravida neque convallis. Ut porttitor leo a diam sollicitudin tempor id eu. Dictum sit amet justo donec. Sit amet cursus sit amet dictum sit. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida. Ornare suspendisse sed nisi lacus sed viverra tellus. Amet cursus sit amet dictum sit amet. Sit amet massa vitae tortor condimentum lacinia quis. Egestas sed sed risus pretium.",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: AppColors.font,
+          fontFamily: 'MainFont',
+          fontWeight: FontWeight.w600,
+          fontSize: 18,
+        ));
+
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Journal"),
+      content: Text(
+          "Use the space below to write anything you want."),
+      actions: [
+        entry,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+
+  Widget journalButton(BuildContext context, String screenName) {
     IconData screenIcon = Icons.account_circle;
     switch (screenName) {
-      case "Profile":
-        goto = ProfileScreen();
-        screenIcon = Icons.account_circle_outlined;
+      case "January 19, 2022":
+        screenIcon = Icons.book;
         break;
-      case "Recommendations":
-        goto = RecommendationScreen();
-        screenIcon = Icons.star_border_outlined;
+      case "January 18, 2022":
+        screenIcon = Icons.book;
         break;
-      case "Find a Health Care Center":
-        goto = MapScreen();
-        screenIcon = Icons.location_on_outlined;
+      case "January 17, 2022":
+        screenIcon = Icons.book;
         break;
-      case "Onboarding":
-        goto = OnboardingScreen();
-        screenIcon = Icons.offline_bolt_outlined;
+      case "January 16, 2022":
+        screenIcon = Icons.book;
+        break;
+      case "January 15, 2022":
+        screenIcon = Icons.book;
+        break;
+      case "January 14, 2022":
+        screenIcon = Icons.book;
+        break;
+      case "January 13, 2022":
+        screenIcon = Icons.book;
+        break;
+      case "January 12, 2022":
+        screenIcon = Icons.book;
         break;
     }
 
@@ -354,8 +419,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
       padding: const EdgeInsets.only(bottom: 10),
       child: (ElevatedButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => (goto)));
+          showJournalDialog(context);
         },
         style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(AppColors.white),
@@ -390,8 +454,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             IconButton(
                 color: AppColors.font,
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => (goto)));
+                  showJournalDialog(context);
                 },
                 icon: Icon(
                   Icons.arrow_forward_ios_outlined,
