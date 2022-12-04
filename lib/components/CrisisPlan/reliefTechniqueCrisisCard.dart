@@ -7,10 +7,14 @@ import 'package:relieflink/utils/relief_technique_utils.dart';
 
 class ReliefTextDropdown extends StatefulWidget {
   final String label;
-  String placeholder;
-  final ValueChanged onChanged;
-  ReliefTextDropdown({Key? key, required this.label, required this.placeholder, required this.onChanged})
-      : super(key: key);
+  final String curVal;
+  final Function(String val) setFunc;
+  const ReliefTextDropdown({
+    Key? key,
+    required this.label,
+    required this.curVal,
+    required this.setFunc,
+  }) : super(key: key);
 
   @override
   _ReliefTextDropdownState createState() => _ReliefTextDropdownState();
@@ -18,6 +22,12 @@ class ReliefTextDropdown extends StatefulWidget {
 
 class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
   String dropdownval = "";
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dropdownval = widget.curVal;
+  }
   List names = activities
       .map(
         (e) => (e.activityName),
@@ -25,13 +35,13 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
       .toList();
   @override
   Widget build(BuildContext context) {
-    if (!names.contains(widget.placeholder)) {
+    print("building begun. ddv is: ${dropdownval}");
+    if (!names.contains(dropdownval)) {
       print("oops");
-      widget.placeholder = "Walking";
-      print("${widget.placeholder}");
+      dropdownval = "Walking";
     }
-    dropdownval = widget.placeholder;
-    print("$dropdownval");
+    print("after checking, dropdownvalfr becomes: ${dropdownval}");
+
     return DropdownButton<String>(
         value: dropdownval,
         items: activities.map((e) {
@@ -53,41 +63,54 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
         }).toList(),
         onChanged: (String? value) {
           setState(() {
-            widget.placeholder = value!;
-            dropdownval = widget.placeholder;
-            debugPrint("placeholder is now: ${widget.placeholder}");
+            dropdownval = value!;
           });
+          widget.setFunc(dropdownval);
         });
   }
 }
+/*
+/ we don't want any change to p1 to be permanent yet. that's for confirm. Instead
+we have t1 (temporaryString1).
 
-Widget reliefTextDropdown(String label, String placeholder) {
-  placeholder = "Walking";
+the Dropdown call will go
+ReliefTextDropdown(label: "Relief Technique 1: ", curVal: p1, function that sets c1 to dropdownval)
 
-  return DropdownButton<String>(
-      value: placeholder,
-      items: activities.map((e) {
-        return DropdownMenuItem(
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(e.activityName),
-                  Container(
-                    height: 15,
-                    width: 15,
-                    decoration: ShapeDecoration(
-                      shape: CircleBorder(),
-                      gradient: AppConstants.getGradByMood(e.mood),
-                    ),
-                  )
-                ]),
-            value: e.activityName);
-      }).toList(),
-      onChanged: (String? value) {
-        placeholder = value!;
-        debugPrint("placeholder is now: ${placeholder}");
-      });
-}
+in ReliefTextDropdown, inside of onChanged, call function with dropdownval as parameter
+
+in dialogue, pass into dropdown curValue and function (value) => {p1 = value}
+*/
+
+// Widget reliefTextContainer(String containingString, ReliefTextDropdown rfd) {
+//   return 
+// }
+// Widget reliefTextDropdown(String label, String placeholder) {
+//   placeholder = "Walking";
+
+//   return DropdownButton<String>(
+//       value: placeholder,
+//       items: activities.map((e) {
+//         return DropdownMenuItem(
+//             child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Text(e.activityName),
+//                   Container(
+//                     height: 15,
+//                     width: 15,
+//                     decoration: ShapeDecoration(
+//                       shape: CircleBorder(),
+//                       gradient: AppConstants.getGradByMood(e.mood),
+//                     ),
+//                   )
+//                 ]),
+//             value: e.activityName);
+//       }).toList(),
+//       onChanged: (String? value) {
+//         placeholder = value!;
+//         debugPrint("placeholder is now: ${placeholder}");
+//       });
+// }
 
 // Widget reliefTextInput(String label, String placeholder) {
 //   return Padding(
