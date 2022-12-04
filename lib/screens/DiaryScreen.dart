@@ -5,6 +5,11 @@ import '../assets/RadioIcon.dart';
 
 import '../utils/constants.dart';
 
+const List<Widget> states = <Widget>[
+  Text('Diary'),
+  Text('Mood Chart'),
+];
+
 class DiaryScreen extends StatefulWidget {
   const DiaryScreen({Key? key}) : super(key: key);
 
@@ -13,8 +18,12 @@ class DiaryScreen extends StatefulWidget {
 }
 
 class _DiaryScreenState extends State<DiaryScreen> {
+  final List<bool> _selectedStates = <bool>[true, false];
+  bool vertical = false;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.bg,
       body: Stack(
@@ -29,7 +38,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   foregroundColor: Colors.black,
                   highlightElevation: 30,
                   onPressed: () {
-                    showAlertDialog(context);
+                    showAlertDialog(height, width, context);
                   },
                   child: Icon(Icons.add),
                 ),
@@ -56,13 +65,52 @@ class _DiaryScreenState extends State<DiaryScreen> {
               ),
             ),
           ),
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.only(bottom: 250),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                // ToggleButtons with a single selection.
+            const SizedBox(height: 5),
+            ToggleButtons(
+              direction: vertical ? Axis.vertical : Axis.horizontal,
+              onPressed: (int index) {
+                setState(() {
+                  for (int buttonIndex = 0; buttonIndex < _selectedStates.length; buttonIndex++) {
+                    if (buttonIndex == index) {
+                      _selectedStates[buttonIndex] = true;
+                    } else {
+                      _selectedStates[buttonIndex] = false;
+                    }
+                  }
+                });
+              },
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              borderColor: AppColors.black,
+              selectedBorderColor: Colors.black,
+              selectedColor: AppColors.black,
+              fillColor: Colors.greenAccent,
+              color: Colors.black,
+              constraints: const BoxConstraints(
+                minHeight: 40.0,
+                minWidth: 80.0,
+              ),
+              isSelected: _selectedStates,
+              children: states,
+            ),
+            ],
+          ),
+          ),
         ],
       ),
     );
   }
 
-  showAlertDialog(BuildContext context) {
-    // set up the buttons
+  showAlertDialog(height, width, BuildContext context) {
+    double height1 = height;
+    double width1 = width;
     Widget cancelButton = TextButton(
       child: Text("Cancel"),
       onPressed: () {
@@ -73,7 +121,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
       child: Text("Continue"),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
-        showMoodDialog(context);
+        showMoodDialog(height1, width1, context);
       },
     );
 
@@ -92,12 +140,17 @@ class _DiaryScreenState extends State<DiaryScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return Container(
+          height: height,
+          width: width,
+          child: alert,
+        );
       },
     );
   }
 
-  showMoodDialog(BuildContext context) {
+  showMoodDialog(height, width, BuildContext context) {
+
     // set up the buttons
     Widget cancelButton = TextButton(
       child: Text("Cancel"),
@@ -128,27 +181,18 @@ class _DiaryScreenState extends State<DiaryScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        shape: RoundedRectangleBorder(
-            borderRadius:
-            BorderRadius.all(
-                Radius.circular(10.0)));
-        content: Builder(
-          builder: (context) {
-        // Get available height and width of the build area of this widget. Make a choice depending on the size.
-            var height = MediaQuery.of(context).size.height;
-            var width = MediaQuery.of(context).size.width;
-
-            return Container(
-            height: height - 400,
-            width: width - 400,
-            );
-            });
-        return alert;
+        return Container(
+          height: height,
+          width: width,
+          child: alert,
+        );
           },
     );
   }
 
   showDiaryDialog(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     // set up the buttons
     Widget continueButton = TextButton(
       child: Text("Done"),
@@ -187,7 +231,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
     );
   }
   Widget _buildTextField() {
-    final maxLines = 5;
+    final maxLines = 10;
 
     return Container(
       margin: EdgeInsets.all(12),
