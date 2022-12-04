@@ -75,6 +75,13 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   decoration: BoxDecoration(
                     gradient: AppConstants.getGradByName('maingreen'),
                     borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 10,
+                        spreadRadius: 1,
+                        color: AppColors.black.withOpacity(0.25),
+                      )
+                    ]
                   ),
                   child: ElevatedButton(
                       onPressed: () {
@@ -110,13 +117,18 @@ class _ContactsScreenState extends State<ContactsScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: cardsList),
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            color: AppColors.bg,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: cardsList),
+            ),
           ),
+          
         ),
       ),
       floatingActionButton: list.isEmpty
@@ -137,7 +149,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   padding: EdgeInsets.all(13.0),
                   child: Icon(
                     Icons.add,
-                    color: AppColors.black,
+                    color: AppColors.font,
                   ),
                 ),
                 decoration: BoxDecoration(

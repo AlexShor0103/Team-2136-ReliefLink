@@ -88,7 +88,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(252, 245, 235, 1),
+        backgroundColor: AppColors.bg,
         body: ListView(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
@@ -117,6 +117,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
 
   Widget warningCard() {
     return Card(
+      elevation: 10,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
@@ -171,6 +172,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
 
   Widget reliefCard() {
     return Card(
+      elevation: 10,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
@@ -259,6 +261,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
 
   Widget distractingContactsCard() {
     return Card(
+      elevation: 10,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
@@ -348,7 +351,9 @@ class _CrisisPlanState extends State<CrisisPlan> {
   }
 
   Widget helpingContactsCard() {
+    
     return Card(
+      elevation: 10,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
@@ -437,6 +442,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
 
   Widget professionalContactsCard() {
     return Card(
+      elevation: 10,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(

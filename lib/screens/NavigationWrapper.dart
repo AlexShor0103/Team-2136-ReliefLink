@@ -56,6 +56,7 @@ class _NavState extends State<Nav> {
         ),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
+            color: AppColors.bg,
             boxShadow: [
               BoxShadow(
                 color: AppColors.font.withOpacity(0.8),
@@ -66,8 +67,10 @@ class _NavState extends State<Nav> {
             ],
           ),
           child: SizedBox(
+              
               height: 105,
               child: BottomNavigationBar(
+                backgroundColor: AppColors.bg,
                 //currentIndex: selected screen(icon) index
                 currentIndex: currentIndex,
                 onTap: (index) => setState(
