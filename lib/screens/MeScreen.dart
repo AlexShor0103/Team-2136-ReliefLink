@@ -10,6 +10,7 @@ class MeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: AppColors.bg,
         body: ListView(
@@ -27,7 +28,7 @@ class MeScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            meScreenButton(context, "Find a Health Care Center Near You"),
+            meScreenButton(context, "Find a Health Care Center"),
             const SizedBox(
               height: 20,
             ),
@@ -50,7 +51,7 @@ class MeScreen extends StatelessWidget {
         goto = RecommendationScreen();
         screenIcon = Icons.star_border_outlined;
         break;
-      case "Find a Health Care Center Near You":
+      case "Find a Health Care Center":
         goto = MapScreen();
         screenIcon = Icons.location_on_outlined;
         break;

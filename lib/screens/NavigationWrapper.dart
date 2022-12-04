@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:relieflink/components/Navigation/TopBars.dart';
 import 'package:relieflink/screens/DiaryScreen.dart';
 import 'package:relieflink/screens/ContactsScreen.dart';
 import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/screens/MeScreen.dart';
 import 'ReliefHomeScreen.dart';
-import 'package:relieflink/screens/CrisisPlan.dart';
+import 'package:relieflink/screens/CrisisPlanScreen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -20,24 +21,35 @@ class _NavState extends State<Nav> {
   final screens = [
     const DiaryScreen(),
     const ContactsScreen(),
+    const CrisisPlan(),
     const ReliefHomeScreen(),
     MeScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    var appBar;
+    switch (currentIndex) {
+      case 0:
+        appBar = TOP_BARS.DIARY;
+        break;
+      case 1:
+        appBar = TOP_BARS.CONTACTS;
+        break;
+      case 2:
+        appBar = TOP_BARS.CRISIS;
+        break;
+      case 3:
+        appBar = TOP_BARS.RELIEF_MAIN;
+        break;
+      case 4:
+        appBar = TOP_BARS.ME;
+        break;
+      default:
+    }
+
     return Scaffold(
-        //state within screens are maintained
-        floatingActionButton: FloatingActionButton(
-          heroTag: null,
-          child: const Icon(Icons
-              .local_florist), //icon ideas: balance cloud crisis_alert emergency_sharp foggy front_hand handshake healing health_and_safety
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => CrisisPlan()));
-          },
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        appBar: appBar,
         body: IndexedStack(
           index: currentIndex,
           children: screens,
@@ -49,12 +61,12 @@ class _NavState extends State<Nav> {
                 color: AppColors.font.withOpacity(0.8),
                 spreadRadius: 5,
                 blurRadius: 20,
-                offset: const Offset(0, 3), // changes position of shadow
+                offset: const Offset(0, 3),
               ),
             ],
           ),
           child: SizedBox(
-              height: 100,
+              height: 105,
               child: BottomNavigationBar(
                 //currentIndex: selected screen(icon) index
                 currentIndex: currentIndex,
@@ -79,6 +91,12 @@ class _NavState extends State<Nav> {
                       Icons.phone_outlined,
                     ),
                     label: 'Contacts',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.local_florist,
+                    ),
+                    label: 'Plan',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(

@@ -2,35 +2,35 @@ import '../utils/relief_technique_utils.dart';
 
 List<ReliefTechniqueData> activities = [
   ReliefTechniqueData(
-      activityName: "PMR2",
+      activityName: "Muscle Relaxation",
       duration: 15,
       mood: "Anxious",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Walking",
+      activityName: "Take a walk",
       duration: 15,
       mood: "Sleepless",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Talking to someone",
+      activityName: "Talk to someone",
       duration: 30,
       mood: "Anxious",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Play volleyball",
+      activityName: "Exercise",
       duration: 60,
       mood: "Energetic",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Meditation",
+      activityName: "Meditate",
       duration: 30,
       mood: "Sleepless",
       videoLink:
@@ -51,50 +51,50 @@ List<ReliefTechniqueData> activities = [
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Movie",
+      activityName: "Watch a Movie",
+      duration: 60,
+      mood: "Other",
+      videoLink:
+          "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
+      favorite: false),
+  ReliefTechniqueData(
+      activityName: "Volunteer",
       duration: 60,
       mood: "Energetic",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Activity 1",
-      duration: 60,
-      mood: "Energetic",
-      videoLink:
-          "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
-      favorite: false),
-  ReliefTechniqueData(
-      activityName: "Activity 2",
+      activityName: "Be in Nature",
       duration: 60,
       mood: "Anxious",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Activity 3",
+      activityName: "Artistic Activities",
       duration: 30,
       mood: "Energetic",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Activity 4",
-      duration: 30,
+      activityName: "Read a book",
+      duration: 60,
       mood: "Sleepless",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Activity 5",
-      duration: 30,
-      mood: "Energetic",
+      activityName: "Intentional Breathing",
+      duration: 15,
+      mood: "Anxious",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
       favorite: false),
   ReliefTechniqueData(
-      activityName: "Activity 6",
-      duration: 60,
+      activityName: "Cold Shower",
+      duration: 15,
       mood: "Anxious",
       videoLink:
           "https://mainlinecounselingpartners.com/wp-content/uploads/2015/08/ProduceLauraMTS.mp4",
