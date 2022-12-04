@@ -79,13 +79,62 @@ Widget reliefButton(String placeholder) {
       .toList();
   if (!names.contains(placeholder)) {
     return Container(
-      width: double.maxFinite,
-      color: AppColors.black.withOpacity(0.5),
-      child: Text("No Relief Technique Selected"),
-    );
+        width: double.maxFinite,
+        decoration: BoxDecoration(
+          color: AppColors.black.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 9),
+          child: ElevatedButton(
+              onPressed: () {},
+              child: const Text(
+                "No Relief Technique Selected",
+                style: const TextStyle(
+                    color: AppColors.font,
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18),
+              ),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)))),
+        ));
   }
-
-  return Text(placeholder);
+  ReliefTechniqueData activity = activities.firstWhere(
+      (e) => e.activityName.toLowerCase().contains(placeholder.toLowerCase()));
+  return Container(
+    width: double.maxFinite,
+    decoration: BoxDecoration(
+      gradient: AppConstants.getGradByMood(activity.mood),
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+        BoxShadow(
+          blurRadius: 10,
+          spreadRadius: 1,
+          color: AppColors.black.withOpacity(0.25),
+        ),
+      ]
+    ),
+    child: Padding(padding: const EdgeInsets.symmetric(vertical: 9),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text(activity.activityName,
+          style: const TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w700,
+                fontSize: 18),),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+        )
+      ),
+    ) 
+  );
 }
 
 Widget reliefInput(String label, String placeholder) {
@@ -104,36 +153,33 @@ Widget reliefInput(String label, String placeholder) {
       ]));
 }
 
-// Widget distractingContactsInput(String label, String placeholder) {
-//     return Padding(
-//         padding: const EdgeInsets.only(left: 20, right: 20),
-//         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          // Text(label,
-          //     style: const TextStyle(
-          //       height: 0,
-          //       color: AppColors.font,
-          //       fontFamily: 'MainFont',
-          //       fontWeight: FontWeight.w900,
-          //       fontSize: 17,
-          //     )),
-//           TextField(
-//             onChanged: (value) => {
-//               if (label == "Distracting Contact 1:")
-//                 {firstDistractingContact = value}
-//               else if (label == "Distracting Contact 2:")
-//                 {secondDistractingContact = value}
-//               else if (label == "Distracting Place")
-//                 {distractingPlace = value}
-//             },
-//             style: const TextStyle(
-//                 color: AppColors.font,
-//                 fontFamily: 'MainFont',
-//                 fontWeight: FontWeight.w600,
-//                 fontSize: 18),
-//             decoration: InputDecoration(
-//               isDense: true,
-//               hintText: placeholder,
-//             ),
-//           )
-//         ]));
-//   }
+/*
+return Container(
+  decoration: BoxDecoration(
+    gradient: AppGrads.mainGreen,
+    borderRadius: BorderRadius.circular(10),
+  ),
+  child: Padding(padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+    child: ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ReliefRateScreen(data: data)));
+      },
+      child: const Text("Mark As Completed",
+        style: TextStyle(
+          color: AppColors.font,
+          fontFamily: 'MainFont',
+          fontWeight: FontWeight.w800,
+          fontSize: 20,
+        )),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+      )
+    ),
+  ) 
+);
+*/

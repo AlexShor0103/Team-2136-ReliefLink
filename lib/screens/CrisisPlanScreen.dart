@@ -216,12 +216,22 @@ class _CrisisPlanState extends State<CrisisPlan> {
               textAlign: TextAlign.center,
             ),
             ReliefTextDropdown(
-                label: "Relief Technique 1:",
-                curVal: firstCopingStrategy,
+              label: "Relief Technique 1:",
+              curVal: firstCopingStrategy,
+              setFunc: (String value) {
+                t1 = value;
+              }),
+            ReliefTextDropdown(
+                label: "Relief Technique 2:",
+                curVal: secondCopingStrategy,
                 setFunc: (String value) {
-                  t1 = value;
-                  debugPrint(
-                      "t1 is: " + t1 + ", and p1 is: " + firstCopingStrategy);
+                  t2 = value;
+                }),
+            ReliefTextDropdown(
+                label: "Relief Technique 3:",
+                curVal: thirdCopingStrategy,
+                setFunc: (String value) {
+                  t3 = value;
                 }),
           ]),
           actions: [
@@ -240,7 +250,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 350,
+          height: 360,
           child: Column(
             children: [
               //container for gradient
@@ -296,8 +306,10 @@ class _CrisisPlanState extends State<CrisisPlan> {
               reliefInput("Relief Technique 1: ", firstCopingStrategy),
               // reliefTextInput("Relief Technique 1:", firstCopingStrategy),
               const SizedBox(height: 15),
+              reliefInput("Relief Technique 2: ", secondCopingStrategy),
               // reliefTextInput("Relief Technique 2:", secondCopingStrategy),
               const SizedBox(height: 15),
+              reliefInput("Relief Technique 3: ", thirdCopingStrategy),
               // reliefTextInput("Relief Technique 3:", thirdCopingStrategy),
             ],
           )),
