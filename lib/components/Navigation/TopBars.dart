@@ -159,8 +159,8 @@ class TOP_BARS {
     descriptiveText: 'Manage your emergency contacts',
   );
   static const ME = TopBars(
-    mainText: 'More',
-    descriptiveText: 'Manage your app and extra resources',
+    mainText: 'Me',
+    descriptiveText: 'Manage your app and find extra resources',
   );
   static const CRISIS = TopBars(
     mainText: 'Crisis Plan',

@@ -50,6 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: ListView(
           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
