@@ -54,7 +54,7 @@ class _VideoAreaState extends State<VideoArea> {
         padding: const EdgeInsets.all(8.0),
         child: Text(widget.data.activityName,
             style: const TextStyle(
-                color: AppColors.font,
+                color: AppColors.black,
                 fontSize: 30,
                 fontFamily: 'MainFont',
                 fontWeight: FontWeight.w800)),
