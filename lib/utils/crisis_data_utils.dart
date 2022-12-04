@@ -45,7 +45,7 @@ class CrisisData {
   });
 
   CrisisData.blankAccount()
-      : reasonToLive = "Write down anything you'd like about what you live for",
+      : reasonToLive = "Write down what makes life worth living for you. Feel free to add as much as you'd like!",
         firstWarningSign = "Add a warning sign",
         secondWarningSign = "Add a warning sign",
         thirdWarningSign = "Add a warning sign",

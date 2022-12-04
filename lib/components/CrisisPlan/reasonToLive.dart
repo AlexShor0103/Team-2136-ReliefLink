@@ -17,7 +17,7 @@ Widget reasonInput(String placeholder) {
             color: AppColors.font,
             fontFamily: 'MainFont',
             fontWeight: FontWeight.w600,
-            fontSize: 18
+            fontSize: 16
           ),
           minLines: 1,
           maxLines: 6,

@@ -73,6 +73,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
         setState(() {}); //Manually call build
       });
     } else {
+      reasonToLive = data.reasonToLive;
       firstWarningSign = data.firstWarningSign;
       secondWarningSign = data.secondWarningSign;
       thirdWarningSign = data.thirdWarningSign;
