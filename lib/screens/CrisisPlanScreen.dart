@@ -14,6 +14,9 @@ class CrisisPlan extends StatefulWidget {
 }
 
 class _CrisisPlanState extends State<CrisisPlan> {
+  //size standards
+  double cardHeight = 360;
+  double labelHeight = 50;
   //step 1
   String firstWarningSign = "";
   String secondWarningSign = "";
@@ -121,7 +124,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
+          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -140,7 +143,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     ),
                   ),
                 ),
-                height: 40,
+                height: labelHeight,
                 constraints: BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
@@ -216,11 +219,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
               textAlign: TextAlign.center,
             ),
             ReliefTextDropdown(
-              label: "Relief Technique 1:",
-              curVal: firstCopingStrategy,
-              setFunc: (String value) {
-                t1 = value;
-              }),
+                label: "Relief Technique 1:",
+                curVal: firstCopingStrategy,
+                setFunc: (String value) {
+                  t1 = value;
+                }),
             ReliefTextDropdown(
                 label: "Relief Technique 2:",
                 curVal: secondCopingStrategy,
@@ -250,7 +253,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 360,
+          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -302,7 +305,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-              
+
               reliefInput("Relief Technique 1: ", firstCopingStrategy),
               // reliefTextInput("Relief Technique 1:", firstCopingStrategy),
               const SizedBox(height: 15),
@@ -321,7 +324,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
+          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -340,7 +343,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     ),
                   ),
                 ),
-                height: 40,
+                height: labelHeight,
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
@@ -411,7 +414,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
+          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -430,7 +433,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     ),
                   ),
                 ),
-                height: 40,
+                height: labelHeight,
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
@@ -499,7 +502,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
+          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -518,7 +521,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     ),
                   ),
                 ),
-                height: 40,
+                height: labelHeight,
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
@@ -530,7 +533,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
               //spacer
               const SizedBox(height: 8),
               // text for the intro
-              Text("Here we list professional Mental Health Resources",
+              Text("Here we list professional resources",
                   style: TextStyle(
                     color: AppColors.font.withOpacity(0.75),
                     fontFamily: 'MainFont',
