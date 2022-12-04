@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
+//when strings need to be passed by reference
+class StringWrapper {
+  var value;
+  StringWrapper(this.value);
+}
 class AppConstants {
   // ACTIVITY SORTING
 

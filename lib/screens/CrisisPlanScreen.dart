@@ -171,6 +171,67 @@ class _CrisisPlanState extends State<CrisisPlan> {
   }
 
   Widget reliefCard() {
+    void showReliefEditDialogue(BuildContext context) {
+  //storing temporary values before getting confirmed or ignored
+      String t1 = firstCopingStrategy;
+      String t2 = secondCopingStrategy;
+      String t3 = thirdCopingStrategy;
+
+      //on confirm, put temporary values into permanent values
+      Widget confirmButton = TextButton(
+        child: Text("Confirm"),
+        onPressed: () {
+          Navigator.of(context).pop();
+          firstCopingStrategy = t1;
+          debugPrint("p1 has become: " + firstCopingStrategy);
+          secondCopingStrategy = t2;
+          thirdCopingStrategy = t3;
+          //somehow save the code properly
+        },
+      );
+
+      //on cancel nothing extraordinary happens
+      Widget cancelButton = TextButton(
+        child: Text("Cancel"),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      );
+
+      //this is just the row of both of them
+      Widget ConfirmCancel = Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [cancelButton, confirmButton],
+      );
+
+      //this is the dialog that will appear if the player presses the edit icon
+      AlertDialog alert = AlertDialog(
+          title: const Text("Choose Relief Techniques", style: TextStyle()),
+          content: const Text(
+            "Here you can choose which Relief Techniques you would like to include",
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            ReliefTextDropdown(
+                label: "Relief Technique 1:",
+                curVal: firstCopingStrategy,
+                setFunc: (String value) {
+                  t1 = value;
+                  debugPrint("t1 is: " + t1 + ", and p1 is: " + firstCopingStrategy);
+                }),
+            const SizedBox(height: 10),
+            ConfirmCancel
+          ]);
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          });
+    }
+
+    final txt = TextEditingController();
+
     return Card(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -199,6 +260,8 @@ class _CrisisPlanState extends State<CrisisPlan> {
                       ElevatedButton(
                         onPressed: () {
                           showReliefEditDialogue(context);
+                          // firstCopingStrategy = "ahh";
+                          txt.text = firstCopingStrategy;
                         },
                         child: Container(
                             height: 30, width: 30, color: AppColors.bg),
@@ -226,6 +289,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
+              TextField(controller: txt),
               // reliefTextInput("Relief Technique 1:", firstCopingStrategy),
               const SizedBox(height: 15),
               // reliefTextInput("Relief Technique 2:", secondCopingStrategy),
@@ -234,58 +298,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
             ],
           )),
     );
-  }
-
-  showReliefEditDialogue(BuildContext context) {
-    Widget confirmButton = TextButton(
-      child: Text("Confirm"),
-      onPressed: () {
-        Navigator.of(context).pop();
-        //somehow save the code properly
-      },
-    );
-
-    Widget cancelButton = TextButton(
-      child: Text("Cancel"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    Widget ConfirmCancel = Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [cancelButton, confirmButton],
-    );
-
-    Widget relief1 = ReliefTextDropdown(
-        label: "Relief Tehcnique 1", placeholder: firstCopingStrategy,
-        onChanged:(value) => {
-          print("print" + value),
-          firstCopingStrategy = value},);
-    AlertDialog alert = AlertDialog(
-        title: Text("Choose Relief Techniques", style: TextStyle()),
-        content: Text(
-          "Here you can choose which Relief Techniques you would like to include",
-          textAlign: TextAlign.center,
-        ),
-        actions: [
-          relief1,
-          // ReliefTextDropdown(
-          //     label: "Relief Technique 1", placeholder: firstCopingStrategy),
-          // ReliefTextDropdown(
-          //     label: "Relief Technique 2", placeholder: firstCopingStrategy),
-          // ReliefTextDropdown(
-          //     label: "Relief Technique 3", placeholder: firstCopingStrategy),
-          // reliefTextInput("hello", "hello"),
-          const SizedBox(height: 10),
-          ConfirmCancel
-        ]);
-
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        });
   }
 
   Widget distractingContactsCard() {
@@ -556,3 +568,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
         ]));
   }
 }
+
+//wrapper to pass variables as references
+
