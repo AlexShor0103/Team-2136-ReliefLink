@@ -39,6 +39,10 @@ class _RadioIconState extends State<RadioIcon> {
         onTap: () => setState(
               () {
             _selected = index;
+            if (index == 0) {
+
+            }
+
           },
         ),
       ),
