@@ -271,13 +271,13 @@ class _CrisisPlanState extends State<CrisisPlan> {
                           fontSize: 17,
                         ),
                       ),
-                      ElevatedButton(
+                      IconButton(
                         onPressed: () {
                           showReliefEditDialogue(context);
                           // firstCopingStrategy = "ahh";
                         },
-                        child: Container(
-                            height: 30, width: 30, color: AppColors.bg),
+                        icon: Icon(Icons.edit),
+                        color: AppColors.font,
                       ),
                     ],
                   ),
