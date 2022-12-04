@@ -6,6 +6,7 @@ import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
 import 'package:relieflink/components/CrisisPlan/warningSignsCrisisCard.dart';
 import 'package:relieflink/components/CrisisPlan/reliefTechniqueCrisisCard.dart';
+import 'package:relieflink/components/CrisisPlan/reasonToLive.dart';
 
 class CrisisPlan extends StatefulWidget {
   const CrisisPlan({Key? key}) : super(key: key);
@@ -17,6 +18,8 @@ class _CrisisPlanState extends State<CrisisPlan> {
   //size standards
   double cardHeight = 360;
   double labelHeight = 50;
+
+  String reasonToLive = "";
   //step 1
   String firstWarningSign = "";
   String secondWarningSign = "";
@@ -49,6 +52,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       DataStorage.init().then((success) {
         data = DataStorage.getCrisisData();
       }).then((arg) {
+        reasonToLive = data!.reasonToLive;
         firstWarningSign = data!.firstWarningSign;
         secondWarningSign = data!.secondWarningSign;
         thirdWarningSign = data!.thirdWarningSign;
@@ -103,6 +107,8 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
+                    reasonCard(),
+                    const SizedBox(height: 20),
                     warningCard(),
                     const SizedBox(height: 20),
                     reliefCard(),
@@ -119,57 +125,107 @@ class _CrisisPlanState extends State<CrisisPlan> {
             ));
   }
 
+  Widget reasonCard() {
+    return Card(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
+      child: Container(
+          // height: cardHeight,
+          child: Column(
+        children: [
+          //container for gradient
+          Container(
+            alignment: Alignment.centerLeft,
+            child: const Padding(
+              padding: EdgeInsets.only(left: 20.0),
+              child: Text(
+                "Step 1: Reason To Live",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+            ),
+            height: labelHeight,
+            constraints: BoxConstraints(minWidth: double.infinity),
+            decoration: const BoxDecoration(
+                gradient: AppGrads.mainGreen,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+          ),
+          //spacer
+          const SizedBox(height: 8),
+          // text for the intro
+          Text("Here we write down reasons to keep living",
+              style: TextStyle(
+                color: AppColors.font.withOpacity(0.75),
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              )),
+          const SizedBox(height: 8),
+          reasonInput(reasonToLive),
+        ],
+      )),
+    );
+  }
+
   Widget warningCard() {
     return Card(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: cardHeight,
+          // height: cardHeight,
           child: Column(
-            children: [
-              //container for gradient
-              Container(
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Step 1: Warning Signs",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: AppColors.font,
-                      fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 17,
-                    ),
-                  ),
+        children: [
+          //container for gradient
+          Container(
+            alignment: Alignment.centerLeft,
+            child: const Padding(
+              padding: EdgeInsets.only(left: 20.0),
+              child: Text(
+                "Step 2: Warning Signs",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
                 ),
-                height: labelHeight,
-                constraints: BoxConstraints(minWidth: double.infinity),
-                decoration: const BoxDecoration(
-                    gradient: AppGrads.mainGreen,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    )),
               ),
-              //spacer
-              const SizedBox(height: 8),
-              // text for the intro
-              Text("Here we identify warning signs before crisis",
-                  style: TextStyle(
-                    color: AppColors.font.withOpacity(0.75),
-                    fontFamily: 'MainFont',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  )),
-              const SizedBox(height: 15),
-              warningTextInputAuto("Warning 1:", firstWarningSign),
-              const SizedBox(height: 15),
-              warningTextInputAuto("Warning 2:", secondWarningSign),
-              const SizedBox(height: 15),
-              warningTextInputAuto("Warning 3:", thirdWarningSign),
-            ],
-          )),
+            ),
+            height: labelHeight,
+            constraints: BoxConstraints(minWidth: double.infinity),
+            decoration: const BoxDecoration(
+                gradient: AppGrads.mainGreen,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+          ),
+          //spacer
+          const SizedBox(height: 8),
+          // text for the intro
+          Text("Here we identify warning signs before crisis",
+              style: TextStyle(
+                color: AppColors.font.withOpacity(0.75),
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              )),
+          const SizedBox(height: 15),
+          warningTextInputAuto("Warning 1:", firstWarningSign),
+          const SizedBox(height: 15),
+          warningTextInputAuto("Warning 2:", secondWarningSign),
+          const SizedBox(height: 15),
+          warningTextInputAuto("Warning 3:", thirdWarningSign),
+        ],
+      )),
     );
   }
 
@@ -265,12 +321,12 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Step 2: Relief Techniques",
+                        "Step 3: Relief Techniques",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: AppColors.font,
                           fontFamily: 'MainFont',
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.bold,
                           fontSize: 17,
                         ),
                       ),
@@ -324,60 +380,60 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: cardHeight,
+          // height: cardHeight,
           child: Column(
-            children: [
-              //container for gradient
-              Container(
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Step 3: Sources of Distraction",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: AppColors.font,
-                      fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 17,
-                    ),
-                  ),
+        children: [
+          //container for gradient
+          Container(
+            alignment: Alignment.centerLeft,
+            child: const Padding(
+              padding: EdgeInsets.only(left: 20.0),
+              child: Text(
+                "Step 4: Sources of Distraction",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
                 ),
-                height: labelHeight,
-                constraints: const BoxConstraints(minWidth: double.infinity),
-                decoration: const BoxDecoration(
-                    gradient: AppGrads.mainGreen,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    )),
               ),
-              //spacer
-              const SizedBox(height: 8),
-              // text for the intro
-              Text("Here we list resources that can distract you",
-                  style: TextStyle(
-                    color: AppColors.font.withOpacity(0.75),
-                    fontFamily: 'MainFont',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  )),
-              const SizedBox(height: 15),
-              distractingContactsInput(
-                  "Distracting Contact 1:", firstDistractingContact),
-              const SizedBox(height: 15),
-              distractingContactsInput(
-                  "Distracting Contact 2:", secondDistractingContact),
-              const SizedBox(height: 15),
-              distractingContactsInput("Distracting Place:", distractingPlace),
-            ],
-          )),
+            ),
+            height: labelHeight,
+            constraints: const BoxConstraints(minWidth: double.infinity),
+            decoration: const BoxDecoration(
+                gradient: AppGrads.mainGreen,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+          ),
+          //spacer
+          const SizedBox(height: 8),
+          // text for the intro
+          Text("Here we list resources that can distract you",
+              style: TextStyle(
+                color: AppColors.font.withOpacity(0.75),
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              )),
+          const SizedBox(height: 15),
+          distractingContactsInput(
+              "Distracting Contact 1:", firstDistractingContact),
+          const SizedBox(height: 15),
+          distractingContactsInput(
+              "Distracting Contact 2:", secondDistractingContact),
+          const SizedBox(height: 15),
+          distractingContactsInput("Distracting Place:", distractingPlace),
+        ],
+      )),
     );
   }
 
   Widget distractingContactsInput(String label, String placeholder) {
     return Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
               style: const TextStyle(
@@ -414,58 +470,58 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: cardHeight,
+          // height: cardHeight,
           child: Column(
-            children: [
-              //container for gradient
-              Container(
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Step 4: Sources of Help",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: AppColors.font,
-                      fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 17,
-                    ),
-                  ),
+        children: [
+          //container for gradient
+          Container(
+            alignment: Alignment.centerLeft,
+            child: const Padding(
+              padding: EdgeInsets.only(left: 20.0),
+              child: Text(
+                "Step 5: Sources of Help",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
                 ),
-                height: labelHeight,
-                constraints: const BoxConstraints(minWidth: double.infinity),
-                decoration: const BoxDecoration(
-                    gradient: AppGrads.mainGreen,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    )),
               ),
-              //spacer
-              const SizedBox(height: 8),
-              // text for the intro
-              Text("Here we list contacts that can help you",
-                  style: TextStyle(
-                    color: AppColors.font.withOpacity(0.75),
-                    fontFamily: 'MainFont',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  )),
-              const SizedBox(height: 15),
-              helpingContactsInput("Helping Contact 1:", firstHelpingContact),
-              const SizedBox(height: 15),
-              helpingContactsInput("Helping Contact 2:", secondHelpingContact),
-              const SizedBox(height: 15),
-              helpingContactsInput("Helping Contact 3:", thirdHelpingContact),
-            ],
-          )),
+            ),
+            height: labelHeight,
+            constraints: const BoxConstraints(minWidth: double.infinity),
+            decoration: const BoxDecoration(
+                gradient: AppGrads.mainGreen,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+          ),
+          //spacer
+          const SizedBox(height: 8),
+          // text for the intro
+          Text("Here we list contacts that can help you",
+              style: TextStyle(
+                color: AppColors.font.withOpacity(0.75),
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              )),
+          const SizedBox(height: 15),
+          helpingContactsInput("Helping Contact 1:", firstHelpingContact),
+          const SizedBox(height: 15),
+          helpingContactsInput("Helping Contact 2:", secondHelpingContact),
+          const SizedBox(height: 15),
+          helpingContactsInput("Helping Contact 3:", thirdHelpingContact),
+        ],
+      )),
     );
   }
 
   Widget helpingContactsInput(String label, String placeholder) {
     return Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
               style: const TextStyle(
@@ -502,60 +558,60 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: cardHeight,
+          // height: cardHeight,
           child: Column(
-            children: [
-              //container for gradient
-              Container(
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Step 5: Professional Resources",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: AppColors.font,
-                      fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 17,
-                    ),
-                  ),
+        children: [
+          //container for gradient
+          Container(
+            alignment: Alignment.centerLeft,
+            child: const Padding(
+              padding: EdgeInsets.only(left: 20.0),
+              child: Text(
+                "Step 6: Professional Resources",
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
                 ),
-                height: labelHeight,
-                constraints: const BoxConstraints(minWidth: double.infinity),
-                decoration: const BoxDecoration(
-                    gradient: AppGrads.mainGreen,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    )),
               ),
-              //spacer
-              const SizedBox(height: 8),
-              // text for the intro
-              Text("Here we list professional resources",
-                  style: TextStyle(
-                    color: AppColors.font.withOpacity(0.75),
-                    fontFamily: 'MainFont',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  )),
-              const SizedBox(height: 15),
-              professionalContactsInput(
-                  "Professional Contact 1:", firstProfessionalContact),
-              const SizedBox(height: 15),
-              professionalContactsInput(
-                  "Professional Contact 2:", secondProfessionalContact),
-              const SizedBox(height: 15),
-              professionalContactsInput("Local Urgent Care:", localUrgentCare),
-            ],
-          )),
+            ),
+            height: labelHeight,
+            constraints: const BoxConstraints(minWidth: double.infinity),
+            decoration: const BoxDecoration(
+                gradient: AppGrads.mainGreen,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                )),
+          ),
+          //spacer
+          const SizedBox(height: 8),
+          // text for the intro
+          Text("Here we list professional resources",
+              style: TextStyle(
+                color: AppColors.font.withOpacity(0.75),
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              )),
+          const SizedBox(height: 15),
+          professionalContactsInput(
+              "Professional Contact 1:", firstProfessionalContact),
+          const SizedBox(height: 15),
+          professionalContactsInput(
+              "Professional Contact 2:", secondProfessionalContact),
+          const SizedBox(height: 15),
+          professionalContactsInput("Local Urgent Care:", localUrgentCare),
+        ],
+      )),
     );
   }
 
   Widget professionalContactsInput(String label, String placeholder) {
     return Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(label,
               style: const TextStyle(
@@ -587,28 +643,3 @@ class _CrisisPlanState extends State<CrisisPlan> {
         ]));
   }
 }
-
-/*when the dialog completes, it should update the state of the relieftechniques right?
-So we need to have a general relieftehcniquecard class that deals with updating.
-For one we need those buttons, which can come in the form of regular button widgets.
-
-use setState to rerun the widget. The widget will contain three finals? No It will
-contain just key. Inside of state, we'll have 3 reliefTechnique Datas whose values are set
-to the search from the Strings that are the coping strategies.
-
-inside of the widget, widgets will take a relief technique data obj and construct a button from that.
-*/
-
-// class ReliefButton extends StatefulWidget {
-//   const ReliefButton({Key? key}) : super(key: key);
-//   @override
-//   State<ReliefButton> createState() => _ReliefButtonState();
-// }
-
-// class _ReliefButtonState extends State<ReliefButton> {
-  
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }

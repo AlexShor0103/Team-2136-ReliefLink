@@ -1,4 +1,5 @@
 class CrisisData {
+  String reasonToLive;
   String firstWarningSign;
   String secondWarningSign;
   String thirdWarningSign;
@@ -23,6 +24,7 @@ class CrisisData {
   String secondEnvironmentalSafetyStep;
 
   CrisisData({
+    required this.reasonToLive,
     required this.firstWarningSign,
     required this.secondWarningSign,
     required this.thirdWarningSign,
@@ -40,10 +42,10 @@ class CrisisData {
     required this.localUrgentCare,
     required this.firstEnvironmentalSafetyStep,
     required this.secondEnvironmentalSafetyStep,
-});
+  });
 
-
-  CrisisData.blankAccount():
+  CrisisData.blankAccount()
+      : reasonToLive = "Write down anything you'd like about what you live for",
         firstWarningSign = "Add a warning sign",
         secondWarningSign = "Add a warning sign",
         thirdWarningSign = "Add a warning sign",
@@ -59,9 +61,11 @@ class CrisisData {
         firstProfessionalContact = "Add a licensed professional contact",
         secondProfessionalContact = "Add a licensed professional contact",
         localUrgentCare = "Add a local urgent care",
-        firstEnvironmentalSafetyStep = "Tap here to set steps to make your location safer for you",
+        firstEnvironmentalSafetyStep =
+            "Tap here to set steps to make your location safer for you",
         secondEnvironmentalSafetyStep = "";
-  CrisisData.fromJson(Map<String, dynamic> json):
+  CrisisData.fromJson(Map<String, dynamic> json)
+      : reasonToLive = json['reasonToLive'],
         firstWarningSign = json['firstWarningSign'],
         secondWarningSign = json['secondWarningSign'],
         thirdWarningSign = json['thirdWarningSign'],
@@ -82,23 +86,24 @@ class CrisisData {
 
   Map<String, dynamic> toJson() {
     return {
-    'firstWarningSign': firstWarningSign,
-    'secondWarningSign': secondWarningSign,
-    'thirdWarningSign': thirdWarningSign,
-    'firstCopingStrategy': firstCopingStrategy,
-    'secondCopingStrategy': secondCopingStrategy,
-    'thirdCopingStrategy': thirdCopingStrategy,
-    'firstDistractingContact': firstDistractingContact,
-    'secondDistractingContact': secondDistractingContact,
-    'distractingPlace': distractingPlace,
-    'firstHelpingContact': firstHelpingContact,
-    'secondHelpingContact': secondHelpingContact,
-    'thirdHelpingContact': thirdHelpingContact,
-    'firstProfessionalContact': firstProfessionalContact,
-    'secondProfessionalContact': secondProfessionalContact,
-    'localUrgentCare': localUrgentCare,
-    'firstEnvironmentalSafetyStep': firstEnvironmentalSafetyStep,
-    'secondEnvironmentalSafetyStep': secondEnvironmentalSafetyStep,
+      'reasonToLive': reasonToLive,
+      'firstWarningSign': firstWarningSign,
+      'secondWarningSign': secondWarningSign,
+      'thirdWarningSign': thirdWarningSign,
+      'firstCopingStrategy': firstCopingStrategy,
+      'secondCopingStrategy': secondCopingStrategy,
+      'thirdCopingStrategy': thirdCopingStrategy,
+      'firstDistractingContact': firstDistractingContact,
+      'secondDistractingContact': secondDistractingContact,
+      'distractingPlace': distractingPlace,
+      'firstHelpingContact': firstHelpingContact,
+      'secondHelpingContact': secondHelpingContact,
+      'thirdHelpingContact': thirdHelpingContact,
+      'firstProfessionalContact': firstProfessionalContact,
+      'secondProfessionalContact': secondProfessionalContact,
+      'localUrgentCare': localUrgentCare,
+      'firstEnvironmentalSafetyStep': firstEnvironmentalSafetyStep,
+      'secondEnvironmentalSafetyStep': secondEnvironmentalSafetyStep,
     };
   }
 }
