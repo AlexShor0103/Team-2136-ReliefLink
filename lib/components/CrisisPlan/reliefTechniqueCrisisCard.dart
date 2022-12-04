@@ -43,31 +43,48 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
     }
     print("after checking, dropdownvalfr becomes: ${dropdownval}");
 
-    return DropdownButton<String>(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: 20),
+        Text(
+          widget.label,
+          textAlign: TextAlign.start,
+          style: const TextStyle(
+            height: 0,
+            color: AppColors.font,
+            fontFamily: 'MainFont',
+            fontWeight: FontWeight.w900,
+            fontSize: 17,
+          )
+        ),
+        DropdownButton<String>(
         value: dropdownval,
         items: activities.map((e) {
           return DropdownMenuItem(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(e.activityName),
-                    Container(
-                      height: 15,
-                      width: 15,
-                      decoration: ShapeDecoration(
-                        shape: CircleBorder(),
-                        gradient: AppConstants.getGradByMood(e.mood),
-                      ),
-                    )
-                  ]),
-              value: e.activityName);
-        }).toList(),
-        onChanged: (String? value) {
-          setState(() {
-            dropdownval = value!;
-          });
-          widget.setFunc(dropdownval);
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(e.activityName),
+                  Container(
+                    height: 15,
+                    width: 15,
+                    decoration: ShapeDecoration(
+                      shape: CircleBorder(),
+                      gradient: AppConstants.getGradByMood(e.mood),
+                    ),
+                  )
+                ]),
+            value: e.activityName);
+      }).toList(),
+      onChanged: (String? value) {
+        setState(() {
+          dropdownval = value!;
         });
+        widget.setFunc(dropdownval);
+      })
+      ],
+    );
   }
 }
 
@@ -106,35 +123,35 @@ Widget reliefButton(String placeholder) {
   ReliefTechniqueData activity = activities.firstWhere(
       (e) => e.activityName.toLowerCase().contains(placeholder.toLowerCase()));
   return Container(
-    width: double.maxFinite,
-    decoration: BoxDecoration(
-      gradient: AppConstants.getGradByMood(activity.mood),
-      borderRadius: BorderRadius.circular(8),
-      boxShadow: [
-        BoxShadow(
-          blurRadius: 10,
-          spreadRadius: 1,
-          color: AppColors.black.withOpacity(0.25),
-        ),
-      ]
-    ),
-    child: Padding(padding: const EdgeInsets.symmetric(vertical: 9),
-      child: ElevatedButton(
-        onPressed: () {},
-        child: Text(activity.activityName,
-          style: const TextStyle(
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w700,
-                fontSize: 18),),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
-        )
-      ),
-    ) 
-  );
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+          gradient: AppConstants.getGradByMood(activity.mood),
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              spreadRadius: 1,
+              color: AppColors.black.withOpacity(0.25),
+            ),
+          ]),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 9),
+        child: ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              activity.activityName,
+              style: const TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18),
+            ),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)))),
+      ));
 }
 
 Widget reliefInput(String label, String placeholder) {
