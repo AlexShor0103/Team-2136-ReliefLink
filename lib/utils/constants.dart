@@ -110,7 +110,7 @@ class AppColors {
   static const white = Color.fromRGBO(255, 255, 255, 1);
   static const red2 = Color.fromRGBO(230, 81, 86, 1);
   static const grey = Color.fromRGBO(90, 90, 90, 1);
-  static const bg = Color.fromRGBO(255, 252, 250, 1);
+  static const bg = Color.fromRGBO(252, 245, 235, 1);
   static const font = Color.fromRGBO(81, 69, 106, 1);
 }
 

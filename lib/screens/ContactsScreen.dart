@@ -75,6 +75,13 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   decoration: BoxDecoration(
                     gradient: AppConstants.getGradByName('maingreen'),
                     borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 10,
+                        spreadRadius: 1,
+                        color: AppColors.black.withOpacity(0.25),
+                      )
+                    ]
                   ),
                   child: ElevatedButton(
                       onPressed: () {
