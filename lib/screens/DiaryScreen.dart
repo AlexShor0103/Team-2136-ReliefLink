@@ -107,7 +107,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
     );
     Widget continueButton = TextButton(
       child: Text("Continue"),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+        showDiaryDialog(context);
+      },
     );
 
     // set up the AlertDialog
@@ -142,6 +145,61 @@ class _DiaryScreenState extends State<DiaryScreen> {
             });
         return alert;
           },
+    );
+  }
+
+  showDiaryDialog(BuildContext context) {
+    // set up the buttons
+    Widget continueButton = TextButton(
+      child: Text("Done"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+
+    TextEditingController diaryController = TextEditingController();
+    Widget diaryEntry = TextField(
+        controller: diaryController,
+        decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: 'Diary',
+        hintText: 'Write something',
+
+    ));
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Journal"),
+      content: Text(
+          "Use the space below to write anything you want."),
+      actions: [
+        _buildTextField(),
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+  Widget _buildTextField() {
+    final maxLines = 5;
+
+    return Container(
+      margin: EdgeInsets.all(12),
+      height: maxLines * 24.0,
+      child: TextField(
+        maxLines: maxLines,
+        decoration: InputDecoration(
+          hintText: "Enter a message",
+          fillColor: Colors.grey[300],
+          filled: true,
+        ),
+      ),
     );
   }
 }
