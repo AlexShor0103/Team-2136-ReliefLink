@@ -21,7 +21,6 @@ Widget warningTextInputAuto(String label, String placeholder) {
         //label text
         Text(label,
             style: const TextStyle(
-              height: 0,
               color: AppColors.font,
               fontFamily: 'MainFont',
               fontWeight: FontWeight.w900,
@@ -34,7 +33,7 @@ Widget warningTextInputAuto(String label, String placeholder) {
               return const Iterable<String>.empty();
             }
             return _warningSignOptions.where((String option) {
-              return option.contains(textEditingValue.text.toLowerCase());
+              return option.toLowerCase().contains(textEditingValue.text.toLowerCase());
             });
           },
           onSelected: (String selection) {
@@ -55,9 +54,7 @@ Widget warningTextInputAuto(String label, String placeholder) {
                         color: AppColors.black.withOpacity(0.3),
                         offset: const Offset(0, 4))
                   ]),
-                  width: 330,
-                  constraints:
-                      const BoxConstraints(maxHeight: 300, minHeight: 100),
+                  constraints:BoxConstraints.tightForFinite(width: 303, height: options.length * 56),
                   child: ListView.builder(
                       padding: const EdgeInsets.all(10),
                       itemCount: options.length,

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
-import 'package:relieflink/components/CrisisPlan/warningSigns.dart';
+import 'package:relieflink/components/CrisisPlan/warningSignsCrisisCard.dart';
+import 'package:relieflink/components/CrisisPlan/reliefTechniqueCrisisCard.dart';
 
 class CrisisPlan extends StatefulWidget {
   const CrisisPlan({Key? key}) : super(key: key);
@@ -223,40 +224,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
             ],
           )),
     );
-  }
-
-  Widget reliefTextInput(String label, String placeholder) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(label,
-              style: const TextStyle(
-                height: 0,
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w900,
-                fontSize: 17,
-              )),
-          TextField(
-            onChanged: (value) => {
-              if (label == "Relief Technique 1:")
-                {firstCopingStrategy = value}
-              else if (label == "Relief Technique 2:")
-                {secondCopingStrategy = value}
-              else if (label == "Relief Technique 3:")
-                {thirdCopingStrategy = value}
-            },
-            style: const TextStyle(
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w600,
-                fontSize: 18),
-            decoration: InputDecoration(
-              isDense: true,
-              hintText: placeholder,
-            ),
-          )
-        ]));
   }
 
   Widget distractingContactsCard() {
