@@ -43,11 +43,11 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                       'This is a space for you to journal! Get your thoughts out and help track your mood as you work towards a brighter tomorrow!',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: AppColors.font,
+                        color: AppColors.black.withOpacity(0.75),
                         fontFamily: 'MainFont',
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
