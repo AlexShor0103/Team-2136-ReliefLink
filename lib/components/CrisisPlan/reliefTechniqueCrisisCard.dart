@@ -25,6 +25,7 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
   String dropdownval = "";
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     dropdownval = widget.curVal;
   }
@@ -39,7 +40,7 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
     print("building begun. ddv is: ${dropdownval}");
     if (!names.contains(dropdownval)) {
       print("oops");
-      dropdownval = "Walking";
+      dropdownval = "Muscle Relaxation";
     }
     print("after checking, dropdownvalfr becomes: ${dropdownval}");
 
@@ -156,7 +157,7 @@ Widget reliefButton(String placeholder) {
 
 Widget reliefInput(String label, String placeholder) {
   return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(label,
             style: const TextStyle(

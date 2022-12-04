@@ -125,7 +125,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: cardHeight,
+          // height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -155,20 +155,24 @@ class _CrisisPlanState extends State<CrisisPlan> {
               ),
               //spacer
               const SizedBox(height: 8),
-              // text for the intro
-              Text("Here we identify warning signs before crisis",
+              // text for the intro'
+              Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text("Here we identify warning signs before crisis",
                   style: TextStyle(
                     color: AppColors.font.withOpacity(0.75),
                     fontFamily: 'MainFont',
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   )),
+                ),
+              
               const SizedBox(height: 15),
               warningTextInputAuto("Warning 1:", firstWarningSign),
               const SizedBox(height: 15),
               warningTextInputAuto("Warning 2:", secondWarningSign),
               const SizedBox(height: 15),
               warningTextInputAuto("Warning 3:", thirdWarningSign),
+              const SizedBox(height: 20),
             ],
           )),
     );
@@ -215,10 +219,13 @@ class _CrisisPlanState extends State<CrisisPlan> {
       AlertDialog alert = AlertDialog(
           title: const Text("Choose Relief Techniques", style: TextStyle()),
           content: Column(children: [
-            const Text(
-              "Here you can choose which Relief Techniques you would like to include",
-              textAlign: TextAlign.center,
+            const Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Here you can choose which Relief Techniques you would like to include",
+                textAlign: TextAlign.center,
+              ),
             ),
+            
             ReliefTextDropdown(
                 label: "Relief Technique 1:",
                 curVal: firstCopingStrategy,
@@ -255,7 +262,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -309,10 +315,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
               const SizedBox(height: 15),
 
               reliefInput("Relief Technique 1: ", firstCopingStrategy),
-            //   const SizedBox(height: 15),
-            //   reliefInput("Relief Technique 2: ", secondCopingStrategy),
-            //   const SizedBox(height: 15),
-            //   reliefInput("Relief Technique 3: ", thirdCopingStrategy),
+              const SizedBox(height: 15),
+              reliefInput("Relief Technique 2: ", secondCopingStrategy),
+              const SizedBox(height: 15),
+              reliefInput("Relief Technique 3: ", thirdCopingStrategy),
+              const SizedBox(height: 20),
             ],
           )),
     );
@@ -323,7 +330,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
           child: Column(
             children: [
               //container for gradient
@@ -369,6 +375,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   "Distracting Contact 2:", secondDistractingContact),
               const SizedBox(height: 15),
               distractingContactsInput("Distracting Place:", distractingPlace),
+              const SizedBox(height: 20),
             ],
           )),
     );
@@ -414,7 +421,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
           child: Column(
             children: [
               //container for gradient
@@ -458,6 +464,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
               helpingContactsInput("Helping Contact 2:", secondHelpingContact),
               const SizedBox(height: 15),
               helpingContactsInput("Helping Contact 3:", thirdHelpingContact),
+              const SizedBox(height: 20),
             ],
           )),
     );
@@ -503,7 +510,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
           child: Column(
             children: [
               //container for gradient
@@ -549,6 +555,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   "Professional Contact 2:", secondProfessionalContact),
               const SizedBox(height: 15),
               professionalContactsInput("Local Urgent Care:", localUrgentCare),
+              const SizedBox(height: 20),
             ],
           )),
     );
