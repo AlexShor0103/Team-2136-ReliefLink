@@ -14,8 +14,8 @@ class LikertScaleButton<T> extends StatelessWidget {
       required this.groupValue,
       required this.onChanged,
       required this.grad,
-      this.width = 32,
-      this.height = 32});
+      this.width = 35,
+      this.height = 35});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,13 @@ class LikertScaleButton<T> extends StatelessWidget {
               height: this.height,
               width: this.width,
               decoration: ShapeDecoration(
+                shadows: [
+                  BoxShadow(
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                    color: AppColors.black.withOpacity(0.3),
+                  ),
+                ],
                 shape: CircleBorder(),
                 gradient: this.grad,
               ),
@@ -37,7 +44,7 @@ class LikertScaleButton<T> extends StatelessWidget {
                     height: this.height - 8,
                     width: this.width - 8,
                     decoration: ShapeDecoration(
-                        shape: CircleBorder(), color: AppColors.bg),
+                        shape: CircleBorder(), color: AppColors.white),
                     child: Center(
                         child: Container(
                       height: this.height - 16,
@@ -47,7 +54,7 @@ class LikertScaleButton<T> extends StatelessWidget {
                           gradient: value == groupValue
                               ? this.grad
                               : LinearGradient(
-                                  colors: [AppColors.bg, AppColors.bg])),
+                                  colors: [AppColors.white, AppColors.white])),
                     ))),
               ))),
     );
