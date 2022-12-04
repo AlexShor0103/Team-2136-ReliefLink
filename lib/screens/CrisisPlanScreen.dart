@@ -14,6 +14,9 @@ class CrisisPlan extends StatefulWidget {
 }
 
 class _CrisisPlanState extends State<CrisisPlan> {
+  //size standards
+  double cardHeight = 360;
+  double labelHeight = 50;
   //step 1
   String firstWarningSign = "";
   String secondWarningSign = "";
@@ -122,7 +125,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
+          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
@@ -136,12 +139,12 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     style: TextStyle(
                       color: AppColors.font,
                       fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
                   ),
                 ),
-                height: 40,
+                height: labelHeight,
                 constraints: BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
@@ -172,31 +175,119 @@ class _CrisisPlanState extends State<CrisisPlan> {
   }
 
   Widget reliefCard() {
+    void showReliefEditDialogue(BuildContext context) {
+      //storing temporary values before getting confirmed or ignored
+      String t1 = firstCopingStrategy;
+      String t2 = secondCopingStrategy;
+      String t3 = thirdCopingStrategy;
+
+      //on confirm, put temporary values into permanent values
+      Widget confirmButton = TextButton(
+        child: Text("Confirm"),
+        onPressed: () {
+          Navigator.of(context).pop();
+          setState(() {
+            firstCopingStrategy = t1;
+            debugPrint("p1 has become: " + firstCopingStrategy);
+            secondCopingStrategy = t2;
+            thirdCopingStrategy = t3;
+          });
+
+          //somehow save the code properly
+        },
+      );
+
+      //on cancel nothing extraordinary happens
+      Widget cancelButton = TextButton(
+        child: Text("Cancel"),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      );
+
+      //this is just the row of both of them
+      Widget ConfirmCancel = Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [cancelButton, confirmButton],
+      );
+
+      //this is the dialog that will appear if the player presses the edit icon
+      AlertDialog alert = AlertDialog(
+          title: const Text("Choose Relief Techniques", style: TextStyle()),
+          content: Column(children: [
+            const Text(
+              "Here you can choose which Relief Techniques you would like to include",
+              textAlign: TextAlign.center,
+            ),
+            ReliefTextDropdown(
+                label: "Relief Technique 1:",
+                curVal: firstCopingStrategy,
+                setFunc: (String value) {
+                  t1 = value;
+                }),
+            ReliefTextDropdown(
+                label: "Relief Technique 2:",
+                curVal: secondCopingStrategy,
+                setFunc: (String value) {
+                  t2 = value;
+                }),
+            ReliefTextDropdown(
+                label: "Relief Technique 3:",
+                curVal: thirdCopingStrategy,
+                setFunc: (String value) {
+                  t3 = value;
+                }),
+          ]),
+          actions: [
+            // const SizedBox(height: 10),
+            ConfirmCancel
+          ]);
+
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          });
+    }
+    
     return Card(
       elevation: 10,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          height: 330,
+          height: cardHeight,
           child: Column(
             children: [
               //container for gradient
               Container(
-                alignment: Alignment.centerLeft,
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    "Step 2: Relief Techniques",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: AppColors.font,
-                      fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 17,
-                    ),
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Step 2: Relief Techniques",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: AppColors.font,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          showReliefEditDialogue(context);
+                          // firstCopingStrategy = "ahh";
+                        },
+                        icon: Icon(Icons.edit),
+                        color: AppColors.font,
+                      ),
+                    ],
                   ),
                 ),
-                height: 40,
+                height: 50,
                 constraints: const BoxConstraints(minWidth: double.infinity),
                 decoration: const BoxDecoration(
                     gradient: AppGrads.mainGreen,
@@ -216,16 +307,16 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-              reliefTextInput("Relief Technique 1:", firstCopingStrategy),
-              const SizedBox(height: 15),
-              reliefTextInput("Relief Technique 2:", secondCopingStrategy),
-              const SizedBox(height: 15),
-              reliefTextInput("Relief Technique 3:", thirdCopingStrategy),
+
+              reliefInput("Relief Technique 1: ", firstCopingStrategy),
+            //   const SizedBox(height: 15),
+            //   reliefInput("Relief Technique 2: ", secondCopingStrategy),
+            //   const SizedBox(height: 15),
+            //   reliefInput("Relief Technique 3: ", thirdCopingStrategy),
             ],
           )),
     );
   }
-
   Widget distractingContactsCard() {
     return Card(
       elevation: 10,
@@ -246,7 +337,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     style: TextStyle(
                       color: AppColors.font,
                       fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
                   ),
@@ -318,7 +409,6 @@ class _CrisisPlanState extends State<CrisisPlan> {
   }
 
   Widget helpingContactsCard() {
-    
     return Card(
       elevation: 10,
       shape: const RoundedRectangleBorder(
@@ -338,7 +428,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     style: TextStyle(
                       color: AppColors.font,
                       fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
                   ),
@@ -363,11 +453,11 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-              reliefTextInput("Helping Contact 1:", firstHelpingContact),
+              helpingContactsInput("Helping Contact 1:", firstHelpingContact),
               const SizedBox(height: 15),
-              reliefTextInput("Helping Contact 2:", secondHelpingContact),
+              helpingContactsInput("Helping Contact 2:", secondHelpingContact),
               const SizedBox(height: 15),
-              reliefTextInput("Helping Contact 3:", thirdHelpingContact),
+              helpingContactsInput("Helping Contact 3:", thirdHelpingContact),
             ],
           )),
     );
@@ -427,7 +517,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     style: TextStyle(
                       color: AppColors.font,
                       fontFamily: 'MainFont',
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
                   ),
