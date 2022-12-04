@@ -57,11 +57,11 @@ class _ContactsScreenState extends State<ContactsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                     'Here you can add your emergency contacts. Those are people who can help you when you need it the most! They will be 2 clicks from you.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.font,
+                      color: AppColors.black.withOpacity(0.75),
                       fontFamily: 'MainFont',
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
@@ -101,7 +101,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       ),
                       child: const Text('Add your first contact',
                           style: TextStyle(
-                            color: AppColors.black,
+                            color: AppColors.font,
                             fontFamily: 'MainFont',
                             fontWeight: FontWeight.w600,
                             fontSize: 20,

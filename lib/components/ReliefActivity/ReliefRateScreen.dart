@@ -13,15 +13,15 @@ class ReliefRateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TOP_BARS.RELIEF, // Insert header here
-      body: Container(
-        color: AppColors.bg,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: RatingSection(data: data),
-        ),
-      )
-    );
+        appBar: TOP_BARS.RELIEF, // Insert header here
+        body: Container(
+          alignment: Alignment.center,
+          color: AppColors.bg,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: RatingSection(data: data),
+          ),
+        ));
   }
 }
 
@@ -43,70 +43,123 @@ class _RatingSectionState extends State<RatingSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Text("How effective was ${widget.data.activityName}?",
-          style: const TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-          )),
-      Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(children: [
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-              LikertScaleButton<double>(
-                  value: 1,
-                  groupValue: _value,
-                  onChanged: (double value) {
-                    setState(() {
-                      _value = value;
-                    });
-                  },
-                  grad: AppGrads.secondLowest),
-              LikertScaleButton<double>(
-                  value: 2,
-                  groupValue: _value,
-                  onChanged: (double value) {
-                    setState(() {
-                      _value = value;
-                    });
-                  },
-                  grad: AppGrads.lowest),
-              LikertScaleButton<double>(
-                  value: 3,
-                  groupValue: _value,
-                  onChanged: (double value) {
-                    setState(() {
-                      _value = value;
-                    });
-                  },
-                  grad: AppGrads.medium),
-              LikertScaleButton<double>(
-                  value: 4,
-                  groupValue: _value,
-                  onChanged: (double value) {
-                    setState(() {
-                      _value = value;
-                    });
-                  },
-                  grad: AppGrads.secondHighest),
-              LikertScaleButton<double>(
-                  value: 5,
-                  groupValue: _value,
-                  onChanged: (double value) {
-                    setState(() {
-                      _value = value;
-                    });
-                  },
-                  grad: AppGrads.highest)
-            ]),
-            Text("$_value"),
-          ])),
-      Center(child: FavoriteButton(data: widget.data)),
-      Padding(
-        child: RateButton(data: widget.data, getRatingValue: getRatingValue),
-        padding: const EdgeInsets.all(20),
-      ),
-    ]);
+    return Column(
+      children: [
+        SizedBox(height: 75),
+        Text("How effective was ${widget.data.activityName}?",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: AppColors.black,
+                fontSize: 30,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.bold,
+              )),
+        SizedBox(height: 25),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          height: 302,
+          constraints: BoxConstraints(minHeight: 302, minWidth: 300),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(blurRadius: 10,
+              spreadRadius: 1,
+              color: AppColors.black.withOpacity(0.25)),
+            ],
+          ),
+          child: Padding (
+            padding: EdgeInsets.all(20),
+            child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            
+            Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                    LikertScaleButton<double>(
+                        value: 1,
+                        groupValue: _value,
+                        onChanged: (double value) {
+                          setState(() {
+                            _value = value;
+                          });
+                        },
+                        grad: AppGrads.secondLowest),
+                    LikertScaleButton<double>(
+                        value: 2,
+                        groupValue: _value,
+                        onChanged: (double value) {
+                          setState(() {
+                            _value = value;
+                          });
+                        },
+                        grad: AppGrads.lowest),
+                    LikertScaleButton<double>(
+                        value: 3,
+                        groupValue: _value,
+                        onChanged: (double value) {
+                          setState(() {
+                            _value = value;
+                          });
+                        },
+                        grad: AppGrads.medium),
+                    LikertScaleButton<double>(
+                        value: 4,
+                        groupValue: _value,
+                        onChanged: (double value) {
+                          setState(() {
+                            _value = value;
+                          });
+                        },
+                        grad: AppGrads.secondHighest),
+                    LikertScaleButton<double>(
+                        value: 5,
+                        groupValue: _value,
+                        onChanged: (double value) {
+                          setState(() {
+                            _value = value;
+                          });
+                        },
+                        grad: AppGrads.highest)
+                  ]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Poor",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: AppColors.font,
+                          fontSize: 20,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.w500,
+                        )),
+                        Text("Great",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: AppColors.font,
+                          fontSize: 20,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.w500,
+                        ))
+                    ],
+                    
+                  ),
+              ])),
+          
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Center(child: FavoriteButton(data: widget.data))),
+          Padding(
+            child: RateButton(data: widget.data, getRatingValue: getRatingValue),
+            padding: const EdgeInsets.all(25),
+          ),
+        ])
+        ))
+      
+      ],
+    );
   }
 }
 
@@ -120,9 +173,15 @@ class RateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          gradient: AppGrads.mainGreen,
-          borderRadius: BorderRadius.circular(10),
-        ),
+            gradient: AppGrads.mainGreen,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 10,
+                spreadRadius: 1,
+                color: AppColors.black.withOpacity(0.3),
+              ),
+            ]),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
           child: ElevatedButton(
@@ -195,14 +254,21 @@ class _FavoriteButtonState extends State<FavoriteButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
+    return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+      Text(_text,
+          style: TextStyle(
+            color: AppColors.font,
+            fontFamily: 'MainFont',
+            fontWeight: FontWeight.normal,
+            fontSize: 20,
+          )),
       IconButton(
           onPressed: flipFavorite,
           icon: Icon(
             _iconData,
-            color: Colors.yellow,
+            size: 30,
+            color: Color.fromARGB(255, 253, 188, 103),
           )),
-      Text(_text)
     ]);
   }
 }

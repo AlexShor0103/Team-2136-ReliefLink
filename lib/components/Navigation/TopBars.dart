@@ -26,17 +26,19 @@ class TopBars extends StatelessWidget implements PreferredSizeWidget {
           text: TextSpan(
               text: mainText + '\n',
               style: TextStyle(
+                fontFamily: 'MainFont',
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: AppColors.font,
+                color: AppColors.black,
               ),
               children: <TextSpan>[
                 TextSpan(
                   text: descriptiveText,
                   style: TextStyle(
+                    fontFamily: 'MainFont',
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.font,
+                    color: AppColors.black,
                   ),
                 ),
               ]),
