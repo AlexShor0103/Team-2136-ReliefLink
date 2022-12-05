@@ -13,7 +13,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'MapScreen.dart';
 import 'OnboardingScreen.dart';
 
-
 TextEditingController diaryController = TextEditingController();
 
 const List<Widget> states = <Widget>[
@@ -21,17 +20,9 @@ const List<Widget> states = <Widget>[
   Text('Mood Chart'),
 ];
 
-Map<String, double> dataMap = {
-  "Happy": 3,
-  "Neutral": 3,
-  "Sad": 2
-};
+Map<String, double> dataMap = {"Happy": 3, "Neutral": 3, "Sad": 2};
 
-final colorList = <Color>[
-  Colors.green,
-  Colors.red,
-  Colors.blue
-];
+final colorList = <Color>[Colors.green, Colors.red, Colors.blue];
 
 class DiaryScreen extends StatefulWidget {
   const DiaryScreen({Key? key}) : super(key: key);
@@ -65,11 +56,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
                       )),
-                  SizedBox(
-                    height:20
-                  ),
-                  const Text(
-                    'Previous Journal Entries',
+                  SizedBox(height: 20),
+                  const Text('Previous Journal Entries',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: AppColors.font,
@@ -120,18 +108,18 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-              FloatingActionButton(
-              backgroundColor: Colors.grey,
-                foregroundColor: Colors.black,
-                highlightElevation: 30,
-                onPressed: () {
-                showGraphDialog(height, width, context);
-                },
-                child: Icon(Icons.pie_chart),
+                  FloatingActionButton(
+                    backgroundColor: Colors.grey,
+                    foregroundColor: Colors.black,
+                    highlightElevation: 30,
+                    onPressed: () {
+                      showGraphDialog(height, width, context);
+                    },
+                    child: Icon(Icons.pie_chart),
+                  ),
+                ],
               ),
-              ],
             ),
-          ),
           ),
           Container(
             padding: const EdgeInsets.only(top: 490, right: 20),
@@ -175,8 +163,8 @@ class _DiaryScreenState extends State<DiaryScreen> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Journal"),
-      content: Text(
-          "Hi there! Would you like to get some of our thoughts out?"),
+      content:
+          Text("Hi there! Would you like to get some of our thoughts out?"),
       actions: [
         cancelButton,
         continueButton,
@@ -197,7 +185,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
   }
 
   showMoodDialog(height, width, BuildContext context) {
-
     // set up the buttons
     Widget cancelButton = TextButton(
       child: Text("Cancel"),
@@ -216,8 +203,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Mood"),
-      content: Text(
-          "Please tell us how you are feeling."),
+      content: Text("Please tell us how you are feeling."),
       actions: [
         RadioIcon(),
         continueButton,
@@ -233,7 +219,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
           width: width,
           child: alert,
         );
-          },
+      },
     );
   }
 
@@ -242,16 +228,15 @@ class _DiaryScreenState extends State<DiaryScreen> {
     double width = MediaQuery.of(context).size.width;
     // set up the buttons
     Widget continueButton = TextButton(
-      child: Text("Done"),
-      onPressed: () {
-        Navigator.of(context, rootNavigator: true).pop();
-      });
+        child: Text("Done"),
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop();
+        });
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Journal"),
-      content: Text(
-          "Use the space below to write anything you want."),
+      content: Text("Use the space below to write anything you want."),
       actions: [
         _buildTextField(),
         continueButton,
@@ -294,36 +279,27 @@ class _DiaryScreenState extends State<DiaryScreen> {
         Navigator.of(context, rootNavigator: true).pop();
       },
     );
-    Widget graph =
-    Container(
-      height: height1 / 4,
-      width: width1,
-      child: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            children: [
+    Widget graph = Container(
+        height: height1 / 4,
+        width: width1,
+        child: Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Column(children: [
               piechart.PieChart(
-                chartRadius: width1,
+                chartRadius: width1 / 4 - 20,
                 dataMap: dataMap,
                 chartType: ChartType.ring,
                 centerText: "Mood Frequency",
                 baseChartColor: Colors.grey[300]!,
                 colorList: colorList,
               ),
-            ]
-      )
-      )
-    );
+            ])));
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Mood Chart"),
-      content: Text(
-          "Mood Over Last 30 Days"),
-      actions: [
-        graph,
-        cancelButton
-      ],
+      content: Text("Mood Over Last 30 Days"),
+      actions: [graph, cancelButton],
     );
 
     // show the dialog
@@ -350,7 +326,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         });
 
     Widget entry = Text(
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt. Ipsum dolor sit amet consectetur adipiscing. Nunc aliquet bibendum enim facilisis gravida neque convallis. Ut porttitor leo a diam sollicitudin tempor id eu. Dictum sit amet justo donec. Sit amet cursus sit amet dictum sit. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida. Ornare suspendisse sed nisi lacus sed viverra tellus. Amet cursus sit amet dictum sit amet. Sit amet massa vitae tortor condimentum lacinia quis. Egestas sed sed risus pretium.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt. Ipsum dolor sit amet consectetur adipiscing. Nunc aliquet bibendum enim facilisis gravida neque convallis. Ut porttitor leo a diam sollicitudin tempor id eu. Dictum sit amet justo donec. Sit amet cursus sit amet dictum sit. Mi tempus imperdiet nulla malesuada pellentesque elit eget gravida. Ornare suspendisse sed nisi lacus sed viverra tellus. Amet cursus sit amet dictum sit amet. Sit amet massa vitae tortor condimentum lacinia quis. Egestas sed sed risus pretium.",
         textAlign: TextAlign.center,
         style: TextStyle(
           color: AppColors.font,
@@ -359,12 +335,10 @@ class _DiaryScreenState extends State<DiaryScreen> {
           fontSize: 18,
         ));
 
-
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Journal"),
-      content: Text(
-          "Use the space below to write anything you want."),
+      content: Text("Journal Entry"),
       actions: [
         entry,
         continueButton,
@@ -379,7 +353,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
       },
     );
   }
-
 
   Widget journalButton(BuildContext context, String screenName) {
     IconData screenIcon = Icons.account_circle;
@@ -429,7 +402,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
             ),
             padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
             fixedSize:
-            MaterialStateProperty.all<Size>(Size(0, buttonMinHeight)),
+                MaterialStateProperty.all<Size>(Size(0, buttonMinHeight)),
             alignment: Alignment.centerLeft),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -499,22 +472,21 @@ class _RadioIconState extends State<RadioIcon> {
               size: 40,
               color: _selected == index ? Colors.green : null,
             ),
-            Text(text, style: TextStyle(color: _selected == index ? Colors.green : null)),
+            Text(text,
+                style:
+                    TextStyle(color: _selected == index ? Colors.green : null)),
           ],
         ),
         onTap: () => setState(
-              () {
+          () {
             _selected = index;
             if (index == 2) {
-                dataMap["Happy"] = (dataMap["Happy"]! + 1);
-            }
-            else if (index == 1) {
+              dataMap["Happy"] = (dataMap["Happy"]! + 1);
+            } else if (index == 1) {
               dataMap["Neutral"] = (dataMap["Neutral"]! + 1);
-            }
-            else if (index == 0) {
+            } else if (index == 0) {
               dataMap["Sad"] = (dataMap["Sad"]! + 1);
             }
-
           },
         ),
       ),
