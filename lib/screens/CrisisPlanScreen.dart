@@ -1,12 +1,15 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:relieflink/utils/constants.dart';
 import '../../utils/crisis_data_utils.dart';
 import '../../utils/data_storage.dart';
 import 'package:relieflink/components/CrisisPlan/warningSignsCrisisCard.dart';
 import 'package:relieflink/components/CrisisPlan/reliefTechniqueCrisisCard.dart';
 import 'package:relieflink/components/CrisisPlan/reasonToLive.dart';
+
+import '../utils/emergency_contact_utils.dart';
 
 class CrisisPlan extends StatefulWidget {
   const CrisisPlan({Key? key}) : super(key: key);
@@ -181,7 +184,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
-          // height: cardHeight,
+          height: cardHeight,
           child: Column(
         children: [
           //container for gradient
@@ -198,6 +201,15 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
                 ),
+                height: labelHeight,
+                constraints: BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
+
               ),
             ),
             height: labelHeight,
@@ -274,15 +286,21 @@ class _CrisisPlanState extends State<CrisisPlan> {
 
       //this is the dialog that will appear if the player presses the edit icon
       AlertDialog alert = AlertDialog(
-          title: const Text("Choose Relief Techniques", style: TextStyle()),
+          title: const Text("Choose Relief Techniques",
+              style: TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w800,
+              )),
           content: Column(children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
+            const Text(
                 "Here you can choose which Relief Techniques you would like to include",
                 textAlign: TextAlign.center,
-              ),
-            ),
+                style: TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.w600,
+                )),
             ReliefTextDropdown(
                 label: "Relief Technique 1:",
                 curVal: firstCopingStrategy,
@@ -319,69 +337,66 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
+          height: cardHeight,
           child: Column(
-        children: [
-          //container for gradient
-          Container(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Step 2: Relief Techniques",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      color: AppColors.font,
-                      fontFamily: 'MainFont',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
+            children: [
+              //container for gradient
+              Container(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Step 2: Relief Techniques",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: AppColors.font,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.w800,
+                          fontSize: 17,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          showReliefEditDialogue(context);
+                        },
+                        icon: const Icon(Icons.edit),
+                        color: AppColors.font,
+                      ),
+                    ],
                   ),
-                  IconButton(
-                    onPressed: () {
-                      showReliefEditDialogue(context);
-                      // firstCopingStrategy = "ahh";
-                    },
-                    icon: Icon(Icons.edit),
-                    color: AppColors.font,
-                  ),
-                ],
+                ),
+                height: 50,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
               ),
-            ),
-            height: 50,
-            constraints: const BoxConstraints(minWidth: double.infinity),
-            decoration: const BoxDecoration(
-                gradient: AppGrads.mainGreen,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                )),
-          ),
-          //spacer
-          const SizedBox(height: 8),
-          // text for the intro
-          Text("Here we identify relief techniques that help",
-              style: TextStyle(
-                color: AppColors.font.withOpacity(0.75),
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              )),
-          const SizedBox(height: 15),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we identify relief techniques that help",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
 
-          reliefInput("Relief Technique 1: ", firstCopingStrategy,
-              () => showReliefEditDialogue(context)),
-          const SizedBox(height: 15),
-          reliefInput("Relief Technique 2: ", secondCopingStrategy,
-              () => showReliefEditDialogue(context)),
-          const SizedBox(height: 15),
-          reliefInput("Relief Technique 3: ", thirdCopingStrategy,
-              () => showReliefEditDialogue(context)),
-          const SizedBox(height: 20),
-        ],
-      )),
+              reliefInput("Relief Technique 1: ", firstCopingStrategy, context),
+              const SizedBox(height: 15),
+              reliefInput(
+                  "Relief Technique 2: ", secondCopingStrategy, context),
+              const SizedBox(height: 15),
+              reliefInput("Relief Technique 3: ", thirdCopingStrategy, context),
+            ],
+          )),
     );
   }
 
@@ -391,58 +406,64 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
+          height: cardHeight,
           child: Column(
-        children: [
-          //container for gradient
-          Container(
-            alignment: Alignment.centerLeft,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                "Step 3: Sources of Distraction",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: AppColors.font,
-                  fontFamily: 'MainFont',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text(
+                    "Step 3: Sources of Distraction",
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 17,
+                    ),
+                  ),
                 ),
+                height: labelHeight,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
               ),
-            ),
-            height: 40,
-            constraints: const BoxConstraints(minWidth: double.infinity),
-            decoration: const BoxDecoration(
-                gradient: AppGrads.mainGreen,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                )),
-          ),
-          //spacer
-          const SizedBox(height: 8),
-          // text for the intro
-          Text("Here we list resources that can distract you",
-              style: TextStyle(
-                color: AppColors.font.withOpacity(0.75),
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              )),
-          const SizedBox(height: 15),
-          distractingContactsInput(
-              "Distracting Contact 1:", firstDistractingContact),
-          const SizedBox(height: 15),
-          distractingContactsInput(
-              "Distracting Contact 2:", secondDistractingContact),
-          const SizedBox(height: 15),
-          distractingContactsInput("Distracting Place:", distractingPlace),
-          const SizedBox(height: 20),
-        ],
-      )),
+              const SizedBox(height: 8),
+              Text("Here we list resources that can distract you",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
+              distractingContactsInput(
+                  "Distracting Contact 1:", firstDistractingContact),
+              const SizedBox(height: 15),
+              distractingContactsInput(
+                  "Distracting Contact 2:", secondDistractingContact),
+              const SizedBox(height: 15),
+              distractingContactsInput("Distracting Place:", distractingPlace),
+            ],
+          )),
     );
   }
 
   Widget distractingContactsInput(String label, String placeholder) {
+    var listIds = DataStorage.getValue('applist_contacts');
+    var listContacts = listIds.map((e) {
+      if (e != '') {
+        return DataStorage.getEmergencyContact(e);
+      }
+    }).toList();
+    listContacts.removeWhere((item) => ["", null, false, 0].contains(item));
+    final TextEditingController _typeAheadController = TextEditingController();
+
     return Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -454,25 +475,89 @@ class _CrisisPlanState extends State<CrisisPlan> {
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
               )),
-          TextField(
-            onChanged: (value) => {
-              if (label == "Distracting Contact 1:")
-                {firstDistractingContact = value}
-              else if (label == "Distracting Contact 2:")
-                {secondDistractingContact = value}
-              else if (label == "Distracting Place")
-                {distractingPlace = value}
-            },
-            style: const TextStyle(
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w600,
-                fontSize: 18),
-            decoration: InputDecoration(
-              isDense: true,
-              hintText: placeholder,
-            ),
-          )
+          (label == "Distracting Place:"
+              ? Container(
+                  height: 0,
+                )
+              : TypeAheadFormField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                      controller: _typeAheadController,
+                      decoration:
+                          const InputDecoration(labelText: 'Add a Contact.')),
+                  suggestionsCallback: (pattern) {
+                    return listContacts.map((e) {
+                      if (!["", null, false, 0].contains(e)) {
+                        var contact = e as EmergencyContactData;
+                        if (contact.name.toLowerCase().contains(pattern)) {
+                          return {
+                            'name': contact.name,
+                            'relation': contact.relation,
+                            'id': contact.id
+                          };
+                        }
+                      }
+                    }).toList();
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      leading: const Icon(Icons.person),
+                      title: Text(
+                        (suggestion as Map<String, dynamic>)['name'],
+                        style: const TextStyle(
+                          color: AppColors.font,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle:
+                          Text((suggestion as Map<String, dynamic>)['relation'],
+                              style: const TextStyle(
+                                color: AppColors.font,
+                                fontFamily: 'MainFont',
+                                fontWeight: FontWeight.w600,
+                              )),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    var suggestion2 = suggestion as Map<String, String>;
+                    _typeAheadController.text =
+                        suggestion2['name'] ?? 'Contact';
+                    _typeAheadController.selection =
+                        (suggestion2['name'] ?? 'Contact') as TextSelection;
+                    setState(() {
+                      if (label == "Distracting Contact 1:") {
+                        firstDistractingContact = suggestion2['id']!;
+                      } else if (label == "Distracting Contact 2:") {
+                        secondDistractingContact = suggestion2['id']!;
+                      } else if (label == "Distracting Place:") {
+                        distractingPlace = suggestion2['id']!;
+                      }
+                    });
+                  },
+                )),
+          (label == "Distracting Place:"
+              ? TextField(
+                  onChanged: (value) => {
+                    if (label == "Distracting Contact 1:")
+                      {firstDistractingContact = value}
+                    else if (label == "Distracting Contact 2:")
+                      {secondDistractingContact = value}
+                    else if (label == "Distracting Place:")
+                      {distractingPlace = value}
+                  },
+                  style: const TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    hintText: placeholder,
+                  ),
+                )
+              : Container(
+                  height: 0,
+                ))
         ]));
   }
 
@@ -482,6 +567,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
+          height: cardHeight,
           child: Column(
         children: [
           //container for gradient
@@ -498,40 +584,46 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
                 ),
+                height: labelHeight,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
               ),
-            ),
-            height: 40,
-            constraints: const BoxConstraints(minWidth: double.infinity),
-            decoration: const BoxDecoration(
-                gradient: AppGrads.mainGreen,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                )),
-          ),
-          //spacer
-          const SizedBox(height: 8),
-          // text for the intro
-          Text("Here we list contacts that can help you",
-              style: TextStyle(
-                color: AppColors.font.withOpacity(0.75),
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              )),
-          const SizedBox(height: 15),
-          helpingContactsInput("Helping Contact 1:", firstHelpingContact),
-          const SizedBox(height: 15),
-          helpingContactsInput("Helping Contact 2:", secondHelpingContact),
-          const SizedBox(height: 15),
-          helpingContactsInput("Helping Contact 3:", thirdHelpingContact),
-          const SizedBox(height: 20),
-        ],
-      )),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we list contacts that can help you",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
+              helpingContactsInput("Helping Contact 1:", firstHelpingContact),
+              const SizedBox(height: 15),
+              helpingContactsInput("Helping Contact 2:", secondHelpingContact),
+              const SizedBox(height: 15),
+              helpingContactsInput("Helping Contact 3:", thirdHelpingContact),
+            ],
+          )),
     );
   }
 
   Widget helpingContactsInput(String label, String placeholder) {
+    var listIds = DataStorage.getValue('applist_contacts');
+    var listContacts = listIds.map((e) {
+      if (e != '') {
+        return DataStorage.getEmergencyContact(e);
+      }
+    }).toList();
+    listContacts.removeWhere((item) => ["", null, false, 0].contains(item));
+    final TextEditingController _typeAheadController = TextEditingController();
+
     return Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -543,25 +635,89 @@ class _CrisisPlanState extends State<CrisisPlan> {
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
               )),
-          TextField(
-            onChanged: (value) => {
-              if (label == "Helping Contact 1:")
-                {firstHelpingContact = value}
-              else if (label == "Helping Contact 2:")
-                {secondHelpingContact = value}
-              else if (label == "Helping Contact 3:")
-                {thirdHelpingContact = value}
-            },
-            style: const TextStyle(
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w600,
-                fontSize: 18),
-            decoration: InputDecoration(
-              isDense: true,
-              hintText: placeholder,
-            ),
-          )
+          (label == "Distracting Place:"
+              ? Container(
+                  height: 0,
+                )
+              : TypeAheadFormField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                      controller: _typeAheadController,
+                      decoration:
+                          const InputDecoration(labelText: 'Add a Contact.')),
+                  suggestionsCallback: (pattern) {
+                    return listContacts.map((e) {
+                      if (!["", null, false, 0].contains(e)) {
+                        var contact = e as EmergencyContactData;
+                        if (contact.name.toLowerCase().contains(pattern)) {
+                          return {
+                            'name': contact.name,
+                            'relation': contact.relation,
+                            'id': contact.id
+                          };
+                        }
+                      }
+                    }).toList();
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      leading: const Icon(Icons.person),
+                      title: Text(
+                        (suggestion as Map<String, dynamic>)['name'],
+                        style: const TextStyle(
+                          color: AppColors.font,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle:
+                          Text((suggestion as Map<String, dynamic>)['relation'],
+                              style: const TextStyle(
+                                color: AppColors.font,
+                                fontFamily: 'MainFont',
+                                fontWeight: FontWeight.w600,
+                              )),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    var suggestion2 = suggestion as Map<String, String>;
+                    _typeAheadController.text =
+                        suggestion2['name'] ?? 'Contact';
+                    _typeAheadController.selection =
+                        (suggestion2['name'] ?? 'Contact') as TextSelection;
+                    setState(() {
+                      if (label == "Distracting Contact 1:") {
+                        firstDistractingContact = suggestion2['id']!;
+                      } else if (label == "Distracting Contact 2:") {
+                        secondDistractingContact = suggestion2['id']!;
+                      } else if (label == "Distracting Place:") {
+                        distractingPlace = suggestion2['id']!;
+                      }
+                    });
+                  },
+                )),
+          (label == "Distracting Place:"
+              ? TextField(
+                  onChanged: (value) => {
+                    if (label == "Helping Contact 1:")
+                      {firstHelpingContact = value}
+                    else if (label == "Helping Contact 2:")
+                      {secondHelpingContact = value}
+                    else if (label == "Helping Contact 3:")
+                      {thirdHelpingContact = value}
+                  },
+                  style: const TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    hintText: placeholder,
+                  ),
+                )
+              : Container(
+                  height: 0,
+                ))
         ]));
   }
 
@@ -571,6 +727,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Container(
+          height: cardHeight,
           child: Column(
         children: [
           //container for gradient
@@ -587,42 +744,48 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
                 ),
+                height: labelHeight,
+                constraints: const BoxConstraints(minWidth: double.infinity),
+                decoration: const BoxDecoration(
+                    gradient: AppGrads.mainGreen,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
               ),
-            ),
-            height: 40,
-            constraints: const BoxConstraints(minWidth: double.infinity),
-            decoration: const BoxDecoration(
-                gradient: AppGrads.mainGreen,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                )),
-          ),
-          //spacer
-          const SizedBox(height: 8),
-          // text for the intro
-          Text("Here we list professional Mental Health Resources",
-              style: TextStyle(
-                color: AppColors.font.withOpacity(0.75),
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              )),
-          const SizedBox(height: 15),
-          professionalContactsInput(
-              "Professional Contact 1:", firstProfessionalContact),
-          const SizedBox(height: 15),
-          professionalContactsInput(
-              "Professional Contact 2:", secondProfessionalContact),
-          const SizedBox(height: 15),
-          professionalContactsInput("Local Urgent Care:", localUrgentCare),
-          const SizedBox(height: 20),
-        ],
-      )),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro
+              Text("Here we list professional resources",
+                  style: TextStyle(
+                    color: AppColors.font.withOpacity(0.75),
+                    fontFamily: 'MainFont',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  )),
+              const SizedBox(height: 15),
+              professionalContactsInput(
+                  "Professional Contact 1:", firstProfessionalContact),
+              const SizedBox(height: 15),
+              professionalContactsInput(
+                  "Professional Contact 2:", secondProfessionalContact),
+              const SizedBox(height: 15),
+              professionalContactsInput("Local Urgent Care:", localUrgentCare),
+            ],
+          )),
     );
   }
 
   Widget professionalContactsInput(String label, String placeholder) {
+    var listIds = DataStorage.getValue('applist_contacts');
+    var listContacts = listIds.map((e) {
+      if (e != '') {
+        return DataStorage.getEmergencyContact(e);
+      }
+    }).toList();
+    listContacts.removeWhere((item) => ["", null, false, 0].contains(item));
+    final TextEditingController _typeAheadController = TextEditingController();
+
     return Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -634,25 +797,89 @@ class _CrisisPlanState extends State<CrisisPlan> {
                 fontWeight: FontWeight.w900,
                 fontSize: 17,
               )),
-          TextField(
-            onChanged: (value) => {
-              if (label == "Professional Contact 1:")
-                {firstProfessionalContact = value}
-              else if (label == "Professional Contact 2:")
-                {secondProfessionalContact = value}
-              else if (label == "Local Urgent Care:")
-                {localUrgentCare = value}
-            },
-            style: const TextStyle(
-                color: AppColors.font,
-                fontFamily: 'MainFont',
-                fontWeight: FontWeight.w600,
-                fontSize: 18),
-            decoration: InputDecoration(
-              isDense: true,
-              hintText: placeholder,
-            ),
-          )
+          (label == "Local Urgent Care:"
+              ? Container(
+                  height: 0,
+                )
+              : TypeAheadFormField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                      controller: _typeAheadController,
+                      decoration:
+                          const InputDecoration(labelText: 'Add a Contact.')),
+                  suggestionsCallback: (pattern) {
+                    return listContacts.map((e) {
+                      if (!["", null, false, 0].contains(e)) {
+                        var contact = e as EmergencyContactData;
+                        if (contact.name.toLowerCase().contains(pattern)) {
+                          return {
+                            'name': contact.name,
+                            'relation': contact.relation,
+                            'id': contact.id
+                          };
+                        }
+                      }
+                    }).toList();
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      leading: const Icon(Icons.person),
+                      title: Text(
+                        (suggestion as Map<String, dynamic>)['name'],
+                        style: const TextStyle(
+                          color: AppColors.font,
+                          fontFamily: 'MainFont',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle:
+                          Text((suggestion as Map<String, dynamic>)['relation'],
+                              style: const TextStyle(
+                                color: AppColors.font,
+                                fontFamily: 'MainFont',
+                                fontWeight: FontWeight.w600,
+                              )),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    var suggestion2 = suggestion as Map<String, String>;
+                    _typeAheadController.text =
+                        suggestion2['name'] ?? 'Contact';
+                    _typeAheadController.selection =
+                        (suggestion2['name'] ?? 'Contact') as TextSelection;
+                    setState(() {
+                      if (label == "Professional Contact 1:") {
+                        firstProfessionalContact = suggestion2['id']!;
+                      } else if (label == "Professional Contact 2:") {
+                        secondProfessionalContact = suggestion2['id']!;
+                      } else if (label == "Local Urgent Care:") {
+                        localUrgentCare = suggestion2['id']!;
+                      }
+                    });
+                  },
+                )),
+          (label == "Local Urgent Care:"
+              ? TextField(
+                  onChanged: (value) => {
+                    if (label == "Professional Contact 1:")
+                      {firstProfessionalContact = value}
+                    else if (label == "Professional Contact 2:")
+                      {secondProfessionalContact = value}
+                    else if (label == "Local Urgent Care:")
+                      {localUrgentCare = value}
+                  },
+                  style: const TextStyle(
+                      color: AppColors.font,
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    hintText: placeholder,
+                  ),
+                )
+              : Container(
+                  height: 0,
+                ))
         ]));
   }
 }
