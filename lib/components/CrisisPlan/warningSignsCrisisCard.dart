@@ -54,7 +54,7 @@ Widget warningTextInputAuto(String label, String placeholder) {
                         color: AppColors.black.withOpacity(0.3),
                         offset: const Offset(0, 4))
                   ]),
-                  constraints:BoxConstraints.tightForFinite(width: 303, height: options.length * 56),
+                  constraints:BoxConstraints.tightForFinite(width: 330, height: options.length * 56),
                   child: ListView.builder(
                       padding: const EdgeInsets.all(10),
                       itemCount: options.length,
