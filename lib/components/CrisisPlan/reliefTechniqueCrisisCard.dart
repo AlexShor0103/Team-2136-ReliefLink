@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/activities/activities.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
-
 import '../ReliefActivity/ReliefScreen.dart';
 
 class ReliefTextDropdown extends StatefulWidget {
@@ -111,7 +110,7 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
   }
 }
 
-Widget reliefButton(String placeholder, BuildContext context) {
+Widget reliefButton(String placeholder, BuildContext context, Function dialogueOpen) {
   List names = activities
       .map(
         (e) => (e.activityName),
@@ -127,7 +126,9 @@ Widget reliefButton(String placeholder, BuildContext context) {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 9),
           child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                dialogueOpen();
+              },
               child: const Text(
                 "No Relief Technique Selected",
                 style: TextStyle(
@@ -182,7 +183,8 @@ Widget reliefButton(String placeholder, BuildContext context) {
       ));
 }
 
-Widget reliefInput(String label, String placeholder, BuildContext context) {
+Widget reliefInput(String label, String placeholder, BuildContext context, Function dialogueOpen) {
+
   return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -194,6 +196,6 @@ Widget reliefInput(String label, String placeholder, BuildContext context) {
               fontWeight: FontWeight.w900,
               fontSize: 17,
             )),
-        reliefButton(placeholder, context)
+        reliefButton(placeholder, context, dialogueOpen)
       ]));
 }

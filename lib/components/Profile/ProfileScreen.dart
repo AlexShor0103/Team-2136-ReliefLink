@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../utils/user_account_utils.dart';
 import '../../utils/data_storage.dart';
+import 'package:relieflink/utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -50,85 +51,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: ListView(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: Stack(
+        body: Container(
+          color: AppColors.bg,
+          child: ListView(
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Stack(
+                  children: [
+                    avatars(),
+                    avatarEdit(context),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Text(
+                "${firstName} ${lastName}",
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  avatars(),
-                  avatarEdit(context),
+                  IconButton(
+                    onPressed: (() {
+                      setState(() {}); // Manually call build
+                      UserAccountData newData = new UserAccountData(
+                        firstName: firstName,
+                        lastName: lastName,
+                        age: age,
+                        memberID: memberID,
+                        policyNumber: policyNumber,
+                        insuranceCompanyName: insuranceCompanyName,
+                      );
+                      DataStorage.setUserAccountData(newData);
+                      DataStorage.saveToDisk();
+                    }),
+                    icon: Icon(
+                      Icons.sync,
+                      size: 35,
+                      color: Colors.grey,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Text(
-              "${firstName} ${lastName}",
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-            ),
-            const SizedBox(
-              height: 35,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: (() {
-                    setState(() {}); // Manually call build
-                    UserAccountData newData = new UserAccountData(
-                      firstName: firstName,
-                      lastName: lastName,
-                      age: age,
-                      memberID: memberID,
-                      policyNumber: policyNumber,
-                      insuranceCompanyName: insuranceCompanyName,
-                    );
-                    DataStorage.setUserAccountData(newData);
-                    DataStorage.saveToDisk();
-                  }),
-                  icon: Icon(
-                    Icons.sync,
-                    size: 35,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-            const Text(
-              'Personal Information',
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-            ),
-            const SizedBox(
-              height: 35,
-            ),
-            textInputs("First Name", firstName, false),
-            textInputs("Last Name", lastName, false),
-            textInputs("Age", age, false),
-            const Text(
-              'Insurance Information',
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
-            ),
-            const SizedBox(
-              height: 35,
-            ),
-            textInputs("Insurance Company Name", insuranceCompanyName, true),
-            textInputs("Policy Number", policyNumber, true),
-            textInputs("Member ID", memberID, true)
-          ],
+              const Text(
+                'Personal Information',
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              textInputs("First Name", firstName, false),
+              textInputs("Last Name", lastName, false),
+              textInputs("Age", age, false),
+              const Text(
+                'Insurance Information',
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              textInputs("Insurance Company Name", insuranceCompanyName, true),
+              textInputs("Policy Number", policyNumber, true),
+              textInputs("Member ID", memberID, true)
+            ],
+          ),
+      
         ),
-      ),
+        
+        ),
     );
   }
 

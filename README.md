@@ -124,3 +124,7 @@ Soon!
 - Map API is not using the user's current location
 - Relief Technique cards overflow in some devices
 - Onboarding flow not popping up upon first start of app
+
+## v1.0
+### Known Issues
+- Autocomplete in Crisis Plan can miss suggestions

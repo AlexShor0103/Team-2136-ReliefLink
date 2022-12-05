@@ -111,7 +111,7 @@ class AppColors {
   static const red = Color(0xffFC8D7A);
   static const orange = Color(0xffF9CB9A);
   static const green = Color(0xffC5D7BF);
-  static const black = Color.fromARGB(255, 43, 40, 40);
+  static const black = Color.fromRGBO(76, 68, 77, 1);
   static const white = Color.fromRGBO(255, 255, 255, 1);
   static const red2 = Color.fromRGBO(230, 81, 86, 1);
   static const grey = Color.fromRGBO(90, 90, 90, 1);
@@ -224,6 +224,15 @@ class ActivitiesSorting with ChangeNotifier {
 }
 
 enum SortOptions { NONE, FAVORITE, MOOD, TIME, RATING }
+
+enum Moods { ANXIOUS, SLEEPLESS, ENERGETIC, OTHER }
+
+extension ParseToString on Moods {
+  String toShortString() {
+    var lower = toString().toLowerCase();
+    return lower[6].toUpperCase() + lower.substring(7);
+  }
+}
 
 class SearchAndSortOptions {
   String searchString;

@@ -21,7 +21,6 @@ Widget warningTextInputAuto(String label, String placeholder) {
         //label text
         Text(label,
             style: const TextStyle(
-              height: 0,
               color: AppColors.font,
               fontFamily: 'MainFont',
               fontWeight: FontWeight.w900,

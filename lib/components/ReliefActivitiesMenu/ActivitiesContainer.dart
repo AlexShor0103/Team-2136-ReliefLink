@@ -166,8 +166,9 @@ class ReliefActivityBoxContainerState
           );
         }
       }
+
       var finalGrid = GridView.count(
-        childAspectRatio: 1.5,
+        childAspectRatio: MediaQuery.of(context).size.width < 420 ? 1 : 1.3,
         primary: true,
         shrinkWrap: true,
         crossAxisCount: 2,
