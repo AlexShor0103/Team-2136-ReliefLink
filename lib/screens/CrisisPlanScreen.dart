@@ -186,20 +186,20 @@ class _CrisisPlanState extends State<CrisisPlan> {
       child: Container(
           height: cardHeight,
           child: Column(
-        children: [
-          //container for gradient
-          Container(
-            alignment: Alignment.centerLeft,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                "Step 1: Warning Signs",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: AppColors.font,
-                  fontFamily: 'MainFont',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
+            children: [
+              //container for gradient
+              Container(
+                alignment: Alignment.centerLeft,
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: Text("Step 1: Warning Signs",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: AppColors.font,
+                        fontFamily: 'MainFont',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      )),
                 ),
                 height: labelHeight,
                 constraints: BoxConstraints(minWidth: double.infinity),
@@ -209,41 +209,30 @@ class _CrisisPlanState extends State<CrisisPlan> {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                     )),
-
               ),
-            ),
-            height: labelHeight,
-            constraints: BoxConstraints(minWidth: double.infinity),
-            decoration: const BoxDecoration(
-                gradient: AppGrads.mainGreen,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                )),
-          ),
-          //spacer
-          const SizedBox(height: 8),
-          // text for the intro'
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text("Here we identify warning signs before crisis",
-                style: TextStyle(
-                  color: AppColors.font.withOpacity(0.75),
-                  fontFamily: 'MainFont',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
-                )),
-          ),
+              //spacer
+              const SizedBox(height: 8),
+              // text for the intro'
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text("Here we identify warning signs before crisis",
+                    style: TextStyle(
+                      color: AppColors.font.withOpacity(0.75),
+                      fontFamily: 'MainFont',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    )),
+              ),
 
-          const SizedBox(height: 15),
-          warningTextInputAuto("Warning 1:", firstWarningSign),
-          const SizedBox(height: 15),
-          warningTextInputAuto("Warning 2:", secondWarningSign),
-          const SizedBox(height: 15),
-          warningTextInputAuto("Warning 3:", thirdWarningSign),
-          const SizedBox(height: 20),
-        ],
-      )),
+              const SizedBox(height: 15),
+              warningTextInputAuto("Warning 1:", firstWarningSign),
+              const SizedBox(height: 15),
+              warningTextInputAuto("Warning 2:", secondWarningSign),
+              const SizedBox(height: 15),
+              warningTextInputAuto("Warning 3:", thirdWarningSign),
+              const SizedBox(height: 20),
+            ],
+          )),
     );
   }
 
@@ -388,13 +377,14 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     fontSize: 16,
                   )),
               const SizedBox(height: 15),
-
-              reliefInput("Relief Technique 1: ", firstCopingStrategy, context),
+              reliefInput(
+                  "Relief Technique 1: ", firstCopingStrategy, context, () {}),
               const SizedBox(height: 15),
               reliefInput(
-                  "Relief Technique 2: ", secondCopingStrategy, context),
+                  "Relief Technique 2: ", secondCopingStrategy, context, () {}),
               const SizedBox(height: 15),
-              reliefInput("Relief Technique 3: ", thirdCopingStrategy, context),
+              reliefInput(
+                  "Relief Technique 3: ", thirdCopingStrategy, context, () {}),
             ],
           )),
     );
@@ -569,30 +559,31 @@ class _CrisisPlanState extends State<CrisisPlan> {
       child: Container(
           height: cardHeight,
           child: Column(
-        children: [
-          //container for gradient
-          Container(
-            alignment: Alignment.centerLeft,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                "Step 4: Sources of Help",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: AppColors.font,
-                  fontFamily: 'MainFont',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
-                height: labelHeight,
-                constraints: const BoxConstraints(minWidth: double.infinity),
-                decoration: const BoxDecoration(
-                    gradient: AppGrads.mainGreen,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    )),
-              ),
+            children: [
+              //container for gradient
+              Container(
+                  height: labelHeight,
+                  constraints: const BoxConstraints(minWidth: double.infinity),
+                  decoration: const BoxDecoration(
+                      gradient: AppGrads.mainGreen,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      )),
+                  alignment: Alignment.centerLeft,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Step 4: Sources of Help",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: AppColors.font,
+                        fontFamily: 'MainFont',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  )),
               //spacer
               const SizedBox(height: 8),
               // text for the intro
@@ -729,30 +720,31 @@ class _CrisisPlanState extends State<CrisisPlan> {
       child: Container(
           height: cardHeight,
           child: Column(
-        children: [
-          //container for gradient
-          Container(
-            alignment: Alignment.centerLeft,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 20.0),
-              child: Text(
-                "Step 5: Professional Resources",
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  color: AppColors.font,
-                  fontFamily: 'MainFont',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
-                height: labelHeight,
-                constraints: const BoxConstraints(minWidth: double.infinity),
-                decoration: const BoxDecoration(
-                    gradient: AppGrads.mainGreen,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    )),
-              ),
+            children: [
+              //container for gradient
+              Container(
+                  height: labelHeight,
+                  constraints: const BoxConstraints(minWidth: double.infinity),
+                  decoration: const BoxDecoration(
+                      gradient: AppGrads.mainGreen,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      )),
+                  alignment: Alignment.centerLeft,
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      "Step 5: Professional Resources",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: AppColors.font,
+                        fontFamily: 'MainFont',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  )),
               //spacer
               const SizedBox(height: 8),
               // text for the intro
@@ -784,6 +776,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
       }
     }).toList();
     listContacts.removeWhere((item) => ["", null, false, 0].contains(item));
+    print(listContacts);
     final TextEditingController _typeAheadController = TextEditingController();
 
     return Padding(
