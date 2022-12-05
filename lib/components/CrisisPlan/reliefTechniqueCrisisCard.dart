@@ -48,48 +48,46 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        Text(
-          widget.label,
-          textAlign: TextAlign.start,
-          style: const TextStyle(
-            height: 0,
-            color: AppColors.font,
-            fontFamily: 'MainFont',
-            fontWeight: FontWeight.w900,
-            fontSize: 17,
-          )
-        ),
+        Text(widget.label,
+            textAlign: TextAlign.start,
+            style: const TextStyle(
+              height: 0,
+              color: AppColors.font,
+              fontFamily: 'MainFont',
+              fontWeight: FontWeight.w900,
+              fontSize: 17,
+            )),
         DropdownButton<String>(
-        value: dropdownval,
-        items: activities.map((e) {
-          return DropdownMenuItem(
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(e.activityName),
-                  Container(
-                    height: 15,
-                    width: 15,
-                    decoration: ShapeDecoration(
-                      shape: CircleBorder(),
-                      gradient: AppConstants.getGradByMood(e.mood),
-                    ),
-                  )
-                ]),
-            value: e.activityName);
-      }).toList(),
-      onChanged: (String? value) {
-        setState(() {
-          dropdownval = value!;
-        });
-        widget.setFunc(dropdownval);
-      })
+            value: dropdownval,
+            items: activities.map((e) {
+              return DropdownMenuItem(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(e.activityName),
+                        Container(
+                          height: 15,
+                          width: 15,
+                          decoration: ShapeDecoration(
+                            shape: CircleBorder(),
+                            gradient: AppConstants.getGradByMood(e.mood),
+                          ),
+                        )
+                      ]),
+                  value: e.activityName);
+            }).toList(),
+            onChanged: (String? value) {
+              setState(() {
+                dropdownval = value!;
+              });
+              widget.setFunc(dropdownval);
+            })
       ],
     );
   }
 }
 
-Widget reliefButton(String placeholder) {
+Widget reliefButton(String placeholder, Function dialogueOpen) {
   List names = activities
       .map(
         (e) => (e.activityName),
@@ -105,7 +103,9 @@ Widget reliefButton(String placeholder) {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 9),
           child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                dialogueOpen();
+              },
               child: const Text(
                 "No Relief Technique Selected",
                 style: const TextStyle(
@@ -155,7 +155,7 @@ Widget reliefButton(String placeholder) {
       ));
 }
 
-Widget reliefInput(String label, String placeholder) {
+Widget reliefInput(String label, String placeholder, Function dialogueOpen) {
   return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -167,6 +167,6 @@ Widget reliefInput(String label, String placeholder) {
               fontWeight: FontWeight.w900,
               fontSize: 17,
             )),
-        reliefButton(placeholder)
+        reliefButton(placeholder, dialogueOpen)
       ]));
 }
