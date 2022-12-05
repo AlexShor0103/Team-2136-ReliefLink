@@ -1,9 +1,12 @@
 import 'dart:html';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:relieflink/utils/constants.dart';
 import 'package:relieflink/activities/activities.dart';
 import 'package:relieflink/utils/relief_technique_utils.dart';
+
+import '../ReliefActivity/ReliefScreen.dart';
 
 /*
 double checking this works
@@ -24,10 +27,9 @@ class ReliefTextDropdown extends StatefulWidget {
 }
 
 class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
-  String dropdownval = "";
+  String dropdownval = "none";
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     dropdownval = widget.curVal;
   }
@@ -37,61 +39,82 @@ class _ReliefTextDropdownState extends State<ReliefTextDropdown> {
         (e) => (e.activityName),
       )
       .toList();
+
   @override
   Widget build(BuildContext context) {
-    print("building begun. ddv is: ${dropdownval}");
-    if (!names.contains(dropdownval)) {
-      print("oops");
-      dropdownval = "Walking";
-    }
-    print("after checking, dropdownvalfr becomes: ${dropdownval}");
+    var dropDownItems = activities.map((e) {
+      return DropdownMenuItem(
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(e.activityName,
+                style: const TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.w600,
+                )),
+            Container(
+              height: 15,
+              width: 15,
+              decoration: ShapeDecoration(
+                shape: const CircleBorder(),
+                gradient: AppConstants.getGradByMood(e.mood),
+              ),
+            )
+          ]),
+          value: e.activityName);
+    }).toList();
 
+    dropDownItems.add(DropdownMenuItem(
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          const Text('None',
+              style: TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w600,
+              )),
+          Container(
+            height: 15,
+            width: 15,
+            decoration: ShapeDecoration(
+              shape: const CircleBorder(),
+              gradient: AppConstants.getGradByMood('anxious'),
+            ),
+          )
+        ]),
+        value: 'none'));
+
+    if (!names.contains(dropdownval)) {
+      dropdownval = "none";
+    }
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        Text(
-          widget.label,
-          textAlign: TextAlign.start,
-          style: const TextStyle(
-            height: 0,
-            color: AppColors.font,
-            fontFamily: 'MainFont',
-            fontWeight: FontWeight.w900,
-            fontSize: 17,
-          )
-        ),
+        Text(widget.label,
+            textAlign: TextAlign.start,
+            style: const TextStyle(
+              height: 0,
+              color: AppColors.font,
+              fontFamily: 'MainFont',
+              fontWeight: FontWeight.w900,
+              fontSize: 17,
+            )),
         DropdownButton<String>(
-        value: dropdownval,
-        items: activities.map((e) {
-          return DropdownMenuItem(
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(e.activityName),
-                  Container(
-                    height: 15,
-                    width: 15,
-                    decoration: ShapeDecoration(
-                      shape: CircleBorder(),
-                      gradient: AppConstants.getGradByMood(e.mood),
-                    ),
-                  )
-                ]),
-            value: e.activityName);
-      }).toList(),
-      onChanged: (String? value) {
-        setState(() {
-          dropdownval = value!;
-        });
-        widget.setFunc(dropdownval);
-      })
+            value: dropdownval,
+            items: dropDownItems,
+            onChanged: (String? value) {
+              setState(() {
+                dropdownval = value!;
+              });
+              widget.setFunc(dropdownval);
+            })
       ],
     );
   }
 }
 
-Widget reliefButton(String placeholder) {
+Widget reliefButton(String placeholder, BuildContext context) {
   List names = activities
       .map(
         (e) => (e.activityName),
@@ -110,7 +133,7 @@ Widget reliefButton(String placeholder) {
               onPressed: () {},
               child: const Text(
                 "No Relief Technique Selected",
-                style: const TextStyle(
+                style: TextStyle(
                     color: AppColors.font,
                     fontFamily: 'MainFont',
                     fontWeight: FontWeight.w600,
@@ -140,7 +163,12 @@ Widget reliefButton(String placeholder) {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 9),
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReliefScreen(data: activity)));
+            },
             child: Text(
               activity.activityName,
               style: const TextStyle(
@@ -157,7 +185,7 @@ Widget reliefButton(String placeholder) {
       ));
 }
 
-Widget reliefInput(String label, String placeholder) {
+Widget reliefInput(String label, String placeholder, BuildContext context) {
   return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -169,37 +197,6 @@ Widget reliefInput(String label, String placeholder) {
               fontWeight: FontWeight.w900,
               fontSize: 17,
             )),
-        reliefButton(placeholder)
+        reliefButton(placeholder, context)
       ]));
 }
-
-/*
-return Container(
-  decoration: BoxDecoration(
-    gradient: AppGrads.mainGreen,
-    borderRadius: BorderRadius.circular(10),
-  ),
-  child: Padding(padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-    child: ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ReliefRateScreen(data: data)));
-      },
-      child: const Text("Mark As Completed",
-        style: TextStyle(
-          color: AppColors.font,
-          fontFamily: 'MainFont',
-          fontWeight: FontWeight.w800,
-          fontSize: 20,
-        )),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
-      )
-    ),
-  ) 
-);
-*/

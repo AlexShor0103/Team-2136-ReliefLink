@@ -212,12 +212,21 @@ class _CrisisPlanState extends State<CrisisPlan> {
 
       //this is the dialog that will appear if the player presses the edit icon
       AlertDialog alert = AlertDialog(
-          title: const Text("Choose Relief Techniques", style: TextStyle()),
+          title: const Text("Choose Relief Techniques",
+              style: TextStyle(
+                color: AppColors.font,
+                fontFamily: 'MainFont',
+                fontWeight: FontWeight.w800,
+              )),
           content: Column(children: [
             const Text(
-              "Here you can choose which Relief Techniques you would like to include",
-              textAlign: TextAlign.center,
-            ),
+                "Here you can choose which Relief Techniques you would like to include",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.font,
+                  fontFamily: 'MainFont',
+                  fontWeight: FontWeight.w600,
+                )),
             ReliefTextDropdown(
                 label: "Relief Technique 1:",
                 curVal: firstCopingStrategy,
@@ -306,14 +315,12 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   )),
               const SizedBox(height: 15),
 
-              reliefInput("Relief Technique 1: ", firstCopingStrategy),
-              // reliefTextInput("Relief Technique 1:", firstCopingStrategy),
+              reliefInput("Relief Technique 1: ", firstCopingStrategy, context),
               const SizedBox(height: 15),
-              reliefInput("Relief Technique 2: ", secondCopingStrategy),
-              // reliefTextInput("Relief Technique 2:", secondCopingStrategy),
+              reliefInput(
+                  "Relief Technique 2: ", secondCopingStrategy, context),
               const SizedBox(height: 15),
-              reliefInput("Relief Technique 3: ", thirdCopingStrategy),
-              // reliefTextInput("Relief Technique 3:", thirdCopingStrategy),
+              reliefInput("Relief Technique 3: ", thirdCopingStrategy, context),
             ],
           )),
     );
