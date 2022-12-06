@@ -192,7 +192,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                 alignment: Alignment.centerLeft,
                 child: const Padding(
                   padding: EdgeInsets.only(left: 20.0),
-                  child: Text("Step 1: Warning Signs",
+                  child: Text("Step 2: Warning Signs",
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: AppColors.font,
@@ -338,7 +338,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Step 2: Relief Techniques",
+                        "Step 3: Relief Techniques",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: AppColors.font,
@@ -404,7 +404,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                 child: const Padding(
                   padding: EdgeInsets.only(left: 20.0),
                   child: Text(
-                    "Step 3: Sources of Distraction",
+                    "Step 4: Sources of Distraction",
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: AppColors.font,
@@ -574,7 +574,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   child: const Padding(
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      "Step 4: Sources of Help",
+                      "Step 5: Sources of Help",
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: AppColors.font,
@@ -735,7 +735,7 @@ class _CrisisPlanState extends State<CrisisPlan> {
                   child: const Padding(
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
-                      "Step 5: Professional Resources",
+                      "Step 6: Professional Resources",
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: AppColors.font,

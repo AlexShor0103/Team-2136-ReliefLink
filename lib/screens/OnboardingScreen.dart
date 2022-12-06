@@ -42,7 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     style: TextStyle(fontSize: 19, color: AppColors.black),
                   ),
                   const Text(
-                      'Let`s start with a few questions to get you know better, how does that sound?.',
+                      'Let`s start with a few questions to get you know better, how does that sound?',
                       style: TextStyle(fontSize: 16, color: AppColors.black)),
                   ElevatedButton.icon(
                     onPressed: () {
