@@ -34,7 +34,10 @@ To run it locally, one needs to:
 
 1. [Install Flutter](https://docs.flutter.dev/get-started/install)
 2. Clone this repository
-3. On the main directory, run `flutter run` and choose a device to run it on
+3. [Create an account on the Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects), as well as a project.
+4. [Create a new API Key for the Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key).
+5. Add the API Key in [this file](https://github.com/AlexShor0103/Team-2136-ReliefLink/blob/main/web/index.html#L34) and in [this file](https://github.com/AlexShor0103/Team-2136-ReliefLink/blob/main/android/app/src/main/AndroidManifest.xml#L36).
+6. On the main directory, run `flutter run` and choose a device to run it on
 
 There are some dependencies for this project. They are automatically installed on the `flutter run` command, but here they are:
 
@@ -61,7 +64,7 @@ For demo purposes, we suggest you to deploy the Flutter app to Firebase - so tha
 
 ## For non-programmers
 
-We suggest that you speak to the programmers on your team. You can try this link, too: Link. It might contain a working version of the deployed app for your phone!
+We suggest that you speak to the programmers on your team. You can try this link, too: [Link](https://relieflink.trunci.com/). It might contain a working version of the deployed app for your phone!
 
 
 # Release Notes
