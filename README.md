@@ -3,7 +3,6 @@
 ## About the Project
 
 A companion for individuals struggling with thoughts of harming themselves.
-
 An app to assist suicide prevention, from coping techniques to relaxation exercises. Part of the Junior Design class at Georgia Tech, group 2136, with our client Dr. Nadine Kaslow.
 
 ## Team Members
@@ -20,26 +19,28 @@ We had some awesome people thinking on how to make this app look good. The proce
 
 [Link to Figma](https://www.figma.com/file/mNFVtgz74QbCJ8LsecEXef/2136-Prototype---ReliefLink?node-id=0%3A1)
 
-### Screenshots
-Soon!
-
 
 # Installation Guide
 
 ## For programmers
+
+
+### Installating and Running
 
 This app was entirely built on Flutter. Since there is not back-end to it, its deployment is the creation of the APK for Android and iOS devices and its addition to the app stores.
 
 To run it locally, one needs to:
 
 1. [Install Flutter](https://docs.flutter.dev/get-started/install)
-2. Clone this repository
+2. Fork this repository and clone it into your computer
 3. [Create an account on the Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects), as well as a project.
 4. [Create a new API Key for the Google Maps API](https://developers.google.com/maps/documentation/javascript/get-api-key).
 5. Add the API Key in [this file](https://github.com/AlexShor0103/Team-2136-ReliefLink/blob/main/web/index.html#L34) and in [this file](https://github.com/AlexShor0103/Team-2136-ReliefLink/blob/main/android/app/src/main/AndroidManifest.xml#L36).
 6. On the main directory, run `flutter run` and choose a device to run it on
 
+### Pre-requisites and Libraries
 There are some dependencies for this project. They are automatically installed on the `flutter run` command, but here they are:
+
 
 ```
   chewie: ^1.3.5
@@ -58,16 +59,73 @@ There are some dependencies for this project. They are automatically installed o
   syncfusion_flutter_charts: ^20.3.59
 ```
 
+### Building and Deploying
+
 This is enough to run the project locally and in any connected Android device, as long as it is on developer mode. To build it for the Google App Store, [this tutorial](https://docs.flutter.dev/deployment/android) should do it. This is the [tutorial for iOS](https://docs.flutter.dev/deployment/ios).
 
 For demo purposes, we suggest you to deploy the Flutter app to Firebase - so that people can open in on their phone's browsers. If you do so, update the link in the next section. Here is a guide for doing it: [Guide](https://medium.com/flutter/must-try-use-firebase-to-host-your-flutter-app-on-the-web-852ee533a469).
+
+### Troubleshooting
+
+* With time, the Flutter version used in the application will become outdated. In that case, one should change the version of Flutter to be the latest and fix any major errors that arise - not much can be known now about future bugs.
+* If the Maps API is not working, make sure to check whether your set up of the Google Cloud console is complete. More reseources on it can be found [here](https://developers.google.com/maps).
+
 
 ## For non-programmers
 
 We suggest that you speak to the programmers on your team. You can try this link, too: [Link](https://relieflink.trunci.com/). It might contain a working version of the deployed app for your phone!
 
 
-# Release Notes
+# Major Release Notes
+
+
+## v1.0
+
+The first public deployment of the app! We are very excited to show this working app. All of the psychology-related tasks in the app have been developed and discussed with our clients.
+
+### Features
+
+- Journaling
+  - Users have a space to write down how their are feeling and keep track of their mood trends
+- Relief Techniques
+  - Users have an available list of Relief Techniques to their various moods
+  - Users can add, delete, favorite and edit their techniques
+  - Techniques can be sorted by mood, duration, rating and favorites
+  - Users can rate the activities after completed
+- Emergency Button
+  - Always available in most screens in the app, will now call 988, the Suicide Hotline
+- Emergency Contacts
+  - Users can add, edit and remove Emergency Contacts
+  - Emergency contacts can be saved to the app, with the ability to call or text them
+- Mental health clinics near me
+  - Users can search the map to find health resources near them
+-  External suggestions of resources
+   -  A curated list of apps and services that can assist the users, on top of our own features, can be found in the app now. That includes breathing exercises, relaxation and meditation apps
+- Crisis Plan
+  - Users can now add their own crisis plan and access when needed
+  - The plan's structured was carefully indicated to us by our clients over from Emory University
+- Onboarding is available for new users
+  - New users can now go through a tutorial of the screens on the first time they open the app, or skip it
+  - They can revisit it in the future if needed
+
+### Bug Fixes
+
+- Relief Technique cards overflows in some devices have been fixed
+- Relief Technique's video will pause after exiting the page or going to the rating page
+- Top bar will now update according to the screen the user is in, which was not previously updating the title
+- Crisis screen now shows as a page, not a pop up
+- Sorting in the Relief Techniques will update on any changes
+- Saved data is now consistent across sessions, since the local storage has been implemented
+
+### Known Issues
+- Autocomplete in Crisis Plan can miss suggestions
+- Duplicated Header after completing the onboarding
+- Maps API is not using the user's current location
+
+
+
+
+# Previous Release Notes
 
 ## v0.1.0
 
@@ -168,30 +226,3 @@ We suggest that you speak to the programmers on your team. You can try this link
 - Map API is not using the user's current location
 - Relief Technique cards overflow in some devices
 - Onboarding flow not popping up upon first start of app
-
-## v1.0
-
-The first public deployment of the app!
-
-### Features
-
-- Users can edit the Relief Techniques
-  - They can add, remove and edit the relief techniques present in the app to their liking!
-- Journaling
-  - Users now have a space to write down how their are feeling and keep track of their trends
-- Restyled Emergency Button
-  - Which will now call 988
-- Likert-scale based activity rating
-  - Users can now use a Likert scale to rate the relieft activity completed
-- Overall design changes
-  - Cleaner and more intuitive UI, with consistent colors and patterns
-
-### Bug Fixes
-- Relief Technique cards overflow in some devices has been fixed
-- Relief Technique's video will pause after exiting the page
-- Top bar will now update according to the screen the user is in
-- Crisis screen now shows as a page, not a pop up
-
-### Known Issues
-- Autocomplete in Crisis Plan can miss suggestions
-- Mood chart overflow on Chrome
