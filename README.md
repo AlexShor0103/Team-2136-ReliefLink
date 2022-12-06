@@ -121,8 +121,7 @@ The first public deployment of the app! We are very excited to show this working
 - Autocomplete in Crisis Plan can miss suggestions
 - Duplicated Header after completing the onboarding
 - Maps API is not using the user's current location
-
-
+- Pixel overflow can occur if too many contacts are added
 
 
 # Previous Release Notes
